@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Живко Коцев</title>
+  <meta name="description" content="Личен сајт на Живко Коцев, софтверски инженер.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kocev.mk/">
+  <meta property="og:title" content="Живко Коцев">
+  <meta property="og:description" content="Личен сајт на Живко Коцев, софтверски инженер.">
+  <meta property="og:image" content="https://kocev.mk/spidey.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --bg: #f5f5f0;
+      --muted: #707070;
+      --rule: #d0d0d0;
+      --link: #d11d1d;   /* Spidey red */
+      --accent: #c79100; /* Starboy yellow */
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #d8d8d0;
+        --bg: #0d0d10;
+        --muted: #7a7a75;
+        --rule: #2a2a30;
+        --link: #ff5a4d;
+        --accent: #f2c200;
+      }
+    }
+
+    body {
+      font: 15px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+      color: var(--fg);
+      background: var(--bg);
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    h1 { font-size: 1.3rem; margin: 0 0 0.4rem; }
+    h2 { font-size: 1rem; margin: 1.75rem 0 0.25rem; }
+    h3 { font-size: 1rem; margin: 1.25rem 0 0.25rem; }
+    p  { margin: 0 0 0.75rem; }
+
+    ul { padding-left: 1.4rem; margin: 0.25rem 0 1.25rem; }
+    li { margin: 0 0 0.35rem; }
+
+    hr { border: 0; border-top: 1px solid var(--link); margin: 2rem 0; }
+
+    a { color: var(--link); text-decoration-color: var(--accent); }
+    a:hover { color: var(--accent); }
+
+    img.portrait {
+      display: block;
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 5%;
+      border: 2px solid var(--link);
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .header { display: flex; align-items: center; gap: 1rem; margin: 0 0 0.5rem; }
+    .header h1, .header p { margin: 0; }
+
+    .tagline { color: var(--muted); margin: 0 0 1.5rem; }
+    .note    { color: var(--muted); }
+
+    .row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 1rem 0; }
+
+    .lang-toggle { background: none; border: 0; padding: 0; font: inherit; color: var(--link); cursor: pointer; }
+
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+  </style>
+  <noscript><style>[data-lang] { display: block; }</style></noscript>
+</head>
+<body>
+
+  <p><button class="lang-toggle" type="button" onclick="setLang(document.documentElement.lang === 'mk' ? 'en' : 'mk')">EN</button></p>
+
+  <!-- ===================== МК ===================== -->
+  <div data-lang="mk" class="active">
+
+    <div class="header">
+      <img class="portrait" src="spidey.jpg" alt="Живко Коцев">
+      <div>
+        <h1>Живко Коцев</h1>
+        <p class="tagline">Софтверски инженер бај деј. Решавач на Ај Ти проблеми бај најт.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <p>Се чепкам во сѐ поврзано со технологија и компјутери. Накратко решавам проблеми поврзани со технологија. На пример, скршениот принтер на другар на мојот другар.</p>
+
+    <h2>Студент</h2>
+    <p>Студирам на ФИНКИ, толку.</p>
+
+    <h2>Софтверски инженер</h2>
+    <p>Работам како софтверски инженер во CodeChem, по работа куцам и по нешто за мене. Кодот што го куцам ми е на <a href="https://github.com/zhivko-kocev">тука</a>.
+      Моите скромни ставови, идеи и експерименти се <a href="https://kocev.hashnode.dev/">тука</a>.</p>
+
+    <h2>Хакерспејс контрибутор</h2>
+    <p>Активен сум и во <a href="https://42.mk/">Base42</a>, хакерспејсот во Скопје. Таму може да ме најдете како чачкам нешто со компјутери или помагам на некој настан.</p>
+
+    <h2>Ај Ти настани</h2>
+    <p>Кога има Ај Ти настан во Скопје, обично сум таму како волонтер: WhatTheStack, NASA Space Apps, UXplore, AI Tech Summit, Global Azure...</p>
+
+    <h2>Донирај Компјутер</h2>
+    <p>Уште од средно, и сè уште, сум во Донирај Компјутер. Почнав да поправам компјутери таму пред пет години како волонтер, сега сум и координатор на волонтерите. Поправаме стари машини, ги даваме на луѓе на кои им требаат.</p>
+
+    <h2>Бивш фудбалер</h2>
+    <p>До 20-тата година играв фудбал професионално. Сега играм само рекреативно.</p>
+
+    <hr>
+
+    <h2>Книги, блогови и алатки кои ми помагаат мене.</h2>
+    <ul>
+      <li><a href="https://brutalist.report/topic/tech">Brutalist Report</a> — сите технолошки вести, без реклами и без глупости.</li>
+      <li><a href="https://rlworkman.net/howtos/rute/">Rute User's Tutorial and Exposition</a> — компјутер и Линукс од нула.</li>
+      <li><a href="https://info.cern.ch/hypertext/WWW/TheProject.html">The WorldWideWeb Project</a> — првата веб-страница некогаш.</li>
+      <li><a href="https://github.com/dotnet/runtime/tree/main/docs/design/coreclr/botr">Book of the Runtime</a> — .NET под хаубата.</li>
+      <li><a href="https://www.doc.ic.ac.uk/%7Esusan/475/unmain.html">How to Write Unmaintainable Code</a> — сатира, практикувај контра од неа.</li>
+      <li><a href="https://little-book-of.github.io/c/books/en-US/book.html">The Little Book of C</a> — кратко и јасно запознавање со C.</li>
+      <li><a href="https://semicolony.dev/how-it-works/">Semicolony</a> — како функционира сѐ.</li>
+      <li><a href="https://datascale-ai.github.io/data_engineering_book/en/">The Data Engineering Book</a> — бесплатна книга за дата инженерство.</li>
+      <li><a href="https://buildsoftwaresystems.com/post/guide-to-execution-environments/">From Bare Metal to Containers</a> — историја и објаснување на околините за извршување на кодот.</li>
+      <li><a href="https://antirez.com/news/158">Don't fall into the anti-AI hype</a> — нешто од творецот на Redis.</li>
+      <li><a href="https://gibbok.github.io/typescript-book/book/the-concise-typescript-book/">The Concise TypeScript Book</a> — TypeScript објаснет накратко.</li>
+      <li><a href="https://world.hey.com/jason/the-obvious-the-easy-and-the-possible-2e11a3fb">The Obvious, the Easy, and the Possible</a> — Џејсон Фрид со една проста идеја.</li>
+    </ul>
+
+    <hr>
+
+    <p class="row">
+      <a href="https://github.com/zhivko-kocev">.github</a>
+      <a href="https://www.linkedin.com/in/zhivko-kocev/">.lnkedin</a>
+      <a href="https://kocev.hashnode.dev/">.blog</a>
+      <a href="mailto:zikekocev57@gmail.com">.email</a>
+    </p>
+
+  </div>
+
+  <!-- ===================== EN ===================== -->
+  <div data-lang="en">
+
+    <div class="header">
+      <img class="portrait" src="spidey.jpg" alt="Zhivko Kocev">
+      <div>
+        <h1>Zhivko Kocev</h1>
+        <p class="tagline">Software engineer by day. IT problem-solver by night.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <p>I tinker with anything related to tech and computers. In short, I solve technology problems. For example, my friend's friend's broken printer.</p>
+
+    <h2>Student</h2>
+    <p>I study at FINKI. That's it.</p>
+
+    <h2>Software engineer</h2>
+    <p>I work as a software engineer at CodeChem; after hours I write a bit of code for myself too. The code I write lives <a href="https://github.com/zhivko-kocev">here</a>. My modest takes, ideas and experiments are <a href="https://kocev.hashnode.dev/">here</a>.</p>
+
+    <h2>Hackerspace contributor</h2>
+    <p>I'm also active at <a href="https://42.mk/">Base42</a>, the hackerspace in Skopje. You can find me there tinkering with computers or helping out at an event.</p>
+
+    <h2>IT events</h2>
+    <p>When there's an IT event in Skopje, I'm usually there as a volunteer: WhatTheStack, NASA Space Apps, UXplore, AI Tech Summit, Global Azure...</p>
+
+    <h2>Donate a Computer</h2>
+    <p>Since high school, and still today, I've been part of Donate a Computer. I started repairing computers there five years ago as a volunteer; now I also coordinate the volunteers. We fix up old machines and give them to people who need them.</p>
+
+    <h2>Former footballer</h2>
+    <p>Until I was 20 I played football professionally. Now I only play recreationally.</p>
+
+    <hr>
+
+    <h2>Books, blogs and tools that help me out.</h2>
+    <ul>
+      <li><a href="https://brutalist.report/topic/tech">Brutalist Report</a> — all of today's tech news, no ads and no nonsense.</li>
+      <li><a href="https://rlworkman.net/howtos/rute/">Rute User's Tutorial and Exposition</a> — if you really want to get Linux, this is the doorstopper to read.</li>
+      <li><a href="https://info.cern.ch/hypertext/WWW/TheProject.html">The WorldWideWeb Project</a> — the first web page ever, and it's still up. Wild, right?</li>
+      <li><a href="https://github.com/dotnet/runtime/tree/main/docs/design/coreclr/botr">Book of the Runtime</a> — what goes on under .NET's hood, straight from the people who built it.</li>
+      <li><a href="https://www.doc.ic.ac.uk/%7Esusan/475/unmain.html">How to Write Unmaintainable Code</a> — how to write code nobody wants to touch. It's satire, but it stings how true it is.</li>
+      <li><a href="https://little-book-of.github.io/c/books/en-US/book.html">The Little Book of C</a> — a short, painless intro to C.</li>
+      <li><a href="https://semicolony.dev/how-it-works/">Semicolony</a> — interactive drawings that explain how the web actually works.</li>
+      <li><a href="https://datascale-ai.github.io/data_engineering_book/en/">The Data Engineering Book</a> — a free book on building data pipelines.</li>
+      <li><a href="https://buildsoftwaresystems.com/post/guide-to-execution-environments/">From Bare Metal to Containers</a> — bare metal, VMs, containers... what to use when, and why.</li>
+      <li><a href="https://antirez.com/news/158">Don't fall into the anti-AI hype</a> — the Redis creator says stop panicking about AI and just use it.</li>
+      <li><a href="https://gibbok.github.io/typescript-book/book/the-concise-typescript-book/">The Concise TypeScript Book</a> — TypeScript explained, short and free.</li>
+      <li><a href="https://world.hey.com/jason/the-obvious-the-easy-and-the-possible-2e11a3fb">The Obvious, the Easy, and the Possible</a> — Jason Fried with one simple idea for making better decisions.</li>
+    </ul>
+
+    <hr>
+
+    <p class="row">
+      <a href="https://github.com/zhivko-kocev">.github</a>
+      <a href="https://www.linkedin.com/in/zhivko-kocev/">.lnkedin</a>
+      <a href="https://kocev.hashnode.dev/">.blog</a>
+      <a href="mailto:zikekocev57@gmail.com">.email</a>
+    </p>
+
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.title = lang === 'mk' ? 'Живко Коцев' : 'Zhivko Kocev';
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.classList.toggle('active', el.dataset.lang === lang);
+      });
+      // Toggle button always offers the *other* language.
+      document.querySelector('.lang-toggle').textContent = lang === 'mk' ? 'EN' : 'МК';
+    }
+    setLang('mk');
+  </script>
+
+</body>
+</html>
