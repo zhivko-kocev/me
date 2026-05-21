@@ -108,82 +108,17 @@
   }
   </script>
 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
-  <style>
-    :root {
-      --fg: #1a1a1a;
-      --bg: #f5f5f0;
-      --muted: #595959;
-      --rule: #d0d0d0;
-      --link: #b51616;   /* Spidey red — darkened for AA contrast */
-      --accent: #9a6f00; /* Starboy yellow — darkened for AA contrast */
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --fg: #e6e6dc;
-        --bg: #0d0d10;
-        --muted: #a0a09a;
-        --rule: #2a2a30;
-        --link: #ff7a6f;
-        --accent: #ffd633;
-      }
-    }
-
-    body {
-      font: 15px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-      color: var(--fg);
-      background: var(--bg);
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 3rem;
-    }
-
-    h1 { font-size: 1.3rem; margin: 0 0 0.4rem; }
-    h2 { font-size: 1rem; margin: 1.75rem 0 0.25rem; }
-    h3 { font-size: 1rem; margin: 1.25rem 0 0.25rem; }
-    p  { margin: 0 0 0.75rem; }
-
-    ul { padding-left: 1.4rem; margin: 0.25rem 0 1.25rem; }
-    li { margin: 0 0 0.35rem; }
-
-    hr { border: 0; border-top: 1px solid var(--link); margin: 2rem 0; }
-
-    a { color: var(--link); text-decoration-color: var(--accent); }
-    a:hover { color: var(--accent); }
-
-    img.portrait {
-      display: block;
-      width: 96px;
-      height: 96px;
-      object-fit: cover;
-      border-radius: 5%;
-      border: 2px solid var(--link);
-      flex-shrink: 0;
-      margin: 0;
-    }
-
-    .header { display: flex; align-items: center; gap: 1rem; margin: 0 0 0.5rem; }
-    .header h1, .header p { margin: 0; }
-
-    .tagline { color: var(--muted); margin: 0 0 1.5rem; }
-    .note    { color: var(--muted); }
-
-    .row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 1rem 0; }
-
-    .lang-toggle { background: none; border: 0; padding: 0.25rem 0.5rem; font: inherit; color: var(--link); cursor: pointer; text-decoration: underline; text-decoration-color: var(--accent); }
-
-    :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
-
-    [data-lang] { display: none; }
-    [data-lang].active { display: block; }
-  </style>
-  <noscript><style>[data-lang] { display: block; }</style></noscript>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
 
   <p><button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language / Промени јазик">EN</button></p>
+
+  <main>
 
   <!-- ===================== МК ===================== -->
   <section data-lang="mk" lang="mk" class="active" aria-label="Содржина на македонски">
@@ -204,8 +139,8 @@
     <p>Студирам на ФИНКИ, толку.</p>
 
     <h2>Софтверски инженер</h2>
-    <p>Работам како софтверски инженер во CodeChem, по работа куцам и по нешто за мене. Кодот што го куцам ми е на <a href="https://github.com/zhivko-kocev">тука</a>.
-      Моите скромни ставови, идеи и експерименти се <a href="https://kocev.hashnode.dev/">тука</a>.</p>
+    <p>Работам како софтверски инженер во CodeChem, по работа куцам и по нешто за мене. Кодот што го куцам е <a href="https://github.com/zhivko-kocev">на GitHub профилот на Живко Коцев</a>.
+      Моите скромни ставови, идеи и експерименти се <a href="https://kocev.hashnode.dev/">на блогот на Живко Коцев</a>.</p>
 
     <h2>Хакерспејс контрибутор</h2>
     <p>Активен сум и во <a href="https://42.mk/">Base42</a>, хакерспејсот во Скопје. Таму може да ме најдете како чачкам нешто со компјутери или помагам на некој настан.</p>
@@ -267,7 +202,7 @@
     <p>I study at FINKI. That's it.</p>
 
     <h2>Software engineer</h2>
-    <p>I work as a software engineer at CodeChem; after hours I write a bit of code for myself too. The code I write lives <a href="https://github.com/zhivko-kocev">here</a>. My modest takes, ideas and experiments are <a href="https://kocev.hashnode.dev/">here</a>.</p>
+    <p>I work as a software engineer at CodeChem; after hours I write a bit of code for myself too. The code I write lives on <a href="https://github.com/zhivko-kocev">Zhivko Kocev's GitHub</a>. My modest takes, ideas and experiments are on <a href="https://kocev.hashnode.dev/">Zhivko Kocev's blog</a>.</p>
 
     <h2>Hackerspace contributor</h2>
     <p>I'm also active at <a href="https://42.mk/">Base42</a>, the hackerspace in Skopje. You can find me there tinkering with computers or helping out at an event.</p>
@@ -310,33 +245,7 @@
 
   </section>
 
-  <script>
-    (function () {
-      var TITLES = {
-        mk: 'Живко Коцев — Софтверски инженер',
-        en: 'Zhivko Kocev — Software Engineer'
-      };
-      function setLang(lang) {
-        document.documentElement.lang = lang;
-        document.title = TITLES[lang] || TITLES.mk;
-        document.querySelectorAll('[data-lang]').forEach(function (el) {
-          el.classList.toggle('active', el.dataset.lang === lang);
-        });
-        var btn = document.getElementById('lang-toggle');
-        if (btn) {
-          btn.textContent = lang === 'mk' ? 'EN' : 'МК';
-          btn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
-        }
-      }
-      var btn = document.getElementById('lang-toggle');
-      if (btn) {
-        btn.addEventListener('click', function () {
-          setLang(document.documentElement.lang === 'mk' ? 'en' : 'mk');
-        });
-      }
-      setLang('mk');
-    })();
-  </script>
+  </main>
 
 </body>
 </html>
