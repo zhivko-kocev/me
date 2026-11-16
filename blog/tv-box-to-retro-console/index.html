@@ -93,8 +93,10 @@
     <h1><span data-lang="mk">Од заборавен ТВ бокс до ретро конзола</span><span data-lang="en">From a forgotten TV box to a retro console</span></h1>
     <p class="meta"><time datetime="2026-11-16"><span data-lang="mk">16 ноември 2026</span><span data-lang="en">16 November 2026</span></time> · <span data-lang="mk">15 мин. читање</span><span data-lang="en">15 min read</span></p>
 
-    <p data-lang="mk">Имав Nexbox A95X-B7N, Андроид ТВ бокс што собираше прашина во фиока. Една недела, 32 GB microSD картичка и EmuELEC го претворија во конзола за NES, SNES и PlayStation игри на телевизор. Андроидот на боксот останува недопрен: со картичката внатре бутира EmuELEC, без неа — Андроид, како порано.</p>
-    <p data-lang="en">I had a Nexbox A95X-B7N Android TV box collecting dust in a drawer. One Sunday, a 32 GB microSD card and EmuELEC turned it into a console for NES, SNES and PlayStation games on the TV. Android on the box stays untouched: with the card in, it boots EmuELEC; without it, Android as before.</p>
+    <p data-lang="mk">Обожавам да му наоѓам примена на „стар“ хардвер и да го враќам во живот, па еве го патот од стар ТВ бокс до ретро конзола. Имав еден стар Nexbox A95X-B7N што собираше прашина во фиока; сега влече NES, SNES и PlayStation игри на телевизор.</p>
+    <p data-lang="en">I love finding a use for “old” hardware and bringing it back to life, so here's the road from an old TV box to a retro console. I had an old Nexbox A95X-B7N collecting dust in a drawer; now it runs NES, SNES and PlayStation games on the TV.</p>
+    <p data-lang="mk">„Рекуарементс“: мал дел од викендот, стар ТВ бокс и microSD или SD картичка (или USB стик, ако боксот нема слот за картичка). Андроидот на боксот останува недопрен: со картичката внатре бутира EmuELEC, без неа — Андроид, како порано.</p>
+    <p data-lang="en">Requirements: a small chunk of a weekend, an old TV box, and a microSD or SD card (or a USB stick if the box has no card slot). Android on the box stays untouched: with the card in, it boots EmuELEC; without it, Android as before.</p>
     <p data-lang="mk">Ова е целиот процес по ред, заедно со тоа што се скрши успат и како го поправив, за да ги прескокнеш моите грешки.</p>
     <p data-lang="en">This is the whole build in order, including what broke along the way and how I fixed it, so you can skip my mistakes.</p>
 
@@ -102,33 +104,38 @@
       <video controls playsinline preload="none" width="576" height="1024" poster="media/demo-poster.jpg">
         <source src="media/demo.mp4" type="video/mp4">
       </video>
-      <figcaption><span data-lang="mk">Резултатот: EmuELEC со темата Neon Overdrive и PlayStation игри со корици и слики. 75 секунди, без звук.</span><span data-lang="en">The result: EmuELEC with the Neon Overdrive theme and PlayStation games with box art and screenshots. 75 seconds, no sound.</span></figcaption>
+      <figcaption><span data-lang="mk">Резултатот: EmuELEC со темата Neon Overdrive и PlayStation игри со корици и слики. 20 секунди, без звук.</span><span data-lang="en">The result: EmuELEC with the Neon Overdrive theme and PlayStation games with box art and screenshots. 20 seconds, no sound.</span></figcaption>
     </figure>
 
-    <h2 id="need"><span data-lang="mk">Што ти треба</span><span data-lang="en">What you need</span></h2>
+    <h2 id="need"><span data-lang="mk">Што ти треба навистина</span><span data-lang="en">What you actually need</span></h2>
     <ul data-lang="mk">
-      <li>Amlogic ТВ бокс. Мојот: Nexbox A95X-B7N, Amlogic S905X, 2 GB RAM, 8 GB меморија.</li>
-      <li>microSD картичка. Јас користев Netac од 32 GB; земи поголема ако сакаш многу PlayStation игри.</li>
-      <li>USB читач на картички за компјутерот.</li>
-      <li>USB тастатура за подесување. Џојстиците може и подоцна.</li>
-      <li>Чачкалка. Сериозно.</li>
+      <li>ТВ бокс со Amlogic чип (не оди со секој, види подолу). Мојот: Nexbox A95X-B7N, Amlogic S905X, 2 GB RAM, 8 GB меморија.</li>
+      <li>microSD картичка. Јас користев Netac од 32 GB и собрав околу 1600 игри, а останаа 3 GB празни. Земи поголема ако сакаш многу повеќе.</li>
+      <li>USB читач на картички, ама само ако компјутерот нема SD слот. Мојот немаше.</li>
+      <li>USB тастатура за подесување. Ако имаш џојстик, уште подобро: со тастатурата налетав на проблем (<a href="#input">види тука</a>).</li>
+      <li>Чачкалка. 😃</li>
       <li>HDMI и, по можност, мрежен (Ethernet) кабел.</li>
-      <li>Компјутер. Јас користев Линукс; balenaEtcher работи и на Windows и macOS.</li>
+      <li>Компјутер. Јас користев <a href="https://omarchy.org/">Omarchy</a>; balenaEtcher работи и на Windows и macOS.</li>
     </ul>
     <ul data-lang="en">
-      <li>An Amlogic TV box. Mine: Nexbox A95X-B7N, Amlogic S905X, 2 GB RAM, 8 GB storage.</li>
-      <li>A microSD card. I used a 32 GB Netac; go bigger if you want lots of PlayStation games.</li>
-      <li>A USB card reader for your PC.</li>
-      <li>A USB keyboard for setup. Gamepads can come later.</li>
-      <li>A toothpick. Really.</li>
+      <li>A TV box with an Amlogic chip (not every box works, see below). Mine: Nexbox A95X-B7N, Amlogic S905X, 2 GB RAM, 8 GB storage.</li>
+      <li>A microSD card. I used a 32 GB Netac and fit about 1,600 games with 3 GB to spare. Go bigger if you want a lot more.</li>
+      <li>A USB card reader, but only if your PC has no SD slot. Mine didn't.</li>
+      <li>A USB keyboard for setup. A gamepad is even better: the keyboard gave me trouble (<a href="#input">see here</a>).</li>
+      <li>A toothpick. 😃</li>
       <li>HDMI and, ideally, an Ethernet cable.</li>
-      <li>A PC. I used Linux; balenaEtcher also runs on Windows and macOS.</li>
+      <li>A PC. I used <a href="https://omarchy.org/">Omarchy</a>; balenaEtcher also runs on Windows and macOS.</li>
     </ul>
+
+    <div class="callout">
+      <p data-lang="mk"><strong>Оди ли со било кој ТВ бокс?</strong> Не баш. EmuELEC оди на Amlogic S905X, S905X2, S905X3 и S922X (и нивни варијанти, на пр. S905W). Обичниот S905 (без X) повеќе не оди, S912 е исфрлен од 4.0 (за него остана 3.9), а боксовите со Rockchip или Allwinner чип не се поддржани. Некои (MeCool, Mi Box) имаат заклучен bootloader, а евтините клонови знаат да имаат лажен RAM или да бутираат само од USB. Земи бокс со барем 2 GB RAM. Целата листа е на <a href="https://github.com/EmuELEC/EmuELEC/wiki/Supported-Devices">EmuELEC wiki</a>.</p>
+      <p data-lang="en"><strong>Does any TV box work?</strong> Not quite. EmuELEC runs on Amlogic S905X, S905X2, S905X3 and S922X (and their variants, like the S905W). The plain S905 (no X) no longer works, the S912 was dropped in 4.0 (3.9 still supports it), and boxes with Rockchip or Allwinner chips aren't supported. Some (MeCool, Mi Box) have a locked bootloader, and cheap clones can come with fake RAM or boot only from USB. Get a box with at least 2 GB RAM. The full list is on the <a href="https://github.com/EmuELEC/EmuELEC/wiki/Supported-Devices">EmuELEC wiki</a>.</p>
+    </div>
 
     <figure>
       <picture>
         <source type="image/avif" srcset="media/kit-640.avif 640w, media/kit-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
-        <img src="media/kit-640.jpg" srcset="media/kit-640.jpg 640w, media/kit-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="1280" loading="lazy" decoding="async"
+        <img src="media/kit-640.jpg" srcset="media/kit-640.jpg 640w, media/kit-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="880" loading="lazy" decoding="async"
              alt="Поглед од горе на маса со A95X боксот, далечинскиот, microSD картичка во адаптер, USB читач, шрафцигери и резервни RAM мемории."
              data-alt-en="Top view of a desk with the A95X box, its remote, a microSD card in an adapter, a USB card reader, screwdrivers and spare RAM sticks.">
       </picture>
@@ -158,10 +165,12 @@
     </nav>
 
     <h2 id="box"><span data-lang="mk">Запознај го боксот</span><span data-lang="en">Know your box</span></h2>
-    <p data-lang="mk">Етикетата одоздола го кажува битното: Amlogic S905X, 2 GB RAM, 8 GB ROM. S905X има четири Cortex-A53 јадра и Mali-450 графика, отприлика како Raspberry Pi 3. Тоа е доволно за сè до првиот PlayStation на полна брзина. N64 некогаш оди, некогаш не; PSP, Dreamcast, Saturn и сè поново е претешко.</p>
-    <p data-lang="en">The label on the bottom tells you what matters: Amlogic S905X, 2 GB RAM, 8 GB ROM. The S905X has four Cortex-A53 cores and a Mali-450 GPU, roughly Raspberry Pi 3 class. That is enough for everything up to the original PlayStation at full speed. N64 is hit and miss; PSP, Dreamcast, Saturn and anything newer are too heavy.</p>
-    <p data-lang="mk">Запомни колку RAM имаш: од тоа зависи кој device tree ќе го избереш во <a href="#dtb">чекор 4</a>.</p>
-    <p data-lang="en">Note the RAM size: it decides which device tree you pick in <a href="#dtb">step 4</a>.</p>
+    <p data-lang="mk">Прво, сврти го боксот и види со што располагаш. Етикетата одоздола ги кажува двете работи што ќе ти требаат подоцна: чипот и RAM-от. Кај мене: Amlogic S905X и 2 GB RAM.</p>
+    <p data-lang="en">First, flip the box over and see what you're working with. The label on the bottom tells you the two things you'll need later: the chip and the RAM. Mine: Amlogic S905X and 2 GB RAM.</p>
+    <p data-lang="mk">Чипот кажува кои игри ќе ги влече. S905X е отприлика колку Raspberry Pi 3: сè до првиот PlayStation оди без проблем, N64 некогаш оди, некогаш не, а PSP, Dreamcast и сè поново е претешко.</p>
+    <p data-lang="en">The chip decides which games it can handle. The S905X is roughly Raspberry Pi 3 class: everything up to the original PlayStation runs fine, N64 is hit and miss, and PSP, Dreamcast and anything newer are too heavy.</p>
+    <p data-lang="mk">RAM-от запомни го: од него зависи кој фајл ќе го избереш во <a href="#dtb">чекор 4</a>.</p>
+    <p data-lang="en">Remember the RAM: it decides which file you pick in <a href="#dtb">step 4</a>.</p>
 
     <figure class="gallery">
       <picture>
@@ -180,10 +189,12 @@
     </figure>
 
     <h2 id="download"><span data-lang="mk">Симни EmuELEC</span><span data-lang="en">Download EmuELEC</span></h2>
-    <p data-lang="mk">EmuELEC е мала Линукс дистрибуција што бутира директно во EmulationStation, менито за игри, а под него се RetroArch и другите емулатори. Верзиите се на <a href="https://github.com/EmuELEC/EmuELEC/releases">GitHub</a>. Јас ја користев 4.8 (3 ноември 2025). За ТВ боксови е Amlogic-ng Generic image-от, <code>EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz</code> (1,13 GB); другите се за конкретни плочи (La Frite, Le Potato, Odroid).</p>
-    <p data-lang="en">EmuELEC is a small Linux distribution that boots straight into EmulationStation, the game menu, with RetroArch and other emulators underneath. Releases are on <a href="https://github.com/EmuELEC/EmuELEC/releases">GitHub</a>. I used 4.8 (3 November 2025). TV boxes use the Amlogic-ng Generic image, <code>EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz</code> (1.13 GB); the others are for specific boards (La Frite, Le Potato, Odroid).</p>
-    <p data-lang="mk">До секој image има <code>.sha256</code> фајл. Симни ги двата и спореди ги хашовите; ако се разликуваат, симни повторно.</p>
-    <p data-lang="en">Each image has a <code>.sha256</code> file next to it. Download both and compare the hashes; if they differ, download again.</p>
+    <p data-lang="mk">EmuELEC е мала Линукс дистрибуција што бутира директно во менито за игри (EmulationStation), а под хаубата се RetroArch и другите емулатори. Оди на <a href="https://github.com/EmuELEC/EmuELEC/releases">GitHub</a>, кај верзиите, и земи ја најновата. Јас ја зедов 4.8 (3 ноември 2025).</p>
+    <p data-lang="en">EmuELEC is a small Linux distribution that boots straight into the game menu (EmulationStation), with RetroArch and the other emulators under the hood. Head to the releases on <a href="https://github.com/EmuELEC/EmuELEC/releases">GitHub</a> and grab the latest. I went with 4.8 (3 November 2025).</p>
+    <p data-lang="mk">Таму ќе видиш куп фајлови (сликата подолу). Не паничи, ти треба само еден: Generic, <code>EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz</code> (1,13 GB). Тој е за ТВ боксови; другите се за конкретни плочи (La Frite, Le Potato, Odroid).</p>
+    <p data-lang="en">You'll see a pile of files there (screenshot below). Don't panic, you only need one: Generic, <code>EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz</code> (1.13 GB). That's the one for TV boxes; the rest are for specific boards (La Frite, Le Potato, Odroid).</p>
+    <p data-lang="mk">До секој фајл има и <code>.sha256</code>. Не е задолжително, ама ако сакаш да бидеш сигурен дека симнувањето е цело, симни го и него и спореди ги хашовите. Ако се разликуваат, симни пак.</p>
+    <p data-lang="en">Each file also has a <code>.sha256</code> next to it. Optional, but if you want to be sure the download isn't broken, grab it too and compare the hashes. If they differ, download again.</p>
 
     <figure class="code">
       <figcaption id="c-sha-cap"><span data-lang="mk">Провери го симнатиот фајл</span><span data-lang="en">Check the download</span></figcaption>
@@ -204,33 +215,35 @@ cat EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz.sha256</code></pre>
     <h2 id="flash"><span data-lang="mk">Флеширај ја картичката</span><span data-lang="en">Flash the card</span></h2>
     <p data-lang="mk">Флеширав со balenaEtcher: <i>Flash from file</i> → <code>.img.gz</code> фајлот (не треба да се отпакува) → <i>Select target</i> → картичката → <i>Flash!</i> Провери ја целта двапати: Etcher брише сè што ќе избереш.</p>
     <p data-lang="en">I flashed with balenaEtcher: <i>Flash from file</i> → the <code>.img.gz</code> (no need to unzip it) → <i>Select target</i> → the card → <i>Flash!</i> Check the target twice: Etcher erases whatever you pick.</p>
+    <p data-lang="mk">Мојот компјутер нема SD слот, па картичката ја ставив во адаптер, адаптерот во USB читач, а читачот во компјутерот (сликите подолу). Ако твојот има слот, ова не ти треба: само стави ја картичката.</p>
+    <p data-lang="en">My PC has no SD slot, so the card went into an adapter, the adapter into a USB reader, and the reader into the PC (photos below). If yours has a slot, skip all that and just put the card in.</p>
 
-    <figure class="gallery">
+    <figure class="gallery quad">
       <picture>
-        <source type="image/avif" srcset="media/microsd-360.avif 360w, media/microsd-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
-        <img src="media/microsd-360.jpg" srcset="media/microsd-360.jpg 360w, media/microsd-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+        <source type="image/avif" srcset="media/microsd-360.avif 360w, media/microsd-720.avif 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)">
+        <img src="media/microsd-360.jpg" srcset="media/microsd-360.jpg 360w, media/microsd-720.jpg 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)" width="720" height="960" loading="lazy" decoding="async"
              alt="Netac microSD картичка од 32 GB меѓу два прста."
              data-alt-en="A 32 GB Netac microSD card held between two fingers.">
       </picture>
       <picture>
-        <source type="image/avif" srcset="media/microsd-adapter-360.avif 360w, media/microsd-adapter-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
-        <img src="media/microsd-adapter-360.jpg" srcset="media/microsd-adapter-360.jpg 360w, media/microsd-adapter-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+        <source type="image/avif" srcset="media/microsd-adapter-360.avif 360w, media/microsd-adapter-720.avif 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)">
+        <img src="media/microsd-adapter-360.jpg" srcset="media/microsd-adapter-360.jpg 360w, media/microsd-adapter-720.jpg 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)" width="720" height="960" loading="lazy" decoding="async"
              alt="microSD картичката ставена во SD адаптер."
              data-alt-en="The microSD card inserted into a full-size SD adapter.">
       </picture>
       <picture>
-        <source type="image/avif" srcset="media/card-reader-360.avif 360w, media/card-reader-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
-        <img src="media/card-reader-360.jpg" srcset="media/card-reader-360.jpg 360w, media/card-reader-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+        <source type="image/avif" srcset="media/card-reader-360.avif 360w, media/card-reader-720.avif 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)">
+        <img src="media/card-reader-360.jpg" srcset="media/card-reader-360.jpg 360w, media/card-reader-720.jpg 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)" width="720" height="960" loading="lazy" decoding="async"
              alt="SD адаптерот до црн USB читач на картички."
              data-alt-en="The SD adapter next to a black USB card reader.">
       </picture>
       <picture>
-        <source type="image/avif" srcset="media/reader-in-pc-360.avif 360w, media/reader-in-pc-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
-        <img src="media/reader-in-pc-360.jpg" srcset="media/reader-in-pc-360.jpg 360w, media/reader-in-pc-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+        <source type="image/avif" srcset="media/reader-in-pc-360.avif 360w, media/reader-in-pc-720.avif 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)">
+        <img src="media/reader-in-pc-360.jpg" srcset="media/reader-in-pc-360.jpg 360w, media/reader-in-pc-720.jpg 720w" sizes="(min-width: 45rem) 156px, calc(25vw - 1rem)" width="720" height="960" loading="lazy" decoding="async"
              alt="Читачот приклучен одзади на компјутер, со вклучено сино светло."
              data-alt-en="The card reader plugged into the back of a PC, its blue LED on.">
       </picture>
-      <figcaption><span data-lang="mk">microSD во адаптерот, адаптерот во USB читачот, читачот во компјутерот.</span><span data-lang="en">microSD into the adapter, the adapter into the USB reader, the reader into the PC.</span></figcaption>
+      <figcaption><span data-lang="mk">microSD во адаптерот, адаптерот во USB читачот, читачот во компјутерот. Сè ова само затоа што немав SD слот.</span><span data-lang="en">microSD into the adapter, the adapter into the USB reader, the reader into the PC. All of that only because I had no SD slot.</span></figcaption>
     </figure>
 
     <figure>
@@ -243,8 +256,8 @@ cat EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz.sha256</code></pre>
       <figcaption><span data-lang="mk">Etcher со избран image и картичката од 31,3 GB.</span><span data-lang="en">Etcher with the image and the 31.3 GB card selected.</span></figcaption>
     </figure>
 
-    <p data-lang="mk">Од терминал е една линија. Најди ја картичката со <code>lsblk</code> и замени го <code>/dev/sdX</code>; погрешна буква брише погрешен диск.</p>
-    <p data-lang="en">From a terminal it's one line. Find your card with <code>lsblk</code> and replace <code>/dev/sdX</code>; the wrong letter wipes the wrong disk.</p>
+    <p data-lang="mk">Ако повеќе сакаш терминал, наместо Etcher е една линија. Најди ја картичката со <code>lsblk</code> и замени го <code>/dev/sdX</code>; погрешна буква брише погрешен диск.</p>
+    <p data-lang="en">If you'd rather use a terminal, it's one line instead of Etcher. Find your card with <code>lsblk</code> and replace <code>/dev/sdX</code>; the wrong letter wipes the wrong disk.</p>
 
     <figure class="code">
       <figcaption id="c-dd-cap"><span data-lang="mk">Флеширање од терминал</span><span data-lang="en">Flashing from a terminal</span></figcaption>
@@ -253,8 +266,10 @@ gzip -dc EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz | sudo dd of=/dev/sdX bs=
     </figure>
 
     <h2 id="dtb"><span data-lang="mk">Избери device tree</span><span data-lang="en">Pick the device tree</span></h2>
-    <p data-lang="mk">По флеширањето, картичката има мала FAT партиција <code>EMUELEC</code> со системот (<code>SYSTEM</code>), кернелот, скриптите за бутирање и папката <code>device_trees</code>. На кернелот му треба device tree, фајл што ја опишува плочата. Копирај го вистинскиот во коренот на партицијата и именувај го <code>dtb.img</code>. S905X со 2 GB RAM користи <code>gxl_p212_2g.dtb</code>; боксовите со 1 GB користат <code>gxl_p212_1g.dtb</code>.</p>
-    <p data-lang="en">After flashing, the card has a small FAT partition called <code>EMUELEC</code> with the system image (<code>SYSTEM</code>), the kernel, the boot scripts and a <code>device_trees</code> folder. The kernel needs a device tree, a file that describes your board. Copy the right one to the root of the partition and name it <code>dtb.img</code>. An S905X with 2 GB RAM uses <code>gxl_p212_2g.dtb</code>; boxes with 1 GB use <code>gxl_p212_1g.dtb</code>.</p>
+    <p data-lang="mk">По флеширањето, картичката има мала FAT партиција <code>EMUELEC</code> со системот (<code>SYSTEM</code>), кернелот, скриптите за бутирање и папката <code>device_trees</code>. На кернелот му треба device tree, фајл што ја опишува плочата. Најди го вистинскиот во <code>device_trees</code>, копирај го во коренот на партицијата и преименувај го во <code>dtb.img</code>, од фајл менаџер или од терминал. За S905X со 2 GB RAM тоа е <code>gxl_p212_2g.dtb</code>; со 1 GB, <code>gxl_p212_1g.dtb</code>.</p>
+    <p data-lang="en">After flashing, the card has a small FAT partition called <code>EMUELEC</code> with the system image (<code>SYSTEM</code>), the kernel, the boot scripts and a <code>device_trees</code> folder. The kernel needs a device tree, a file that describes your board. Find the right one in <code>device_trees</code>, copy it to the root of the partition and rename it to <code>dtb.img</code>, in a file manager or a terminal. For an S905X with 2 GB RAM that's <code>gxl_p212_2g.dtb</code>; with 1 GB, <code>gxl_p212_1g.dtb</code>.</p>
+    <p data-lang="mk">Кој фајл за кој бокс? Побарај го моделот на <a href="https://coreelec.org/dtb/">листата на CoreELEC</a> (EmuELEC ги користи истите имиња) или на <a href="https://emuelec.discourse.group/">форумот на EmuELEC</a>. Ако го нема, оди по чипот и RAM-от од етикетата: името почнува со фамилијата на чипот (<code>gxl</code> е S905X/W/L, <code>g12a</code> е S905X2, <code>sm1</code> е S905X3, <code>g12b</code> е S922X), а RAM-от е во името (<code>_1g</code>, <code>_2g</code>, <code>_4g</code>). Мојот A95X-B7N го нема на листата, па одев по чип. Ако не бутира, пробај друг: dtb е само фајл на картичката, ништо не се расипува.</p>
+    <p data-lang="en">Which file for which box? Look up your model on <a href="https://coreelec.org/dtb/">CoreELEC's list</a> (EmuELEC uses the same names) or on the <a href="https://emuelec.discourse.group/">EmuELEC forum</a>. If it isn't there, go by the chip and RAM from the label: the name starts with the chip family (<code>gxl</code> is S905X/W/L, <code>g12a</code> is S905X2, <code>sm1</code> is S905X3, <code>g12b</code> is S922X), and the RAM is in the name (<code>_1g</code>, <code>_2g</code>, <code>_4g</code>). My A95X-B7N isn't on the list, so I went by the chip. If it doesn't boot, try another: the dtb is just a file on the card, nothing breaks.</p>
 
     <figure class="code">
       <figcaption id="c-dtb-cap"><span data-lang="mk">На партицијата EMUELEC (Ubuntu ја монтира под /media/$USER)</span><span data-lang="en">On the EMUELEC partition (Ubuntu mounts it under /media/$USER)</span></figcaption>
@@ -381,16 +396,16 @@ Could not initialize texture from memory, invalid data! (file path: :/frame.png 
 Error loading sound ".../mscroll.ogg"</code></pre>
     </figure>
 
-    <p data-lang="mk">Изброј ги празните фајлови на твојата картичка:</p>
-    <p data-lang="en">Count the empty files on your card:</p>
+    <p data-lang="mk">Ако сакаш да провериш дали и твојата картичка настрада, изброј ги празните фајлови:</p>
+    <p data-lang="en">To check whether your card got hit too, count the empty files:</p>
 
     <figure class="code">
       <figcaption id="c-find-cap"><span data-lang="mk">Изброј ги празните фајлови</span><span data-lang="en">Count empty files</span></figcaption>
       <pre tabindex="0" role="region" aria-labelledby="c-find-cap"><code>sudo find /run/media/$USER/STORAGE/.config/emulationstation -type f -size 0 | wc -l</code></pre>
     </figure>
 
-    <p data-lang="mk">За поправката не треба ништо од интернет. <code>SYSTEM</code> е squashfs image во кој се оригиналните фајлови под <code>/usr/config</code>. Извади ги, па врати го секој фајл што се разликува. Јас немав инсталирано squashfs-tools, па image-от го прочитав со неколку линии Python (PySquashfsImage и python-lzo); <code>unsquashfs</code> го прави истото со една команда:</p>
-    <p data-lang="en">The fix needs nothing from the internet. <code>SYSTEM</code> is a squashfs image that holds the original files under <code>/usr/config</code>. Extract them, then copy back every file that differs. I didn't have squashfs-tools installed, so I read the image with a few lines of Python (PySquashfsImage and python-lzo); <code>unsquashfs</code> does the same in one command:</p>
+    <p data-lang="mk">Најлесно е она од погоре: флеширај пак и пушти го првото бутирање да заврши. Јас сакав да ја поправам, а за тоа не треба ништо од интернет: <code>SYSTEM</code> е squashfs image во кој се оригиналните фајлови под <code>/usr/config</code>. Извади ги со <code>unsquashfs</code> (пакетот <code>squashfs-tools</code>), па врати го секој фајл што се разликува:</p>
+    <p data-lang="en">The easy way is the one above: flash again and let the first boot finish. I wanted to repair it instead, and that needs nothing from the internet: <code>SYSTEM</code> is a squashfs image that holds the original files under <code>/usr/config</code>. Extract them with <code>unsquashfs</code> (from <code>squashfs-tools</code>), then copy back every file that differs:</p>
 
     <figure class="code">
       <figcaption id="c-unsquash-cap"><span data-lang="mk">Извади ги оригиналите од SYSTEM</span><span data-lang="en">Extract the originals from SYSTEM</span></figcaption>
@@ -422,8 +437,8 @@ echo "empty files left: $(find "$S" -type f -size 0 | wc -l)"</code></pre>
     <p data-lang="en"><code>STORAGE</code> is ext4 and owned by root, hence <code>sudo</code>. On my card: <samp>restored 758 files</samp>, <samp>empty files left: 0</samp>.</p>
 
     <h3><span data-lang="mk">Проблем 2: волшебникот никогаш не се појавува, намерно</span><span data-lang="en">Problem 2: the wizard never shows up, by design</span></h3>
-    <p data-lang="mk">Ова ме изненади, па го прочитав изворниот код на EmulationStation на EmuELEC. <code>main.cpp</code> го вклучува екранот за подесување влез, но никогаш не го отвора при стартување, а мапирањето на тастатурата се вчитува само од <code>es_input.cfg</code>. Вграденото стандардно мапирање е резерва за итни случаи што нормалното стартување никогаш не ја повикува. Значи, празен <code>es_input.cfg</code> значи тастатура без мапирање и без волшебник што би го поправил тоа.</p>
-    <p data-lang="en">This one surprised me, so I read the source of EmuELEC's EmulationStation. <code>main.cpp</code> includes the input wizard screen but never opens it at startup, and the keyboard mapping is loaded only from <code>es_input.cfg</code>. The built-in default keyboard mapping is an emergency fallback that normal startup never calls. So an empty <code>es_input.cfg</code> means a keyboard with no mapping and no wizard to fix it.</p>
+    <p data-lang="mk">Ова не е баг, туку така е направено: EmulationStation на EmuELEC никогаш не го отвора волшебникот при стартување, а тастатурата ја чита само од <code>es_input.cfg</code>. Значи празен <code>es_input.cfg</code> е тастатура што не прави ништо, без волшебник да го поправи тоа. Ако имаш џојстик, пробај прво со него.</p>
+    <p data-lang="en">This one isn't a bug, it's by design: EmuELEC's EmulationStation never opens the input wizard at startup and reads the keyboard only from <code>es_input.cfg</code>. So an empty <code>es_input.cfg</code> means a keyboard that does nothing, and no wizard to fix it. If you have a gamepad, try that first.</p>
     <p data-lang="mk">Решението е сам да напишеш блок за тастатурата, во <code>&lt;inputList&gt;</code> во <code>STORAGE/.config/emulationstation/es_input.cfg</code>. Мојата прва верзија (сликата) користеше Enter за A и Space за Start. Работеше во менијата, но во игрите RetroArch си има свои стандардни копчиња, па истото копче правеше различни работи во менијата и во игрите. Конечната верзија ги следи стандардните на RetroArch.</p>
     <p data-lang="en">The fix is to write a keyboard block yourself, inside <code>&lt;inputList&gt;</code> in <code>STORAGE/.config/emulationstation/es_input.cfg</code>. My first version (screenshot) used Enter for A and Space for Start. It worked in menus, but in games RetroArch uses its own default keys, so the same key did different things in menus and in games. The final version follows RetroArch's defaults.</p>
 
@@ -560,12 +575,12 @@ input_player1_r3 = "v"</code></pre>
       <li>Skip <code>(Beta)</code>, <code>(Proto)</code>, <code>(Demo)</code>, <code>[b]</code> (bad dump), and multi-carts with “ + ” in the name.</li>
       <li>NES: take the Headered set. The 16-byte iNES header tells the emulator which mapper (the cartridge's bank-switching chip) it needs; headerless files make it guess.</li>
     </ul>
-    <p data-lang="mk">Мала Python скрипта ги примени овие правила на мојата колекција и остави по еден фајл за секој наслов.</p>
-    <p data-lang="en">A small Python script applied these rules to my collection and kept one file per title.</p>
+    <p data-lang="mk">Ова се прави рачно: од секоја игра остави еден фајл, другите избриши ги. Не е задолжително, ама листата е многу почиста без пет верзии од истата игра.</p>
+    <p data-lang="en">You do this by hand: keep one file per game and delete the rest. It's optional, but the list is much cleaner without five versions of the same game.</p>
 
-    <h3><span data-lang="mk">PlayStation: користи CHD</span><span data-lang="en">PlayStation: use CHD</span></h3>
-    <p data-lang="mk">За PS1 користи CHD: без загуба, 30–50% помал од BIN/CUE, еден фајл по диск, а PCSX ReARMed го чита директно. ISO ги губи CD аудио траките. Конвертирај со <code>chdman</code> од MAME (на Arch е во <code>mame-tools</code>), секогаш од <code>.cue</code>, не од <code>.bin</code>:</p>
-    <p data-lang="en">For PS1 use CHD: lossless, 30–50% smaller than BIN/CUE, one file per disc, and the PCSX ReARMed core reads it directly. ISO loses the CD audio tracks. Convert with <code>chdman</code> from MAME (on Arch it's in <code>mame-tools</code>), always from the <code>.cue</code>, not the <code>.bin</code>:</p>
+    <h3><span data-lang="mk">PlayStation: CHD (не е задолжително)</span><span data-lang="en">PlayStation: CHD (optional)</span></h3>
+    <p data-lang="mk">За PS1 јас користев CHD: без загуба, 30–50% помал од BIN/CUE, еден фајл по диск, а PCSX ReARMed го чита директно. Не мора: BIN/CUE работи исто, CHD е само за да собере повеќе на картичка од 32 GB. ISO не го препорачувам, ги губи CD аудио траките. Ако одиш на CHD, конвертирај со <code>chdman</code> од MAME (на Arch е во <code>mame-tools</code>), секогаш од <code>.cue</code>, не од <code>.bin</code>:</p>
+    <p data-lang="en">For PS1 I used CHD: lossless, 30–50% smaller than BIN/CUE, one file per disc, and the PCSX ReARMed core reads it directly. You don't have to: BIN/CUE works just the same, CHD only fits more games on a 32 GB card. I'd skip ISO, it loses the CD audio tracks. If you go CHD, convert with <code>chdman</code> from MAME (on Arch it's in <code>mame-tools</code>), always from the <code>.cue</code>, not the <code>.bin</code>:</p>
 
     <figure class="code">
       <figcaption id="c-chd-cap"><span data-lang="mk">BIN/CUE во CHD</span><span data-lang="en">BIN/CUE to CHD</span></figcaption>
@@ -583,14 +598,12 @@ Final Fantasy VII (USA) (Disc 2).chd
 Final Fantasy VII (USA) (Disc 3).chd</code></pre>
     </figure>
 
-    <p data-lang="mk">Провери го секој CHD пред копирање и прочитај го серискиот број за бутирање на секој диск, бидејќи имињата на фајловите знаат да лажат. Три од моите лажеа: „Final Fantasy VII“ се покажа како демото Interactive Sampler од 196 MB (SCUS-94961), „Metal Gear Solid“ беше VR Missions, а „Suikoden II“ беше првиот Suikoden.</p>
-    <p data-lang="en">Verify every CHD before copying, and read each disc's boot serial, because file names can be wrong. Three of mine were: a “Final Fantasy VII” turned out to be the 196 MB Interactive Sampler demo (SCUS-94961), “Metal Gear Solid” was VR Missions, and “Suikoden II” was the first Suikoden.</p>
+    <p data-lang="mk">Имињата на фајловите знаат да лажат. Кај мене три лажеа: „Final Fantasy VII“ се покажа како демото Interactive Sampler од 196 MB (SCUS-94961), „Metal Gear Solid“ беше VR Missions, а „Suikoden II“ беше првиот Suikoden. Ќе ги фатиш кога ќе ги пуштиш, а сомнителна големина е добар знак (FFVII диск од 196 MB?). Опционално, пред копирање провери дека CHD-фајловите се цели:</p>
+    <p data-lang="en">File names can lie. Three of mine did: a “Final Fantasy VII” turned out to be the 196 MB Interactive Sampler demo (SCUS-94961), “Metal Gear Solid” was VR Missions, and “Suikoden II” was the first Suikoden. You'll catch them when you launch them, and a suspicious size is a good hint (a 196 MB FFVII disc?). Optionally, check the CHDs are intact before copying:</p>
 
     <figure class="code">
-      <figcaption id="c-verify-cap"><span data-lang="mk">Провери ги сите CHD, па прочитај го серискиот број на еден диск</span><span data-lang="en">Verify all CHDs, then read one disc's serial</span></figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-verify-cap"><code>ls *.chd | xargs -P "$(nproc)" -I{} sh -c 'echo "{}: $(chdman verify -i "{}" 2&gt;&amp;1 | tail -1)"'
-chdman extractcd -i "Game (USA).chd" -o /tmp/x.cue -ob /tmp/x.bin -f
-grep -a -o -m1 -E 'cdrom:\\?[A-Z]{4}_[0-9]{3}\.[0-9]{2}' /tmp/x.bin</code></pre>
+      <figcaption id="c-verify-cap"><span data-lang="mk">Провери ги CHD-фајловите</span><span data-lang="en">Verify the CHDs</span></figcaption>
+      <pre tabindex="0" role="region" aria-labelledby="c-verify-cap"><code>for f in *.chd; do echo "$f: $(chdman verify -i "$f" 2&gt;&amp;1 | tail -1)"; done</code></pre>
     </figure>
 
     <h3>BIOS</h3>
@@ -619,30 +632,16 @@ md5sum /run/media/$USER/EEROMS/bios/scph5501.bin
     </table>
 
     <h3><span data-lang="mk">Копирање на картичката</span><span data-lang="en">Copying to the card</span></h3>
-    <p data-lang="mk">Копирај под привремено име и преименувај кога ќе заврши, за прекинато копирање никогаш да не остави половичен фајл под вистинското име. Потоа провери пак на картичката; мојата веќе еднаш имаше изгубено фајлови.</p>
-    <p data-lang="en">Copy to a temporary name and rename when done, so an interrupted copy never leaves a half file under the real name. Then verify again on the card; mine had already lost files once.</p>
-
-    <figure class="code">
-      <figcaption id="c-copy-cap"><span data-lang="mk">Безбедно копирање</span><span data-lang="en">Safe copy</span></figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-copy-cap"><code>D=/run/media/$USER/EEROMS/psx
-for f in *.chd; do cp "$f" "$D/$f.part" &amp;&amp; mv "$D/$f.part" "$D/$f"; done
-sync</code></pre>
-    </figure>
-
-    <p data-lang="mk">Ако при вадење пишува „device busy“, а ништо нема отворени фајлови, компјутерот обично сè уште запишува гигабајти на бавната картичка. Пушти <code>sync</code>, почекај, па откачи ја секоја партиција посебно. Еднаш пробав и <code>udisksctl power-off</code>; читачот потоа исчезна сè додека не го извадив и вратив. Доволно е unmount.</p>
-    <p data-lang="en">If ejecting says “device busy” while nothing has files open, the PC is usually still flushing gigabytes to a slow card. Run <code>sync</code>, wait, then unmount each partition. I also tried <code>udisksctl power-off</code> once; the reader then vanished until I unplugged it and plugged it back in. Unmounting is enough.</p>
-
-    <figure class="code">
-      <figcaption id="c-eject-cap"><span data-lang="mk">Вади безбедно</span><span data-lang="en">Eject safely</span></figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-eject-cap"><code>sync
-for p in /dev/sdX1 /dev/sdX2 /dev/sdX3; do udisksctl unmount -b "$p"; done</code></pre>
-    </figure>
+    <p data-lang="mk">Копирај ги игрите со фајл менаџерот, како било што друго, секоја во папката на својот систем (<code>EEROMS/psx</code>, <code>EEROMS/snes</code>...). Пред да ја извадиш картичката, секогаш Eject и почекај: SD картичките се бавни и компјутерот запишува уште долго откако копирањето „завршило“.</p>
+    <p data-lang="en">Copy the games with your file manager like anything else, each into its system's folder (<code>EEROMS/psx</code>, <code>EEROMS/snes</code>...). Before pulling the card, always Eject and wait: SD cards are slow, and the PC keeps writing long after the copy has “finished”.</p>
+    <p data-lang="mk">Ако при вадење пишува „device busy“, а ништо нема отворено, тоа е токму тоа: компјутерот уште запишува гигабајти. Почекај (или пушти <code>sync</code> во терминал) и пробај пак. Еднаш пробав <code>udisksctl power-off</code>; читачот исчезна сè додека не го извадив и вратив. Обичен Eject е доволен.</p>
+    <p data-lang="en">If ejecting says “device busy” while nothing is open, that's exactly it: the PC is still writing gigabytes. Wait (or run <code>sync</code> in a terminal) and try again. I tried <code>udisksctl power-off</code> once; the reader vanished until I unplugged it and plugged it back in. A plain Eject is enough.</p>
 
     <h3><span data-lang="mk">Колку собира 32 GB</span><span data-lang="en">How much fits on 32 GB</span></h3>
-    <p data-lang="mk">За игри остануваат околу 22 GB. Игрите од касети се ситни; PS1 дисковите се тие што ја полнат картичката, околу 320 MB секој како CHD.</p>
-    <p data-lang="en">About 22 GB is left for games. Cartridge games are tiny; PS1 discs are what fill the card, around 320 MB each as CHD.</p>
+    <p data-lang="mk">За игри остануваат околу 22 GB. Игрите од касети се ситни; PS1 дисковите се тие што ја полнат картичката, околу 320 MB секој како CHD. Јас собрав околу 1600 игри, а останаа 3 GB празни.</p>
+    <p data-lang="en">About 22 GB is left for games. Cartridge games are tiny; PS1 discs are what fill the card, around 320 MB each as CHD. I fit about 1,600 games with 3 GB to spare.</p>
     <table>
-      <caption><span data-lang="mk">Разумна поделба на 22 GB</span><span data-lang="en">A sensible split of 22 GB</span></caption>
+      <caption><span data-lang="mk">Пример поделба на 22 GB</span><span data-lang="en">An example split of 22 GB</span></caption>
       <thead>
         <tr><th scope="col"><span data-lang="mk">Група</span><span data-lang="en">Group</span></th><th scope="col"><span data-lang="mk">Игри</span><span data-lang="en">Games</span></th><th scope="col"><span data-lang="mk">Простор</span><span data-lang="en">Space</span></th></tr>
       </thead>
@@ -660,8 +659,8 @@ for p in /dev/sdX1 /dev/sdX2 /dev/sdX3; do udisksctl unmount -b "$p"; done</code
     <p data-lang="en">What runs: everything up to PS1 at full speed on default settings. N64 is mixed (Ocarina of Time plays, with slowdown). PSP, Dreamcast, Saturn, DS, GameCube and newer are too heavy for the S905X.</p>
 
     <h2 id="art"><span data-lang="mk">Корици и слики од игрите</span><span data-lang="en">Box art and screenshots</span></h2>
-    <p data-lang="mk">Листа на игри без слики изгледа тажно. Scraping значи симнување корици, слики и описи од <a href="https://www.screenscraper.fr/">ScreenScraper</a>, за што треба бесплатна сметка. EmuELEC има scraper во главното мени, но мојата картичка веќе беше во компјутерот, па користев <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> таму:</p>
-    <p data-lang="en">A game list without pictures looks sad. Scraping downloads covers, screenshots and descriptions from <a href="https://www.screenscraper.fr/">ScreenScraper</a>, which needs a free account. EmuELEC has a scraper in its main menu, but my card was in the PC anyway, so I used <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> there:</p>
+    <p data-lang="mk">Листа на игри без слики изгледа тажно. Scraping значи симнување корици, слики и описи од <a href="https://www.screenscraper.fr/">ScreenScraper</a>, за што треба бесплатна сметка. Најлесно е од самиот бокс: главното мени има scraper. Јас користев <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> на компјутер, бидејќи картичката веќе беше таму:</p>
+    <p data-lang="en">A game list without pictures looks sad. Scraping downloads covers, screenshots and descriptions from <a href="https://www.screenscraper.fr/">ScreenScraper</a>, which needs a free account. The easiest way is on the box itself: the main menu has a scraper. I used <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> on the PC because the card was in it anyway:</p>
 
     <figure class="code">
       <figcaption id="c-sky-install-cap">Skyscraper (AUR)</figcaption>
@@ -705,8 +704,8 @@ Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g
     </ul>
     <p data-lang="mk">Резултат за PS1: 52 од 53 игри пронајдени, 22 MB слики, околу 0,25 MB по игра.</p>
     <p data-lang="en">Result for PS1: 52 of 53 games found, 22 MB of images, about 0.25 MB per game.</p>
-    <p data-lang="mk">Ако правиш scraping на боксот, прво исклучи ги додатоците во <code>STORAGE/.config/emulationstation/es_settings.cfg</code>. Само видеата се 2–10 MB по игра и брзо ја полнат картичка од 32 GB. „Maps“ тука се мапи на световите направени од фанови, прикажани во прегледувач на слики, а не мапи во самата игра.</p>
-    <p data-lang="en">If you scrape on the box instead, turn off the extras first in <code>STORAGE/.config/emulationstation/es_settings.cfg</code>. Videos alone are 2–10 MB per game and fill a 32 GB card quickly. “Maps” here are fan-made world maps shown in a picture viewer, not in-game maps.</p>
+    <p data-lang="mk">Ако правиш scraping на боксот, прво исклучи ги додатоците во опциите на scraper-от (или во <code>STORAGE/.config/emulationstation/es_settings.cfg</code>). Само видеата се 2–10 MB по игра и брзо ја полнат картичка од 32 GB. „Maps“ тука се мапи на световите направени од фанови, прикажани во прегледувач на слики, а не мапи во самата игра.</p>
+    <p data-lang="en">If you scrape on the box instead, turn off the extras first in the scraper options (or in <code>STORAGE/.config/emulationstation/es_settings.cfg</code>). Videos alone are 2–10 MB per game and fill a 32 GB card quickly. “Maps” here are fan-made world maps shown in a picture viewer, not in-game maps.</p>
 
     <figure class="code">
       <figcaption id="c-scrape-off-cap"><span data-lang="mk">es_settings.cfg: без видеа и други додатоци</span><span data-lang="en">es_settings.cfg: no videos or other extras</span></figcaption>
@@ -718,8 +717,8 @@ Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g
     </figure>
 
     <h2 id="settings"><span data-lang="mk">Подесувања што се битни</span><span data-lang="en">Settings that matter</span></h2>
-    <p data-lang="mk">Главната поука: не менувај го <code>retroarch.cfg</code> за видео и емулациски подесувања. <code>setsettings.sh</code> на EmuELEC ги препишува секој пат кога стартува игра, од <code>/storage/.config/emuelec/configs/emuelec.conf</code>. Таму стави ги подесувањата: <code>global.клуч</code> за сè, <code>систем.клуч</code> (на пр. <code>nes.runahead</code>) за еден систем. Подесување за игра е посилно од она за систем, а тоа од глобалното.</p>
-    <p data-lang="en">The main lesson: don't edit <code>retroarch.cfg</code> for video and emulation settings. EmuELEC's <code>setsettings.sh</code> rewrites them every time a game starts, from <code>/storage/.config/emuelec/configs/emuelec.conf</code>. Put settings there instead: <code>global.key</code> for everything, <code>system.key</code> (like <code>nes.runahead</code>) for one system. A per-game setting beats a per-system one, which beats global.</p>
+    <p data-lang="mk">Главната поука: не менувај го <code>retroarch.cfg</code> за видео и емулациски подесувања. <code>setsettings.sh</code> на EmuELEC ги препишува секој пат кога стартува игра, од <code>/storage/.config/emuelec/configs/emuelec.conf</code>. Таму стави ги подесувањата: <code>global.клуч</code> за сè, <code>систем.клуч</code> (на пр. <code>nes.runahead</code>) за еден систем. Подесување за игра е посилно од она за систем, а тоа од глобалното. Не мора да го уредуваш фајлот рачно: повеќето од ова го има и во менијата (Game Settings, System Settings), а тие пишуваат токму во <code>emuelec.conf</code>.</p>
+    <p data-lang="en">The main lesson: don't edit <code>retroarch.cfg</code> for video and emulation settings. EmuELEC's <code>setsettings.sh</code> rewrites them every time a game starts, from <code>/storage/.config/emuelec/configs/emuelec.conf</code>. Put settings there instead: <code>global.key</code> for everything, <code>system.key</code> (like <code>nes.runahead</code>) for one system. A per-game setting beats a per-system one, which beats global. You don't have to edit the file by hand: most of this is also in the menus (Game Settings, System Settings), and they write to that same <code>emuelec.conf</code>.</p>
 
     <figure class="code">
       <figcaption id="c-conf-cap"><span data-lang="mk">Мои измени во emuelec.conf</span><span data-lang="en">My changes to emuelec.conf</span></figcaption>
@@ -783,8 +782,8 @@ Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g
     </ul>
 
     <h2 id="lockdown"><span data-lang="mk">Заклучи го</span><span data-lang="en">Lock it down</span></h2>
-    <p data-lang="mk">Стандардно EmuELEC пушта Samba (споделување фајлови на мрежа, стандардна најава <code>root</code> / <code>emuelec</code>), а SSH е едно подесување подалеку. Сакам боксот да стигнува до интернет (scraping, синхронизација на време), но ништо од мојата мрежа да не стигнува до боксот. Сервисите проверуваат фајлови-знаменца во <code>STORAGE/.cache/services</code> кога боксот се пали:</p>
-    <p data-lang="en">Out of the box EmuELEC runs Samba (network file sharing, default login <code>root</code> / <code>emuelec</code>), and SSH is one setting away. I want the box to reach the internet (scraping, time sync) but nothing on my network to reach the box. The services check flag files in <code>STORAGE/.cache/services</code> when the box boots:</p>
+    <p data-lang="mk">Ова е опционално. Стандардно EmuELEC пушта Samba (споделување фајлови на мрежа, стандардна најава <code>root</code> / <code>emuelec</code>), а SSH е едно подесување подалеку. Сакам боксот да стигнува до интернет (scraping, синхронизација на време), но ништо од мојата мрежа да не стигнува до боксот. Сервисите проверуваат фајлови-знаменца во <code>STORAGE/.cache/services</code> кога боксот се пали:</p>
+    <p data-lang="en">This part is optional. Out of the box EmuELEC runs Samba (network file sharing, default login <code>root</code> / <code>emuelec</code>), and SSH is one setting away. I want the box to reach the internet (scraping, time sync) but nothing on my network to reach the box. The services check flag files in <code>STORAGE/.cache/services</code> when the box boots:</p>
 
     <figure class="code">
       <figcaption id="c-lock-cap"><span data-lang="mk">Исклучи ги SSH, Samba и Avahi, вклучи firewall</span><span data-lang="en">Turn off SSH, Samba and Avahi, turn on the firewall</span></figcaption>
