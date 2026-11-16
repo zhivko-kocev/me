@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'inline-speculation-rules'; object-src 'none'; base-uri 'none'">
 
-  <title>Живко Коцев — Софтверски инженер | Zhivko Kocev — Software Engineer</title>
+  <title data-mk="Живко Коцев — Софтверски инженер" data-en="Zhivko Kocev — Software Engineer">Живко Коцев — Софтверски инженер | Zhivko Kocev — Software Engineer</title>
+  <script src="/script.js"></script>
   <meta name="description" content="Личен сајт на Живко Коцев — софтверски инженер во CodeChem, студент на ФИНКИ, хакерспејс контрибутор во Base42 и волонтер во Донирај Компјутер.">
   <meta name="author" content="Живко Коцев">
-  <meta name="keywords" content="Живко Коцев, Zhivko Kocev, софтверски инженер, software engineer, .NET, C#, CodeChem, FINKI, Base42, hackerspace, Донирај Компјутер, Skopje, Macedonia, Скопје">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="googlebot" content="index, follow">
   <meta name="theme-color" content="#f5f5f0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0d0d10" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
@@ -17,13 +17,10 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <link rel="canonical" href="https://kocev.mk/">
-  <link rel="alternate" hreflang="mk" href="https://kocev.mk/">
-  <link rel="alternate" hreflang="en" href="https://kocev.mk/">
-  <link rel="alternate" hreflang="x-default" href="https://kocev.mk/">
+  <link rel="alternate" type="application/atom+xml" href="/blog/feed.xml" title="Блог — Живко Коцев">
 
-  <link rel="icon" type="image/jpeg" href="/spidey.jpg">
-  <link rel="apple-touch-icon" href="/spidey.jpg">
-  <link rel="preload" as="image" href="/spidey.jpg" fetchpriority="high">
+  <link rel="icon" type="image/jpeg" href="/spidey-96.jpg">
+  <link rel="apple-touch-icon" href="/spidey-192.jpg">
 
   <meta property="og:type" content="profile">
   <meta property="og:url" content="https://kocev.mk/">
@@ -80,8 +77,7 @@
     },
     "sameAs": [
       "https://github.com/zhivko-kocev",
-      "https://www.linkedin.com/in/zhivko-kocev/",
-      "https://kocev.hashnode.dev/"
+      "https://www.linkedin.com/in/zhivko-kocev/"
     ],
     "email": "mailto:zikekocev57@gmail.com",
     "address": {
@@ -108,22 +104,31 @@
   }
   </script>
 
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <script type="speculationrules">
+  {"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[data-set-lang]"}}]}, "eagerness": "moderate"}]}
+  </script>
 
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-  <p><button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language / Промени јазик">EN</button></p>
+  <header class="site-header">
+    <p class="lang-switch">
+      <a href="?lang=en" hreflang="en" lang="en" data-set-lang="en" data-lang="mk">English</a>
+      <a href="?lang=mk" hreflang="mk" lang="mk" data-set-lang="mk" data-lang="en">Македонски</a>
+    </p>
+  </header>
 
   <main>
 
   <!-- ===================== МК ===================== -->
-  <section data-lang="mk" lang="mk" class="active" aria-label="Содржина на македонски">
+  <section data-lang="mk" lang="mk">
 
     <div class="header">
-      <img class="portrait" src="spidey.jpg" alt="Живко Коцев — портрет" width="736" height="736" decoding="async" fetchpriority="high">
+      <picture>
+        <source type="image/avif" srcset="/spidey-96.avif 96w, /spidey-192.avif 192w, /spidey-288.avif 288w" sizes="96px">
+        <img class="portrait" src="/spidey-192.jpg" srcset="/spidey-96.jpg 96w, /spidey-192.jpg 192w, /spidey-288.jpg 288w" sizes="96px" alt="Живко Коцев — портрет" width="96" height="96">
+      </picture>
       <div>
         <h1>Живко Коцев</h1>
         <p class="tagline">Софтверски инженер бај деј. Решавач на Ај Ти проблеми бај најт.</p>
@@ -138,8 +143,8 @@
     <p>Студирам на ФИНКИ, толку.</p>
 
     <h2>Софтверски инженер</h2>
-    <p>Работам како софтверски инженер во CodeChem, по работа куцам и по нешто за мене. Кодот што го куцам е <a href="https://github.com/zhivko-kocev">тука</a>.
-      Моите скромни ставови, идеи и експерименти се <a href="https://kocev.hashnode.dev/">тука</a>.</p>
+    <p>Работам како софтверски инженер во CodeChem, по работа куцам и по нешто за мене. Кодот што го куцам е <a href="https://github.com/zhivko-kocev">тука<span class="visually-hidden"> (GitHub)</span></a>.
+      Моите скромни ставови, идеи и експерименти се <a href="/blog/">тука<span class="visually-hidden"> (блог)</span></a>.</p>
 
     <h2>Хакерспејс контрибутор</h2>
     <p>Активен сум и во <a href="https://42.mk/">Base42</a>, хакерспејсот во Скопје. Таму може да ме најдете како чачкам нешто со компјутери или помагам на некој настан.</p>
@@ -152,6 +157,9 @@
 
     <h2>Бивш фудбалер</h2>
     <p>До 20-тата година играв фудбал професионално. Сега играм само рекреативно.</p>
+
+    <h2>Блог</h2>
+    <p>Најново: <a href="/blog/tv-box-to-retro-console/">Од заборавен ТВ бокс до ретро конзола</a>.</p>
 
     <hr>
 
@@ -171,22 +179,16 @@
       <li><a href="https://world.hey.com/jason/the-obvious-the-easy-and-the-possible-2e11a3fb">The Obvious, the Easy, and the Possible</a> — Џејсон Фрид со една проста идеја.</li>
     </ul>
 
-    <hr>
-
-    <p class="row">
-      <a rel="me" href="https://github.com/zhivko-kocev">.github</a>
-      <a rel="me" href="https://www.linkedin.com/in/zhivko-kocev/">.lnkedin</a>
-      <a rel="me" href="https://kocev.hashnode.dev/">.blog</a>
-      <a rel="me author" href="mailto:zikekocev57@gmail.com">.email</a>
-    </p>
-
   </section>
 
   <!-- ===================== EN ===================== -->
-  <section data-lang="en" lang="en" aria-label="Content in English">
+  <section data-lang="en" lang="en">
 
     <div class="header">
-      <img class="portrait" src="spidey.jpg" alt="Zhivko Kocev — portrait" width="736" height="736" decoding="async" loading="lazy">
+      <picture>
+        <source type="image/avif" srcset="/spidey-96.avif 96w, /spidey-192.avif 192w, /spidey-288.avif 288w" sizes="96px">
+        <img class="portrait" src="/spidey-192.jpg" srcset="/spidey-96.jpg 96w, /spidey-192.jpg 192w, /spidey-288.jpg 288w" sizes="96px" alt="Zhivko Kocev — portrait" width="96" height="96">
+      </picture>
       <div>
         <h1>Zhivko Kocev</h1>
         <p class="tagline">Software engineer by day. IT problem-solver by night.</p>
@@ -201,7 +203,7 @@
     <p>I study at FINKI. That's it.</p>
 
     <h2>Software engineer</h2>
-    <p>I work as a software engineer at CodeChem; after hours I write a bit of code for myself too. The code I write lives <a href="https://github.com/zhivko-kocev">here</a>. My modest takes, ideas and experiments are <a href="https://kocev.hashnode.dev/">here</a>.</p>
+    <p>I work as a software engineer at CodeChem; after hours I write a bit of code for myself too. The code I write lives <a href="https://github.com/zhivko-kocev">here<span class="visually-hidden"> (GitHub)</span></a>. My modest takes, ideas and experiments are <a href="/blog/">here<span class="visually-hidden"> (blog)</span></a>.</p>
 
     <h2>Hackerspace contributor</h2>
     <p>I'm also active at <a href="https://42.mk/">Base42</a>, the hackerspace in Skopje. You can find me there tinkering with computers or helping out at an event.</p>
@@ -214,6 +216,9 @@
 
     <h2>Former footballer</h2>
     <p>Until I was 20 I played football professionally. Now I only play recreationally.</p>
+
+    <h2>Blog</h2>
+    <p>Latest: <a href="/blog/tv-box-to-retro-console/">From a forgotten TV box to a retro console</a>.</p>
 
     <hr>
 
@@ -233,18 +238,19 @@
       <li><a href="https://world.hey.com/jason/the-obvious-the-easy-and-the-possible-2e11a3fb">The Obvious, the Easy, and the Possible</a> — Jason Fried with one simple idea.</li>
     </ul>
 
-    <hr>
-
-    <p class="row">
-      <a rel="me" href="https://github.com/zhivko-kocev">.github</a>
-      <a rel="me" href="https://www.linkedin.com/in/zhivko-kocev/">.lnkedin</a>
-      <a rel="me" href="https://kocev.hashnode.dev/">.blog</a>
-      <a rel="me author" href="mailto:zikekocev57@gmail.com">.email</a>
-    </p>
-
   </section>
 
   </main>
+
+  <footer>
+    <hr>
+    <ul class="row" role="list">
+      <li><a rel="me" href="https://github.com/zhivko-kocev">.github</a></li>
+      <li><a rel="me" href="https://www.linkedin.com/in/zhivko-kocev/">.linkedin</a></li>
+      <li><a href="/blog/">.blog</a></li>
+      <li><a rel="me author" href="mailto:zikekocev57@gmail.com">.email</a></li>
+    </ul>
+  </footer>
 
 </body>
 </html>
