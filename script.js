@@ -1,5 +1,5 @@
 // Loaded as a classic script in <head>, after <title>: sets the language before first paint.
-// Language order: ?lang= in the URL, then the saved choice, then the page default (<html lang="mk">).
+// Language order: ?lang= in the URL, then the saved choice, then the page default (<html lang="en">).
 (() => {
   const LANGS = ['mk', 'en'];
   const root = document.documentElement;
@@ -14,16 +14,16 @@
     if (document.readyState !== 'loading') translateAttributes(lang);
   }
 
-  // Attributes cannot be hidden with CSS: the HTML holds the Macedonian value,
-  // data-alt-en / data-label-en hold the English one, and the original is kept in data-*-mk.
+  // Attributes cannot be hidden with CSS: the HTML holds the English value,
+  // data-alt-mk / data-label-mk hold the Macedonian one, and the original is kept in data-*-en.
   const ATTRIBUTES = [
-    { attr: 'alt', selector: '[data-alt-en]', en: 'altEn', mk: 'altMk' },
-    { attr: 'aria-label', selector: '[data-label-en]', en: 'labelEn', mk: 'labelMk' },
+    { attr: 'alt', selector: '[data-alt-mk]', en: 'altEn', mk: 'altMk' },
+    { attr: 'aria-label', selector: '[data-label-mk]', en: 'labelEn', mk: 'labelMk' },
   ];
   function translateAttributes(lang) {
     for (const { attr, selector, en, mk } of ATTRIBUTES) {
       for (const el of document.querySelectorAll(selector)) {
-        el.dataset[mk] ??= el.getAttribute(attr) ?? '';
+        el.dataset[en] ??= el.getAttribute(attr) ?? '';
         el.setAttribute(attr, el.dataset[lang === 'en' ? en : mk]);
       }
     }
@@ -113,7 +113,7 @@
     clearTimeout(timers.get(button));
     button.removeAttribute('data-copied');
     button.removeAttribute('data-failed');
-    let message = MESSAGES[root.lang === 'en' ? 'en' : 'mk'][ok ? 'ok' : 'fail'];
+    let message = MESSAGES[root.lang === 'mk' ? 'mk' : 'en'][ok ? 'ok' : 'fail'];
     if (message === lastMessage) message += '\u00A0'; // VoiceOver skips identical repeats
     lastMessage = message;
     tip.textContent = '';
