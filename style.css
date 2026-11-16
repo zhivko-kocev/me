@@ -117,6 +117,7 @@ figure picture img { border-radius: 4px; }
 figure:not(.gallery) picture + picture { margin-block-start: 0.5rem; }
 figcaption { color: var(--muted); font-size: 0.875em; margin-block-start: 0.4rem; }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+.gallery.quad { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .gallery figcaption { grid-column: 1 / -1; margin-block-start: 0; }
 video { max-inline-size: min(100%, 24rem); max-block-size: 80dvh; margin-inline: auto; border-radius: 4px; background: #000; }
 
