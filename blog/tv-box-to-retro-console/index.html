@@ -153,7 +153,7 @@
         <li><a href="#dtb"><span data-lang="mk">Избери device tree</span><span data-lang="en">Pick the device tree</span></a></li>
         <li><a href="#boot"><span data-lang="mk">Бутирање од картичка: чачкалката</span><span data-lang="en">Boot from the card: the toothpick</span></a></li>
         <li><a href="#first-boot"><span data-lang="mk">Првото бутирање: не допирај</span><span data-lang="en">First boot: hands off</span></a></li>
-        <li><a href="#input"><span data-lang="mk">Нема волшебник, тастатурата е мртва</span><span data-lang="en">No input wizard, dead keyboard</span></a></li>
+        <li><a href="#input"><span data-lang="mk">Тастатурата не работи, менијата скршени</span><span data-lang="en">Dead keyboard, broken menus</span></a></li>
         <li><a href="#layout"><span data-lang="mk">Што има на картичката</span><span data-lang="en">What's on the card</span></a></li>
         <li><a href="#games"><span data-lang="mk">Игри, BIOS и формати</span><span data-lang="en">Games, BIOS and formats</span></a></li>
         <li><a href="#art"><span data-lang="mk">Корици и слики од игрите</span><span data-lang="en">Box art and screenshots</span></a></li>
@@ -232,8 +232,8 @@ cat EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz.sha256</code></pre>
     </figure>
 
     <h2 id="flash"><span data-lang="mk">Флеширај ја картичката</span><span data-lang="en">Flash the card</span></h2>
-    <p data-lang="mk">Флеширав со balenaEtcher: <i>Flash from file</i> → <code>.img.gz</code> фајлот (не треба да се отпакува) → <i>Select target</i> → картичката → <i>Flash!</i> Провери ја целта двапати: Etcher брише сè што ќе избереш.</p>
-    <p data-lang="en">I flashed with balenaEtcher: <i>Flash from file</i> → the <code>.img.gz</code> (no need to unzip it) → <i>Select target</i> → the card → <i>Flash!</i> Check the target twice: Etcher erases whatever you pick.</p>
+    <p data-lang="mk">Флеширање значи да го запишеш системот на картичката. Јас користев balenaEtcher (бесплатен е): <i>Flash from file</i> → симнатиот <code>.img.gz</code> (не го отпакувај, Etcher сам се снаоѓа) → <i>Select target</i> → картичката → <i>Flash!</i> Внимавај што бираш како цел: Etcher го брише целиот диск, па ако избереш погрешен, збогум фајлови.</p>
+    <p data-lang="en">Flashing means writing the system onto the card. I used balenaEtcher (it's free): <i>Flash from file</i> → the <code>.img.gz</code> you downloaded (don't unzip it, Etcher handles that) → <i>Select target</i> → the card → <i>Flash!</i> Watch what you pick as the target: Etcher wipes the whole disk, so pick the wrong one and say goodbye to your files.</p>
     <p data-lang="mk">Мојот компјутер нема SD слот, па картичката ја ставив во адаптер, адаптерот во USB читач, а читачот во компјутерот (сликите подолу). Ако твојот има слот, ова не ти треба: само стави ја картичката.</p>
     <p data-lang="en">My PC has no SD slot, so the card went into an adapter, the adapter into a USB reader, and the reader into the PC (photos below). If yours has a slot, skip all that and just put the card in.</p>
 
@@ -275,8 +275,8 @@ cat EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz.sha256</code></pre>
       <figcaption><span data-lang="mk">Etcher со избран image и картичката од 31,3 GB.</span><span data-lang="en">Etcher with the image and the 31.3 GB card selected.</span></figcaption>
     </figure>
 
-    <p data-lang="mk">Ако повеќе сакаш терминал, наместо Etcher е една линија. Најди ја картичката со <code>lsblk</code> и замени го <code>/dev/sdX</code>; погрешна буква брише погрешен диск.</p>
-    <p data-lang="en">If you'd rather use a terminal, it's one line instead of Etcher. Find your card with <code>lsblk</code> and replace <code>/dev/sdX</code>; the wrong letter wipes the wrong disk.</p>
+    <p data-lang="mk">Само за Линукс луѓе: наместо Etcher, може и од терминал. Најди ја картичката со <code>lsblk</code> и замени го <code>/dev/sdX</code>; погрешна буква брише погрешен диск.</p>
+    <p data-lang="en">Linux folks only: instead of Etcher you can use a terminal. Find your card with <code>lsblk</code> and replace <code>/dev/sdX</code>; the wrong letter wipes the wrong disk.</p>
 
     <figure class="code">
       <figcaption id="c-dd-cap"><span data-lang="mk">Флеширање од терминал</span><span data-lang="en">Flashing from a terminal</span></figcaption>
@@ -285,13 +285,13 @@ gzip -dc EmuELEC-Amlogic-ng.aarch64-4.8-Generic.img.gz | sudo dd of=/dev/sdX bs=
     </figure>
 
     <h2 id="dtb"><span data-lang="mk">Избери device tree</span><span data-lang="en">Pick the device tree</span></h2>
-    <p data-lang="mk">По флеширањето, картичката има мала FAT партиција <code>EMUELEC</code> со системот (<code>SYSTEM</code>), кернелот, скриптите за бутирање и папката <code>device_trees</code>. На кернелот му треба device tree, фајл што ја опишува плочата. Најди го вистинскиот во <code>device_trees</code>, копирај го во коренот на партицијата и преименувај го во <code>dtb.img</code>, од фајл менаџер или од терминал. За S905X со 2 GB RAM тоа е <code>gxl_p212_2g.dtb</code>; со 1 GB, <code>gxl_p212_1g.dtb</code>.</p>
-    <p data-lang="en">After flashing, the card has a small FAT partition called <code>EMUELEC</code> with the system image (<code>SYSTEM</code>), the kernel, the boot scripts and a <code>device_trees</code> folder. The kernel needs a device tree, a file that describes your board. Find the right one in <code>device_trees</code>, copy it to the root of the partition and rename it to <code>dtb.img</code>, in a file manager or a terminal. For an S905X with 2 GB RAM that's <code>gxl_p212_2g.dtb</code>; with 1 GB, <code>gxl_p212_1g.dtb</code>.</p>
+    <p data-lang="mk">Кога Etcher ќе заврши, извади ја картичката и врати ја во компјутерот. Ќе се појави диск <code>EMUELEC</code>. Ако Windows те праша дали да форматира некој диск, кажи <strong>не</strong>: тоа е дел од картичката што Windows не го разбира, не е расипан. На <code>EMUELEC</code> има папка <code>device_trees</code>. Device tree (dtb) е мал фајл што му кажува на системот каков хардвер има во боксот, затоа ти требаше RAM-от од етикетата. Најди го вистинскиот, копирај го надвор од папката (во главниот дел на дискот) и преименувај го во <code>dtb.img</code>. За S905X со 2 GB RAM тоа е <code>gxl_p212_2g.dtb</code>; со 1 GB, <code>gxl_p212_1g.dtb</code>.</p>
+    <p data-lang="en">When Etcher is done, pull the card out and put it back in. A disk called <code>EMUELEC</code> shows up. If Windows asks to format a disk, say <strong>no</strong>: that's a part of the card Windows doesn't understand, not a broken one. On <code>EMUELEC</code> there's a <code>device_trees</code> folder. A device tree (dtb) is a small file that tells the system what hardware is inside the box, which is why you needed the RAM from the label. Find the right one, copy it out of the folder (to the top level of the disk) and rename it to <code>dtb.img</code>. For an S905X with 2 GB RAM that's <code>gxl_p212_2g.dtb</code>; with 1 GB, <code>gxl_p212_1g.dtb</code>.</p>
     <p data-lang="mk">Кој фајл за кој бокс? Побарај го моделот на <a href="https://coreelec.org/dtb/">листата на CoreELEC</a> (EmuELEC ги користи истите имиња) или на <a href="https://emuelec.discourse.group/">форумот на EmuELEC</a>. Ако го нема, оди по чипот и RAM-от од етикетата: името почнува со фамилијата на чипот (<code>gxl</code> е S905X/W/L, <code>g12a</code> е S905X2, <code>sm1</code> е S905X3, <code>g12b</code> е S922X), а RAM-от е во името (<code>_1g</code>, <code>_2g</code>, <code>_4g</code>). Мојот A95X-B7N го нема на листата, па одев по чип. Ако не бутира, пробај друг: dtb е само фајл на картичката, ништо не се расипува.</p>
     <p data-lang="en">Which file for which box? Look up your model on <a href="https://coreelec.org/dtb/">CoreELEC's list</a> (EmuELEC uses the same names) or on the <a href="https://emuelec.discourse.group/">EmuELEC forum</a>. If it isn't there, go by the chip and RAM from the label: the name starts with the chip family (<code>gxl</code> is S905X/W/L, <code>g12a</code> is S905X2, <code>sm1</code> is S905X3, <code>g12b</code> is S922X), and the RAM is in the name (<code>_1g</code>, <code>_2g</code>, <code>_4g</code>). My A95X-B7N isn't on the list, so I went by the chip. If it doesn't boot, try another: the dtb is just a file on the card, nothing breaks.</p>
 
     <figure class="code">
-      <figcaption id="c-dtb-cap"><span data-lang="mk">На партицијата EMUELEC (Ubuntu ја монтира под /media/$USER)</span><span data-lang="en">On the EMUELEC partition (Ubuntu mounts it under /media/$USER)</span></figcaption>
+      <figcaption id="c-dtb-cap"><span data-lang="mk">Или од терминал, на Линукс (на Ubuntu патеката е /media/$USER/EMUELEC)</span><span data-lang="en">Or from a terminal, on Linux (on Ubuntu the path is /media/$USER/EMUELEC)</span></figcaption>
       <pre tabindex="0" role="region" aria-labelledby="c-dtb-cap"><code>cd /run/media/$USER/EMUELEC
 cp device_trees/gxl_p212_2g.dtb dtb.img
 sync</code></pre>
@@ -314,8 +314,8 @@ sync</code></pre>
     </figure>
 
     <h2 id="boot"><span data-lang="mk">Бутирање од картичка: чачкалката</span><span data-lang="en">Boot from the card: the toothpick</span></h2>
-    <p data-lang="mk">Amlogic боксовите имаат скриено reset копче на дното од AV приклучокот. Ако го држиш додека боксот се пали, bootloader-от го извршува <code>aml_autoscript</code> од картичката, а таа скрипта му кажува отсега прво да ја проверува SD картичката.</p>
-    <p data-lang="en">Amlogic boxes hide a reset button at the bottom of the AV jack. If you hold it while the box powers on, the bootloader runs <code>aml_autoscript</code> from the card, and that script tells it to check the SD card first from then on.</p>
+    <p data-lang="mk">Сега треба боксот да пали од картичката наместо од Андроид. Тука влегува чачкалката: Amlogic боксовите имаат скриено копче длабоко во AV приклучокот (малата дупка за стариот аналоген кабел). Ако го држиш додека боксот се пали, боксот ја чита картичката и запамтува отсега прво од неа да пали.</p>
+    <p data-lang="en">Now the box needs to start from the card instead of Android. This is where the toothpick comes in: Amlogic boxes hide a button deep inside the AV jack (the small hole for the old analogue cable). Hold it while the box powers on, and the box reads the card and remembers to start from it first from now on.</p>
     <ol data-lang="mk">
       <li>Исклучи го напојувањето и стави ја картичката во TF слотот.</li>
       <li>Турни чачкалка во AV приклучокот додека не почувствуваш клик и држи.</li>
@@ -346,8 +346,8 @@ sync</code></pre>
     </figure>
 
     <div class="callout">
-      <p data-lang="mk"><strong>Првиот обид не успеа.</strong> Наместо EmuELEC се подигна Андроид и тивко направи <code>Android/</code> и <code>LOST.DIR/</code> на картичката. Не е штетно, но значи дека bootloader-от не го виде копчето. Пробај пак и држи подолго.</p>
-      <p data-lang="en"><strong>My first try didn't take.</strong> Android booted instead and quietly created <code>Android/</code> and <code>LOST.DIR/</code> on the card. That's harmless, but it means the bootloader never saw the button. Try again and hold it longer.</p>
+      <p data-lang="mk"><strong>Првиот обид не ми успеа.</strong> Наместо EmuELEC се подигна Андроид и тивко направи папки <code>Android/</code> и <code>LOST.DIR/</code> на картичката. Не е штетно, само значи дека боксот не го почувствува копчето. Пробај пак и држи подолго.</p>
+      <p data-lang="en"><strong>My first try didn't take.</strong> Android booted instead and quietly created <code>Android/</code> and <code>LOST.DIR/</code> folders on the card. That's harmless, it just means the box never felt the button. Try again and hold it longer.</p>
     </div>
 
     <figure>
@@ -361,10 +361,10 @@ sync</code></pre>
     </figure>
 
     <h2 id="first-boot"><span data-lang="mk">Првото бутирање: не допирај</span><span data-lang="en">First boot: hands off</span></h2>
-    <p data-lang="mk">Првото бутирање подесува работи: ги проширува партициите на цела картичка и ја копира почетната конфигурација од <code>SYSTEM</code> (кој е само за читање) на партицијата <code>STORAGE</code>. Не гаси ја струјата додека трае.</p>
-    <p data-lang="en">The first boot does setup work. It resizes the partitions to fill the card and copies the default configuration from the read-only <code>SYSTEM</code> image to the <code>STORAGE</code> partition. Don't cut the power while it runs.</p>
-    <p data-lang="mk">Мојот падна токму на средина од тоа. Екранот се наполни со трага од кернелот додека <code>userconfig.service</code>, задачата што ги копира почетните фајлови, сè уште работеше, а грешката беше во <code>cp</code> процес: <q>Unhandled fault: synchronous external abort</q>. Боксот сепак стигна до менито, но копирањето остана преполовено. Тоа го сфатив подоцна (следниот чекор).</p>
-    <p data-lang="en">Mine crashed in the middle of exactly that. The screen filled with a kernel trace while <code>userconfig.service</code>, the job that copies the defaults, was still running, and the fault was inside a <code>cp</code> process: <q>Unhandled fault: synchronous external abort</q>. The box still made it to the menu, but the copy was left half done. I only understood that later (next step).</p>
+    <p data-lang="mk">При првото палење EmuELEC се подесува сам: ја зафаќа целата картичка и си ги копира почетните подесувања. Не гаси ја струјата додека трае, ни случајно.</p>
+    <p data-lang="en">On the first start EmuELEC sets itself up: it grows to fill the whole card and copies its default settings. Don't cut the power while it runs, not even by accident.</p>
+    <p data-lang="mk">Кај мене токму тука нешто пукна. Екранот се наполни со бел текст, грешка од системот, додека тој сè уште копираше фајлови. Боксот сепак стигна до менито, ама копирањето остана преполовено. Тоа го сфатив дури подоцна (следниот чекор).</p>
+    <p data-lang="en">Mine broke right there. The screen filled with white text, a system error, while it was still copying files. The box still made it to the menu, but the copy was left half done. I only figured that out later (next step).</p>
 
     <figure>
       <picture>
@@ -379,7 +379,7 @@ sync</code></pre>
              alt="Почетниот екран на EmuELEC со грешка од кернелот испечатена врз него: Internal error, Comm: cp, Unhandled fault: synchronous external abort."
              data-alt-en="EmuELEC splash screen with a kernel oops printed over it: Internal error, Comm: cp, Unhandled fault: synchronous external abort.">
       </picture>
-      <figcaption><span data-lang="mk">Првото бутирање. Горе: watchdog трага со „Job userconfig.service/start running“ на дното. Долу: грешката на кернелот врз логото на EmuELEC; процесот што паднал е <code>cp</code>.</span><span data-lang="en">First boot. Top: a watchdog trace with “Job userconfig.service/start running” at the bottom. Bottom: the kernel error over the EmuELEC splash; the process that crashed is <code>cp</code>.</span></figcaption>
+      <figcaption><span data-lang="mk">Првото палење: екран полн со грешки (горе) и грешка врз логото на EmuELEC (долу). Изгледа страшно, а значи само дека копирањето не завршило.</span><span data-lang="en">First start: a screen full of errors (top) and an error over the EmuELEC logo (bottom). Looks scary, but it only means the copy didn't finish.</span></figcaption>
     </figure>
 
     <div class="callout">
@@ -387,53 +387,60 @@ sync</code></pre>
       <p data-lang="en">If the first boot crashes, the cheapest fix is to flash the card again and boot again. I didn't, and spent an evening finding the damage by hand.</p>
     </div>
 
-    <h2 id="input"><span data-lang="mk">Нема волшебник, тастатурата е мртва</span><span data-lang="en">No input wizard, dead keyboard</span></h2>
-    <p data-lang="mk">EmuELEC се подигна, но немаше волшебник „држи копче за подесување“, тастатурата не реагираше, а менијата изгледаа скршено. Бришењето или празнењето на конфигурацијата за влез не помогна. Тука се криеја два различни проблеми.</p>
-    <p data-lang="en">EmuELEC came up, but there was no “hold a button to configure” wizard, the keyboard did nothing, and the menus looked broken. Deleting or emptying the input config didn't help. Two separate problems were hiding here.</p>
+    <h2 id="input"><span data-lang="mk">Тастатурата не работи, менијата скршени</span><span data-lang="en">Dead keyboard, broken menus</span></h2>
+    <p data-lang="mk">EmuELEC се подигна, ама немаше екран за подесување на копчињата („држи копче за да го подесиш“), тастатурата ништо не правеше, а менијата изгледаа скршено. Пробав да го избришам фајлот со копчињата, не помогна. Се покажа дека се два различни проблеми.</p>
+    <p data-lang="en">EmuELEC came up, but there was no screen for setting up the buttons (“hold a button to configure”), the keyboard did nothing, and the menus looked broken. I tried deleting the button config file, no luck. Turned out it was two separate problems.</p>
 
     <h3><span data-lang="mk">Проблем 1: 758 празни фајлови</span><span data-lang="en">Problem 1: 758 empty files</span></h3>
-    <p data-lang="mk">Со картичката назад во компјутерот, 803 од 6.483 фајлови на <code>STORAGE</code> имаа 0 бајти. 45 од нив се празни и во оригиналот. Другите 758 беа штета:</p>
-    <p data-lang="en">With the card back in the PC, 803 of the 6,483 files on <code>STORAGE</code> were 0 bytes. 45 of them are empty in the original too. The other 758 were damage:</p>
-    <table>
-      <caption><span data-lang="mk">Празни фајлови во <code>.config/emulationstation</code></span><span data-lang="en">Empty files under <code>.config/emulationstation</code></span></caption>
-      <thead>
-        <tr><th scope="col"><span data-lang="mk">Папка</span><span data-lang="en">Folder</span></th><th scope="col"><span data-lang="mk">Што има</span><span data-lang="en">What's in it</span></th><th scope="col"><span data-lang="mk">Празни</span><span data-lang="en">Empty</span></th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>themes</code></td><td><span data-lang="mk">стандардната тема Crystal</span><span data-lang="en">the default Crystal theme</span></td><td>605</td></tr>
-        <tr><td><code>resources</code></td><td><span data-lang="mk">графика за менијата, фонтови, XML</span><span data-lang="en">menu graphics, fonts, XML</span></td><td>144</td></tr>
-        <tr><td><code>scripts</code></td><td><span data-lang="mk">вклучително скриптите за влез</span><span data-lang="en">including the input config scripts</span></td><td>9</td></tr>
-      </tbody>
-    </table>
-    <p data-lang="mk">Логот на EmulationStation (<code>es_log.txt</code> во истата папка) го кажува истото:</p>
-    <p data-lang="en">EmulationStation's log (<code>es_log.txt</code> in the same folder) says the same thing:</p>
+    <p data-lang="mk">Падот при првото палење остави 758 празни фајлови: графика, фонтови и звуци од менијата. Затоа менијата изгледаа скршено.</p>
+    <p data-lang="en">The crash on the first start left 758 empty files behind: menu graphics, fonts and sounds. That's why the menus looked broken.</p>
+    <p data-lang="mk"><strong>Решение за сите:</strong> флеширај ја картичката пак (Etcher, како погоре), стави го <code>dtb.img</code> пак и пушти го првото палење да заврши. Готово.</p>
+    <p data-lang="en"><strong>The fix for everyone:</strong> flash the card again (Etcher, like above), put <code>dtb.img</code> back and let the first start finish. Done.</p>
 
-    <figure class="code">
-      <figcaption id="c-eslog-cap">es_log.txt</figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-eslog-cap"><code>Error parsing XML file ".../resources/genres.xml"! No document element found
+    <details>
+      <summary><span data-lang="mk">За љубопитните: како го поправив без флеширање (Линукс, терминал)</span><span data-lang="en">For the curious: how I fixed it without reflashing (Linux, terminal)</span></summary>
+      <p data-lang="mk">Со картичката назад во компјутерот, 803 од 6.483 фајлови на <code>STORAGE</code> имаа 0 бајти. 45 од нив се празни и во оригиналот. Другите 758 беа штета:</p>
+      <p data-lang="en">With the card back in the PC, 803 of the 6,483 files on <code>STORAGE</code> were 0 bytes. 45 of them are empty in the original too. The other 758 were damage:</p>
+      <table>
+        <caption><span data-lang="mk">Празни фајлови во <code>.config/emulationstation</code></span><span data-lang="en">Empty files under <code>.config/emulationstation</code></span></caption>
+        <thead>
+          <tr><th scope="col"><span data-lang="mk">Папка</span><span data-lang="en">Folder</span></th><th scope="col"><span data-lang="mk">Што има</span><span data-lang="en">What's in it</span></th><th scope="col"><span data-lang="mk">Празни</span><span data-lang="en">Empty</span></th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>themes</code></td><td><span data-lang="mk">стандардната тема Crystal</span><span data-lang="en">the default Crystal theme</span></td><td>605</td></tr>
+          <tr><td><code>resources</code></td><td><span data-lang="mk">графика за менијата, фонтови, XML</span><span data-lang="en">menu graphics, fonts, XML</span></td><td>144</td></tr>
+          <tr><td><code>scripts</code></td><td><span data-lang="mk">вклучително скриптите за копчињата</span><span data-lang="en">including the input config scripts</span></td><td>9</td></tr>
+        </tbody>
+      </table>
+      <p data-lang="mk">Логот на EmulationStation (<code>es_log.txt</code> во истата папка) го кажува истото:</p>
+      <p data-lang="en">EmulationStation's log (<code>es_log.txt</code> in the same folder) says the same thing:</p>
+
+      <figure class="code">
+        <figcaption id="c-eslog-cap">es_log.txt</figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-eslog-cap"><code>Error parsing XML file ".../resources/genres.xml"! No document element found
 Could not initialize texture from memory, invalid data! (file path: :/frame.png …)
 Error loading sound ".../mscroll.ogg"</code></pre>
-    </figure>
+      </figure>
 
-    <p data-lang="mk">Ако сакаш да провериш дали и твојата картичка настрада, изброј ги празните фајлови:</p>
-    <p data-lang="en">To check whether your card got hit too, count the empty files:</p>
+      <p data-lang="mk">Ако сакаш да провериш дали и твојата картичка настрада, изброј ги празните фајлови:</p>
+      <p data-lang="en">To check whether your card got hit too, count the empty files:</p>
 
-    <figure class="code">
-      <figcaption id="c-find-cap"><span data-lang="mk">Изброј ги празните фајлови</span><span data-lang="en">Count empty files</span></figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-find-cap"><code>sudo find /run/media/$USER/STORAGE/.config/emulationstation -type f -size 0 | wc -l</code></pre>
-    </figure>
+      <figure class="code">
+        <figcaption id="c-find-cap"><span data-lang="mk">Изброј ги празните фајлови</span><span data-lang="en">Count empty files</span></figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-find-cap"><code>sudo find /run/media/$USER/STORAGE/.config/emulationstation -type f -size 0 | wc -l</code></pre>
+      </figure>
 
-    <p data-lang="mk">Најлесно е она од погоре: флеширај пак и пушти го првото бутирање да заврши. Јас сакав да ја поправам, а за тоа не треба ништо од интернет: <code>SYSTEM</code> е squashfs image во кој се оригиналните фајлови под <code>/usr/config</code>. Извади ги со <code>unsquashfs</code> (пакетот <code>squashfs-tools</code>), па врати го секој фајл што се разликува:</p>
-    <p data-lang="en">The easy way is the one above: flash again and let the first boot finish. I wanted to repair it instead, and that needs nothing from the internet: <code>SYSTEM</code> is a squashfs image that holds the original files under <code>/usr/config</code>. Extract them with <code>unsquashfs</code> (from <code>squashfs-tools</code>), then copy back every file that differs:</p>
+      <p data-lang="mk">За поправката не треба ништо од интернет: <code>SYSTEM</code> е squashfs image (компресиран архив) во кој се оригиналните фајлови под <code>/usr/config</code>. Извади ги со <code>unsquashfs</code> (пакетот <code>squashfs-tools</code>), па врати го секој фајл што се разликува:</p>
+      <p data-lang="en">The repair needs nothing from the internet: <code>SYSTEM</code> is a squashfs image (a compressed archive) that holds the original files under <code>/usr/config</code>. Extract them with <code>unsquashfs</code> (from <code>squashfs-tools</code>), then copy back every file that differs:</p>
 
-    <figure class="code">
-      <figcaption id="c-unsquash-cap"><span data-lang="mk">Извади ги оригиналите од SYSTEM</span><span data-lang="en">Extract the originals from SYSTEM</span></figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-unsquash-cap"><code>unsquashfs -d /tmp/eesys /run/media/$USER/EMUELEC/SYSTEM usr/config/emulationstation</code></pre>
-    </figure>
+      <figure class="code">
+        <figcaption id="c-unsquash-cap"><span data-lang="mk">Извади ги оригиналите од SYSTEM</span><span data-lang="en">Extract the originals from SYSTEM</span></figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-unsquash-cap"><code>unsquashfs -d /tmp/eesys /run/media/$USER/EMUELEC/SYSTEM usr/config/emulationstation</code></pre>
+      </figure>
 
-    <figure class="code">
-      <figcaption id="c-restore-cap">restore.sh (sudo bash restore.sh)</figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-restore-cap"><code>#!/bin/bash
+      <figure class="code">
+        <figcaption id="c-restore-cap">restore.sh (sudo bash restore.sh)</figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-restore-cap"><code>#!/bin/bash
 # Restore files truncated to 0 bytes, using the originals from the card's own SYSTEM image.
 # Writes contents in place, so owner and permissions stay as they were.
 set -euo pipefail
@@ -450,16 +457,19 @@ done &lt; &lt;(find resources themes scripts -type f -print0)
 sync
 echo "restored $fixed files"
 echo "empty files left: $(find "$S" -type f -size 0 | wc -l)"</code></pre>
-    </figure>
+      </figure>
 
-    <p data-lang="mk"><code>STORAGE</code> е ext4 и е на root, затоа <code>sudo</code>. На мојата картичка: <samp>restored 758 files</samp>, <samp>empty files left: 0</samp>.</p>
-    <p data-lang="en"><code>STORAGE</code> is ext4 and owned by root, hence <code>sudo</code>. On my card: <samp>restored 758 files</samp>, <samp>empty files left: 0</samp>.</p>
+      <p data-lang="mk"><code>STORAGE</code> е Линукс партиција (ext4) и фајловите се на root, затоа <code>sudo</code>. На мојата картичка: <samp>restored 758 files</samp>, <samp>empty files left: 0</samp>.</p>
+      <p data-lang="en"><code>STORAGE</code> is a Linux partition (ext4) and the files belong to root, hence <code>sudo</code>. On my card: <samp>restored 758 files</samp>, <samp>empty files left: 0</samp>.</p>
+    </details>
 
-    <h3><span data-lang="mk">Проблем 2: волшебникот никогаш не се појавува, намерно</span><span data-lang="en">Problem 2: the wizard never shows up, by design</span></h3>
-    <p data-lang="mk">Ова не е баг, туку така е направено: EmulationStation на EmuELEC никогаш не го отвора волшебникот при стартување, а тастатурата ја чита само од <code>es_input.cfg</code>. Значи празен <code>es_input.cfg</code> е тастатура што не прави ништо, без волшебник да го поправи тоа. Ако имаш џојстик, пробај прво со него.</p>
-    <p data-lang="en">This one isn't a bug, it's by design: EmuELEC's EmulationStation never opens the input wizard at startup and reads the keyboard only from <code>es_input.cfg</code>. So an empty <code>es_input.cfg</code> means a keyboard that does nothing, and no wizard to fix it. If you have a gamepad, try that first.</p>
-    <p data-lang="mk">Решението е сам да напишеш блок за тастатурата, во <code>&lt;inputList&gt;</code> во <code>STORAGE/.config/emulationstation/es_input.cfg</code>. Мојата прва верзија (сликата) користеше Enter за A и Space за Start. Работеше во менијата, но во игрите RetroArch си има свои стандардни копчиња, па истото копче правеше различни работи во менијата и во игрите. Конечната верзија ги следи стандардните на RetroArch.</p>
-    <p data-lang="en">The fix is to write a keyboard block yourself, inside <code>&lt;inputList&gt;</code> in <code>STORAGE/.config/emulationstation/es_input.cfg</code>. My first version (screenshot) used Enter for A and Space for Start. It worked in menus, but in games RetroArch uses its own default keys, so the same key did different things in menus and in games. The final version follows RetroArch's defaults.</p>
+    <h3><span data-lang="mk">Проблем 2: тастатурата не прави ништо, намерно</span><span data-lang="en">Problem 2: the keyboard does nothing, by design</span></h3>
+    <p data-lang="mk">Ова не е баг, така е направено: EmuELEC никогаш сам не го отвора екранот за подесување копчиња, а за тастатурата гледа само во еден фајл, <code>es_input.cfg</code>. Ако тој фајл е празен или го нема, тастатурата не прави ништо. Затоа џојстик е подобар избор: пробај прво со него.</p>
+    <p data-lang="en">This one isn't a bug, it's by design: EmuELEC never opens the button setup screen on its own, and for the keyboard it only looks at one file, <code>es_input.cfg</code>. If that file is empty or missing, the keyboard does nothing. That's why a gamepad is the better pick: try it first.</p>
+    <p data-lang="mk">Ако мора тастатура, копчињата ги допишуваш сам во тој фајл. Тој е на <code>STORAGE</code> делот од картичката (<code>.config/emulationstation/es_input.cfg</code>), а тоа е Линукс партиција: Windows и macOS не ја гледаат без посебна програма, а на Линукс треба <code>sudo</code>. Отвори го фајлот и залепи го блокот подолу пред <code>&lt;/inputList&gt;</code>. Бројките се кодовите на копчињата, не мораш да ги разбираш, само копирај.</p>
+    <p data-lang="en">If it has to be a keyboard, you add the keys to that file yourself. It lives on the card's <code>STORAGE</code> part (<code>.config/emulationstation/es_input.cfg</code>), which is a Linux partition: Windows and macOS can't see it without extra software, and on Linux you need <code>sudo</code>. Open the file and paste the block below just before <code>&lt;/inputList&gt;</code>. The numbers are key codes; you don't need to understand them, just copy.</p>
+    <p data-lang="mk">Мојата прва верзија (сликата) користеше Enter за A и Space за Start. Во менијата работеше, ама во игрите RetroArch си има свои копчиња, па истото копче правеше различни работи. Затоа верзијата подолу ги користи истите копчиња како RetroArch.</p>
+    <p data-lang="en">My first version (screenshot) used Enter for A and Space for Start. It worked in the menus, but in games RetroArch has its own keys, so the same key did different things. That's why the version below uses the same keys as RetroArch.</p>
 
     <figure>
       <picture>
@@ -494,8 +504,8 @@ echo "empty files left: $(find "$S" -type f -size 0 | wc -l)"</code></pre>
 &lt;/inputConfig&gt;</code></pre>
     </figure>
 
-    <p data-lang="mk">RetroArch веќе ги користи тие копчиња во игрите. Му фалеа само L2, R2, L3 и R3, па ги додадов во <code>STORAGE/.config/retroarch/retroarch.cfg</code>:</p>
-    <p data-lang="en">RetroArch already uses those keys in games. It only lacked L2, R2, L3 and R3, so I added them to <code>STORAGE/.config/retroarch/retroarch.cfg</code>:</p>
+    <p data-lang="mk">Во игрите RetroArch веќе ги користи истите копчиња. Ако ти требаат и L2, R2, L3 и R3 (задните копчиња и притисок на палките), додај ги во <code>STORAGE/.config/retroarch/retroarch.cfg</code>:</p>
+    <p data-lang="en">In games RetroArch already uses the same keys. If you also want L2, R2, L3 and R3 (the back triggers and stick clicks), add them to <code>STORAGE/.config/retroarch/retroarch.cfg</code>:</p>
 
     <figure class="code">
       <figcaption id="c-ra-cap">retroarch.cfg</figcaption>
@@ -545,17 +555,17 @@ input_player1_r3 = "v"</code></pre>
     <p data-lang="en">If one of them does nothing, hold Right Shift (the hotkey) and press it again.</p>
 
     <h2 id="layout"><span data-lang="mk">Што има на картичката</span><span data-lang="en">What's on the card</span></h2>
-    <p data-lang="mk">По првото бутирање картичката има три партиции. Од компјутер најчесто ќе работиш со две: <code>STORAGE</code> (ext4, на root, па за измени треба <code>sudo</code>) и <code>EEROMS</code> (FAT32, па ниту еден фајл над 4 GB).</p>
-    <p data-lang="en">After the first boot the card has three partitions. From the PC you'll mostly touch two: <code>STORAGE</code> (ext4, owned by root, so edits need <code>sudo</code>) and <code>EEROMS</code> (FAT32, so no single file over 4 GB).</p>
+    <p data-lang="mk">По првото палење картичката е поделена на три дела (партиции), и компјутерот ги гледа како три посебни диска. Битни ти се два. <code>EEROMS</code> е за игрите и се гледа насекаде (Windows, macOS, Линукс), само што не прима фајл поголем од 4 GB. <code>STORAGE</code> е за подесувањата и е Линукс партиција: Windows и macOS не ја гледаат без посебна програма, а на Линукс за измени треба <code>sudo</code>.</p>
+    <p data-lang="en">After the first start the card is split into three parts (partitions), and your PC sees them as three separate disks. Two of them matter. <code>EEROMS</code> is for games and shows up everywhere (Windows, macOS, Linux), it just won't take a single file over 4 GB. <code>STORAGE</code> is for settings and is a Linux partition: Windows and macOS can't see it without extra software, and on Linux edits need <code>sudo</code>.</p>
     <table>
       <caption><span data-lang="mk">Мојата картичка од 32 GB по првото бутирање</span><span data-lang="en">My 32 GB card after the first boot</span></caption>
       <thead>
         <tr><th scope="col"><span data-lang="mk">Партиција</span><span data-lang="en">Partition</span></th><th scope="col"><span data-lang="mk">Големина</span><span data-lang="en">Size</span></th><th scope="col"><span data-lang="mk">Тип</span><span data-lang="en">Type</span></th><th scope="col"><span data-lang="mk">Содржина</span><span data-lang="en">Contents</span></th></tr>
       </thead>
       <tbody>
-        <tr><td><code>EMUELEC</code></td><td>2 GB</td><td>FAT32</td><td><span data-lang="mk"><code>SYSTEM</code>, кернел, <code>dtb.img</code>, скрипти за бутирање</span><span data-lang="en"><code>SYSTEM</code>, kernel, <code>dtb.img</code>, boot scripts</span></td></tr>
-        <tr><td><code>STORAGE</code></td><td>6 GB</td><td>ext4</td><td><span data-lang="mk"><code>/storage</code>: подесувања, теми, скрипти</span><span data-lang="en"><code>/storage</code>: settings, themes, scripts</span></td></tr>
-        <tr><td><code>EEROMS</code></td><td><span data-lang="mk">21,1 GB</span><span data-lang="en">21.1 GB</span></td><td>FAT32</td><td><span data-lang="mk"><code>/storage/roms</code>: игри, <code>bios</code>, <code>BGM</code>, <code>savestates</code></span><span data-lang="en"><code>/storage/roms</code>: games, <code>bios</code>, <code>BGM</code>, <code>savestates</code></span></td></tr>
+        <tr><td><code>EMUELEC</code></td><td>2 GB</td><td><span data-lang="mk">FAT32 (се гледа насекаде)</span><span data-lang="en">FAT32 (visible everywhere)</span></td><td><span data-lang="mk">самиот систем, <code>dtb.img</code>, фајлови за палење</span><span data-lang="en">the system itself, <code>dtb.img</code>, startup files</span></td></tr>
+        <tr><td><code>STORAGE</code></td><td>6 GB</td><td><span data-lang="mk">ext4 (само Линукс)</span><span data-lang="en">ext4 (Linux only)</span></td><td><span data-lang="mk">подесувања, теми, скрипти</span><span data-lang="en">settings, themes, scripts</span></td></tr>
+        <tr><td><code>EEROMS</code></td><td><span data-lang="mk">21,1 GB</span><span data-lang="en">21.1 GB</span></td><td><span data-lang="mk">FAT32 (се гледа насекаде)</span><span data-lang="en">FAT32 (visible everywhere)</span></td><td><span data-lang="mk">игри, <code>bios</code>, <code>BGM</code> (музика), <code>savestates</code> (зачувувања)</span><span data-lang="en">games, <code>bios</code>, <code>BGM</code> (music), <code>savestates</code> (saves)</span></td></tr>
       </tbody>
     </table>
 
@@ -572,34 +582,34 @@ input_player1_r3 = "v"</code></pre>
     <h2 id="games"><span data-lang="mk">Игри, BIOS и формати</span><span data-lang="en">Games, BIOS and formats</span></h2>
 
     <h3><span data-lang="mk">ROM-ови, накратко</span><span data-lang="en">ROMs, briefly</span></h3>
-    <p data-lang="mk">ROM фајл е копија бајт по бајт од чипот за меморија само за читање во касетата; кај конзолите со дискови тоа е image од дискот. Емулаторот („core“) ги имитира процесорот, графиката и звукот на конзолата. EmulationStation е само менито што го стартува.</p>
-    <p data-lang="en">A ROM file is a byte-for-byte copy of a cartridge's read-only memory chip; for disc consoles it's a disc image. The emulator (the “core”) imitates the console's CPU, graphics and sound chips. EmulationStation is only the menu that starts it.</p>
+    <p data-lang="mk">ROM е игра во фајл: копија од касетата, или од дискот кај PlayStation. Емулаторот (во RetroArch се вика „core“) се преправа дека е конзолата и ја пушта. EmulationStation е само менито од кое ја избираш.</p>
+    <p data-lang="en">A ROM is a game in a file: a copy of the cartridge, or of the disc for PlayStation. The emulator (RetroArch calls it a “core”) pretends to be the console and runs it. EmulationStation is just the menu you pick it from.</p>
     <div class="callout">
       <p data-lang="mk">Играј само игри што ги поседуваш: извади ги од своите касети и дискови, или играј homebrew и бесплатни игри. На <a href="https://itch.io/">itch.io</a>, <a href="https://pdroms.de/">PDRoms</a> и во <a href="https://www.nesdev.org/">NESdev</a> заедницата ги има многу, а <a href="https://www.scummvm.org/games/">ScummVM</a> има бесплатни авантуристички игри. Нема да ставам линкови до ROM сајтови.</p>
       <p data-lang="en">Only play games you own: dump your own cartridges and discs, or play homebrew and freeware. <a href="https://itch.io/">itch.io</a>, <a href="https://pdroms.de/">PDRoms</a> and the <a href="https://www.nesdev.org/">NESdev</a> community have plenty, and <a href="https://www.scummvm.org/games/">ScummVM</a> has free adventure games. I won't link ROM sites.</p>
     </div>
 
     <h3><span data-lang="mk">Еден добар фајл по игра</span><span data-lang="en">One good file per game</span></h3>
-    <p data-lang="mk">Сетовите за касети користат No-Intro имиња, од кои се гледа регионот и ревизијата. Моите правила:</p>
-    <p data-lang="en">Cartridge sets use No-Intro naming, which tells you the region and revision. My rules:</p>
+    <p data-lang="mk">Колекциите со игри често имаат по пет верзии од истата игра. Од името се гледа која е која. Моите правила:</p>
+    <p data-lang="en">Game collections often have five versions of the same game. The name tells you which is which. My rules:</p>
     <ul data-lang="mk">
-      <li>Прво <code>(USA)</code> или <code>(World)</code>: 60 Hz, брзината за која се направени игрите. <code>(Europe)</code> е PAL, 50 Hz: побавно и сецка на слика од 60 Hz.</li>
-      <li><code>(Europe)</code> само ако немало USA издание. Земи ја највисоката <code>(Rev N)</code>.</li>
-      <li>Прескокни <code>(Beta)</code>, <code>(Proto)</code>, <code>(Demo)</code>, <code>[b]</code> (лош dump) и мулти-касети со „ + “ во името.</li>
-      <li>NES: земи го Headered сетот. iNES заглавието од 16 бајти му кажува на емулаторот кој mapper (чипот за менување банки во касетата) му треба; без заглавие мора да погодува.</li>
+      <li>Прво <code>(USA)</code> или <code>(World)</code>: тоа е брзината за која се направени игрите. <code>(Europe)</code> верзиите се за старите европски телевизори (PAL, 50 Hz): одат побавно и сецкаат на денешен екран.</li>
+      <li><code>(Europe)</code> само ако немало USA издание. Ако има повеќе ревизии, земи ја највисоката <code>(Rev N)</code>, тоа е најпоправената.</li>
+      <li>Прескокни <code>(Beta)</code>, <code>(Proto)</code>, <code>(Demo)</code>, <code>[b]</code> (лоша копија) и мулти-касети со „ + “ во името.</li>
+      <li>NES: ако имаш избор, земи ги фајловите со header (заглавие). Тоа е мал податок на почетокот од фајлот што му кажува на емулаторот каква е касетата; без него мора да погодува.</li>
     </ul>
     <ul data-lang="en">
-      <li><code>(USA)</code> or <code>(World)</code> first: 60 Hz, the speed the games were made for. <code>(Europe)</code> is PAL, 50 Hz: slower, and it judders on a 60 Hz picture.</li>
-      <li><code>(Europe)</code> only when there was no USA release. Keep the highest <code>(Rev N)</code>.</li>
-      <li>Skip <code>(Beta)</code>, <code>(Proto)</code>, <code>(Demo)</code>, <code>[b]</code> (bad dump), and multi-carts with “ + ” in the name.</li>
-      <li>NES: take the Headered set. The 16-byte iNES header tells the emulator which mapper (the cartridge's bank-switching chip) it needs; headerless files make it guess.</li>
+      <li><code>(USA)</code> or <code>(World)</code> first: that's the speed the games were made for. <code>(Europe)</code> versions are for old European TVs (PAL, 50 Hz): they run slower and judder on a modern screen.</li>
+      <li><code>(Europe)</code> only when there was no USA release. If there are several revisions, keep the highest <code>(Rev N)</code>, it's the most fixed one.</li>
+      <li>Skip <code>(Beta)</code>, <code>(Proto)</code>, <code>(Demo)</code>, <code>[b]</code> (bad copy), and multi-carts with “ + ” in the name.</li>
+      <li>NES: if you have a choice, take the files with a header. It's a bit of data at the start of the file that tells the emulator what kind of cartridge it is; without it, the emulator has to guess.</li>
     </ul>
     <p data-lang="mk">Ова се прави рачно: од секоја игра остави еден фајл, другите избриши ги. Не е задолжително, ама листата е многу почиста без пет верзии од истата игра.</p>
     <p data-lang="en">You do this by hand: keep one file per game and delete the rest. It's optional, but the list is much cleaner without five versions of the same game.</p>
 
     <h3><span data-lang="mk">PlayStation: CHD (не е задолжително)</span><span data-lang="en">PlayStation: CHD (optional)</span></h3>
-    <p data-lang="mk">За PS1 јас користев CHD: без загуба, 30–50% помал од BIN/CUE, еден фајл по диск, а PCSX ReARMed го чита директно. Не мора: BIN/CUE работи исто, CHD е само за да собере повеќе на картичка од 32 GB. ISO не го препорачувам, ги губи CD аудио траките. Ако одиш на CHD, конвертирај со <code>chdman</code> од MAME (на Arch е во <code>mame-tools</code>), секогаш од <code>.cue</code>, не од <code>.bin</code>:</p>
-    <p data-lang="en">For PS1 I used CHD: lossless, 30–50% smaller than BIN/CUE, one file per disc, and the PCSX ReARMed core reads it directly. You don't have to: BIN/CUE works just the same, CHD only fits more games on a 32 GB card. I'd skip ISO, it loses the CD audio tracks. If you go CHD, convert with <code>chdman</code> from MAME (on Arch it's in <code>mame-tools</code>), always from the <code>.cue</code>, not the <code>.bin</code>:</p>
+    <p data-lang="mk">PS1 игрите најчесто доаѓаат како BIN/CUE, два фајла по диск, и тоа си работи. Јас ги претворив во CHD, компресиран формат без губење квалитет: 30–50% помал и еден фајл по диск. Не мора: CHD е само за да собере повеќе на картичка од 32 GB. ISO не го препорачувам, ја губи музиката од дискот. Ако одиш на CHD, ти треба програмата <code>chdman</code> од MAME (на Arch е во <code>mame-tools</code>); конвертирај секогаш од <code>.cue</code>, не од <code>.bin</code>:</p>
+    <p data-lang="en">PS1 games usually come as BIN/CUE, two files per disc, and that works fine. I converted mine to CHD, a compressed format that loses no quality: 30–50% smaller and one file per disc. You don't have to: CHD only fits more games on a 32 GB card. I'd skip ISO, it loses the disc's music. If you go CHD, you need the <code>chdman</code> tool from MAME (on Arch it's in <code>mame-tools</code>); always convert from the <code>.cue</code>, not the <code>.bin</code>:</p>
 
     <figure class="code">
       <figcaption id="c-chd-cap"><span data-lang="mk">BIN/CUE во CHD</span><span data-lang="en">BIN/CUE to CHD</span></figcaption>
@@ -607,8 +617,8 @@ input_player1_r3 = "v"</code></pre>
 for c in *.cue; do chdman createcd -i "$c" -o "${c%.cue}.chd"; done</code></pre>
     </figure>
 
-    <p data-lang="mk">Игрите со повеќе дискови добиваат обичен текстуален <code>.m3u</code> плејлист за да се појават само еднаш во листата. Дискот се менува од менито на RetroArch (<kbd>F1</kbd> → Disc Control):</p>
-    <p data-lang="en">Multi-disc games get a plain text <code>.m3u</code> playlist so they appear once in the list. Swap discs from the RetroArch menu (<kbd>F1</kbd> → Disc Control):</p>
+    <p data-lang="mk">Игрите со повеќе дискови (Final Fantasy VII има три) добиваат мал текст фајл <code>.m3u</code> со листа на дисковите, за да се појават само еднаш во менито. Направи го во обичен текст едитор. Дискот го менуваш од менито на RetroArch (<kbd>F1</kbd> → Disc Control):</p>
+    <p data-lang="en">Multi-disc games (Final Fantasy VII has three) get a small <code>.m3u</code> text file listing the discs, so they show up only once in the menu. Make it in any plain text editor. Swap discs from the RetroArch menu (<kbd>F1</kbd> → Disc Control):</p>
 
     <figure class="code">
       <figcaption id="c-m3u-cap">EEROMS/psx/Final Fantasy VII (USA).m3u</figcaption>
@@ -626,11 +636,11 @@ Final Fantasy VII (USA) (Disc 3).chd</code></pre>
     </figure>
 
     <h3>BIOS</h3>
-    <p data-lang="mk">Конзолите со дискови имаа фирмвер што го стартуваше системот и го вчитуваше дискот. Емулаторите не смеат да го вклучат бидејќи е заштитен со авторски права, па го вадиш од својата конзола. PCSX ReARMed бара US BIOS како <code>scph5501.bin</code> во <code>EEROMS/bios</code>, со мали букви, и му го проверува хашот:</p>
-    <p data-lang="en">Disc consoles had firmware that started the system and loaded the disc. Emulators can't ship it because it's copyrighted, so you dump it from your own console. PCSX ReARMed wants the US BIOS as <code>scph5501.bin</code> in <code>EEROMS/bios</code>, in lowercase, and checks its hash:</p>
+    <p data-lang="mk">BIOS е мала програма од самата конзола што ја пали и го чита дискот. Емулаторите не смеат да го имаат (авторски права), па го вадиш од својата конзола. За PS1 треба фајл <code>scph5501.bin</code> во папката <code>EEROMS/bios</code>, со мали букви. Ако сакаш да провериш дека е вистинскиот, md5 хашот треба да биде како подолу:</p>
+    <p data-lang="en">A BIOS is a small program from the console itself that starts it up and reads the disc. Emulators can't include it (copyright), so you dump it from your own console. PS1 needs a file called <code>scph5501.bin</code> in the <code>EEROMS/bios</code> folder, in lowercase. If you want to check it's the right one, its md5 hash should match the one below:</p>
 
     <figure class="code">
-      <figcaption id="c-bios-cap"><span data-lang="mk">PS1 BIOS на картичката</span><span data-lang="en">PS1 BIOS on the card</span></figcaption>
+      <figcaption id="c-bios-cap"><span data-lang="mk">PS1 BIOS на картичката (Линукс; на Windows само копирај и преименувај)</span><span data-lang="en">PS1 BIOS on the card (Linux; on Windows just copy and rename)</span></figcaption>
       <pre tabindex="0" role="region" aria-labelledby="c-bios-cap"><code>cp SCPH-5501.BIN /run/media/$USER/EEROMS/bios/scph5501.bin
 md5sum /run/media/$USER/EEROMS/bios/scph5501.bin
 # 490f666e1afb15b7362b406ed1cea246</code></pre>
@@ -678,53 +688,10 @@ md5sum /run/media/$USER/EEROMS/bios/scph5501.bin
     <p data-lang="en">What runs: everything up to PS1 at full speed on default settings. N64 is mixed (Ocarina of Time plays, with slowdown). PSP, Dreamcast, Saturn, DS, GameCube and newer are too heavy for the S905X.</p>
 
     <h2 id="art"><span data-lang="mk">Корици и слики од игрите</span><span data-lang="en">Box art and screenshots</span></h2>
-    <p data-lang="mk">Листа на игри без слики изгледа тажно. Scraping значи симнување корици, слики и описи од <a href="https://www.screenscraper.fr/">ScreenScraper</a>, за што треба бесплатна сметка. Најлесно е од самиот бокс: главното мени има scraper. Јас користев <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> на компјутер, бидејќи картичката веќе беше таму:</p>
-    <p data-lang="en">A game list without pictures looks sad. Scraping downloads covers, screenshots and descriptions from <a href="https://www.screenscraper.fr/">ScreenScraper</a>, which needs a free account. The easiest way is on the box itself: the main menu has a scraper. I used <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> on the PC because the card was in it anyway:</p>
-
-    <figure class="code">
-      <figcaption id="c-sky-install-cap">Skyscraper (AUR)</figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-sky-install-cap"><code>yay -S skyscraper-git</code></pre>
-    </figure>
-
-    <p data-lang="mk">Рецепт за слики: по една корица, една слика од играта и едно лого по игра, без составени слики:</p>
-    <p data-lang="en">An artwork recipe keeps it to one cover, one screenshot and one logo per game, with no composite images:</p>
-
-    <figure class="code">
-      <figcaption id="c-artwork-cap">~/.skyscraper/artwork-ee.xml</figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-artwork-cap"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;artwork&gt;
-  &lt;output type="screenshot" width="480"/&gt;
-  &lt;output type="cover" height="400"/&gt;
-  &lt;output type="marquee" width="300"/&gt;
-&lt;/artwork&gt;</code></pre>
-    </figure>
-
-    <p data-lang="mk">Оди во два чекора: прво симнување во кешот на Skyscraper (мрежа), па запишување на <code>gamelist.xml</code> и сликите на картичката (без мрежа):</p>
-    <p data-lang="en">It runs in two steps: first download into Skyscraper's cache (network), then write <code>gamelist.xml</code> and the images to the card (offline):</p>
-
-    <figure class="code">
-      <figcaption id="c-sky-cap"><span data-lang="mk">Прво кеш, потоа картичката</span><span data-lang="en">Cache first, then the card</span></figcaption>
-      <pre tabindex="0" role="region" aria-labelledby="c-sky-cap"><code>R=/run/media/$USER/EEROMS/psx
-Skyscraper -p psx -s screenscraper -u 'USER:PASSWORD' --flags unattend,nosubdirs -i "$R"
-Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g "$R" -o "$R/media" --flags relative,unattend,nosubdirs</code></pre>
-    </figure>
-
-    <ul data-lang="mk">
-      <li><code>-i</code> мора да е апсолутна патека, инаку Skyscraper одбива со <samp>relative path which is not valid</samp>.</li>
-      <li>Бесплатна ScreenScraper сметка добива една нишка. <code>-t 8</code> тивко се намалува на 1: околу 7 игри во минута, па стотици игри траат со часови. Не пуштај две одеднаш; серверот одбива и може да те блокира некое време.</li>
-      <li>Без <code>marquee</code> во рецептот, патеките до логата покажуваа кон <code>~/.skyscraper</code> на компјутерот, што го нема на боксот.</li>
-      <li>Повторното генерирање на <code>gamelist.xml</code> го брише запишаното време на играње (<code>gametime</code>). Прво направи копија.</li>
-    </ul>
-    <ul data-lang="en">
-      <li><code>-i</code> must be an absolute path, or Skyscraper refuses with <samp>relative path which is not valid</samp>.</li>
-      <li>A free ScreenScraper account gets one thread. <code>-t 8</code> is quietly reduced to 1: about 7 games a minute, so hundreds of games take hours. Don't run two at once; the server refuses and may block you for a while.</li>
-      <li>Without <code>marquee</code> in the recipe, logo paths pointed into <code>~/.skyscraper</code> on the PC, which doesn't exist on the box.</li>
-      <li>Regenerating <code>gamelist.xml</code> drops the recorded play time (<code>gametime</code>). Back it up first.</li>
-    </ul>
-    <p data-lang="mk">Резултат за PS1: 52 од 53 игри пронајдени, 22 MB слики, околу 0,25 MB по игра.</p>
-    <p data-lang="en">Result for PS1: 52 of 53 games found, 22 MB of images, about 0.25 MB per game.</p>
-    <p data-lang="mk">Ако правиш scraping на боксот, прво исклучи ги додатоците во опциите на scraper-от (или во <code>STORAGE/.config/emulationstation/es_settings.cfg</code>). Само видеата се 2–10 MB по игра и брзо ја полнат картичка од 32 GB. „Maps“ тука се мапи на световите направени од фанови, прикажани во прегледувач на слики, а не мапи во самата игра.</p>
-    <p data-lang="en">If you scrape on the box instead, turn off the extras first in the scraper options (or in <code>STORAGE/.config/emulationstation/es_settings.cfg</code>). Videos alone are 2–10 MB per game and fill a 32 GB card quickly. “Maps” here are fan-made world maps shown in a picture viewer, not in-game maps.</p>
+    <p data-lang="mk">Листа на игри без слики изгледа тажно. Scraping значи симнување корици, слики и описи од <a href="https://www.screenscraper.fr/">ScreenScraper</a>, за што треба бесплатна сметка. Најлесно е од самиот бокс: во главното мени има Scraper, внеси ја сметката, избери системи и пушти.</p>
+    <p data-lang="en">A game list without pictures looks sad. Scraping means downloading covers, screenshots and descriptions from <a href="https://www.screenscraper.fr/">ScreenScraper</a>, which needs a free account. The easiest way is on the box itself: the main menu has a Scraper, enter your account, pick the systems and start it.</p>
+    <p data-lang="mk">Само прво исклучи ги додатоците во опциите на scraper-от (или во <code>STORAGE/.config/emulationstation/es_settings.cfg</code>). Само видеата се 2–10 MB по игра и брзо ја полнат картичка од 32 GB. „Maps“ тука се мапи на световите направени од фанови, а не мапи во самата игра.</p>
+    <p data-lang="en">Just turn off the extras first in the scraper options (or in <code>STORAGE/.config/emulationstation/es_settings.cfg</code>). Videos alone are 2–10 MB per game and fill a 32 GB card quickly. “Maps” here are fan-made world maps, not in-game maps.</p>
 
     <figure class="code">
       <figcaption id="c-scrape-off-cap"><span data-lang="mk">es_settings.cfg: без видеа и други додатоци</span><span data-lang="en">es_settings.cfg: no videos or other extras</span></figcaption>
@@ -735,12 +702,63 @@ Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g
 &lt;bool name="ScrapeVideos" value="false" /&gt;</code></pre>
     </figure>
 
+    <details>
+      <summary><span data-lang="mk">Јас го правев на компјутер, со Skyscraper (Линукс, терминал)</span><span data-lang="en">I did it on the PC, with Skyscraper (Linux, terminal)</span></summary>
+      <p data-lang="mk">Картичката веќе ми беше во компјутерот, па користев <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> таму:</p>
+      <p data-lang="en">The card was in my PC anyway, so I used <a href="https://github.com/Gemba/skyscraper">Skyscraper</a> there:</p>
+
+      <figure class="code">
+        <figcaption id="c-sky-install-cap">Skyscraper (AUR)</figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-sky-install-cap"><code>yay -S skyscraper-git</code></pre>
+      </figure>
+
+      <p data-lang="mk">Рецепт за слики: по една корица, една слика од играта и едно лого по игра, без составени слики:</p>
+      <p data-lang="en">An artwork recipe keeps it to one cover, one screenshot and one logo per game, with no composite images:</p>
+
+      <figure class="code">
+        <figcaption id="c-artwork-cap">~/.skyscraper/artwork-ee.xml</figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-artwork-cap"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;artwork&gt;
+  &lt;output type="screenshot" width="480"/&gt;
+  &lt;output type="cover" height="400"/&gt;
+  &lt;output type="marquee" width="300"/&gt;
+&lt;/artwork&gt;</code></pre>
+      </figure>
+
+      <p data-lang="mk">Оди во два чекора: прво симнување во кешот на Skyscraper (мрежа), па запишување на <code>gamelist.xml</code> и сликите на картичката (без мрежа):</p>
+      <p data-lang="en">It runs in two steps: first download into Skyscraper's cache (network), then write <code>gamelist.xml</code> and the images to the card (offline):</p>
+
+      <figure class="code">
+        <figcaption id="c-sky-cap"><span data-lang="mk">Прво кеш, потоа картичката</span><span data-lang="en">Cache first, then the card</span></figcaption>
+        <pre tabindex="0" role="region" aria-labelledby="c-sky-cap"><code>R=/run/media/$USER/EEROMS/psx
+Skyscraper -p psx -s screenscraper -u 'USER:PASSWORD' --flags unattend,nosubdirs -i "$R"
+Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g "$R" -o "$R/media" --flags relative,unattend,nosubdirs</code></pre>
+      </figure>
+
+      <ul data-lang="mk">
+        <li><code>-i</code> мора да е апсолутна патека, инаку Skyscraper одбива со <samp>relative path which is not valid</samp>.</li>
+        <li>Бесплатна ScreenScraper сметка добива една нишка. <code>-t 8</code> тивко се намалува на 1: околу 7 игри во минута, па стотици игри траат со часови. Не пуштај две одеднаш; серверот одбива и може да те блокира некое време.</li>
+        <li>Без <code>marquee</code> во рецептот, патеките до логата покажуваа кон <code>~/.skyscraper</code> на компјутерот, што го нема на боксот.</li>
+        <li>Повторното генерирање на <code>gamelist.xml</code> го брише запишаното време на играње (<code>gametime</code>). Прво направи копија.</li>
+      </ul>
+      <ul data-lang="en">
+        <li><code>-i</code> must be an absolute path, or Skyscraper refuses with <samp>relative path which is not valid</samp>.</li>
+        <li>A free ScreenScraper account gets one thread. <code>-t 8</code> is quietly reduced to 1: about 7 games a minute, so hundreds of games take hours. Don't run two at once; the server refuses and may block you for a while.</li>
+        <li>Without <code>marquee</code> in the recipe, logo paths pointed into <code>~/.skyscraper</code> on the PC, which doesn't exist on the box.</li>
+        <li>Regenerating <code>gamelist.xml</code> drops the recorded play time (<code>gametime</code>). Back it up first.</li>
+      </ul>
+      <p data-lang="mk">Резултат за PS1: 52 од 53 игри пронајдени, 22 MB слики, околу 0,25 MB по игра.</p>
+      <p data-lang="en">Result for PS1: 52 of 53 games found, 22 MB of images, about 0.25 MB per game.</p>
+    </details>
+
     <h2 id="settings"><span data-lang="mk">Подесувања што се битни</span><span data-lang="en">Settings that matter</span></h2>
-    <p data-lang="mk">Главната поука: не менувај го <code>retroarch.cfg</code> за видео и емулациски подесувања. <code>setsettings.sh</code> на EmuELEC ги препишува секој пат кога стартува игра, од <code>/storage/.config/emuelec/configs/emuelec.conf</code>. Таму стави ги подесувањата: <code>global.клуч</code> за сè, <code>систем.клуч</code> (на пр. <code>nes.runahead</code>) за еден систем. Подесување за игра е посилно од она за систем, а тоа од глобалното. Не мора да го уредуваш фајлот рачно: повеќето од ова го има и во менијата (Game Settings, System Settings), а тие пишуваат токму во <code>emuelec.conf</code>.</p>
-    <p data-lang="en">The main lesson: don't edit <code>retroarch.cfg</code> for video and emulation settings. EmuELEC's <code>setsettings.sh</code> rewrites them every time a game starts, from <code>/storage/.config/emuelec/configs/emuelec.conf</code>. Put settings there instead: <code>global.key</code> for everything, <code>system.key</code> (like <code>nes.runahead</code>) for one system. A per-game setting beats a per-system one, which beats global. You don't have to edit the file by hand: most of this is also in the menus (Game Settings, System Settings), and they write to that same <code>emuelec.conf</code>.</p>
+    <p data-lang="mk">Повеќето подесувања ги наоѓаш во менијата (Start → Game Settings, System Settings). Тие се запишуваат во еден фајл, <code>emuelec.conf</code>, на <code>STORAGE</code> во <code>.config/emuelec/configs/</code>, па ако сакаш може и рачно. Во фајлот <code>global.нешто</code> важи за сите системи, а на пр. <code>nes.нешто</code> само за NES.</p>
+    <p data-lang="en">Most settings are in the menus (Start → Game Settings, System Settings). They're saved to one file, <code>emuelec.conf</code>, on <code>STORAGE</code> under <code>.config/emuelec/configs/</code>, so you can also edit it by hand. In that file <code>global.something</code> applies to every system, and something like <code>nes.something</code> only to NES.</p>
+    <p data-lang="mk">Една замка: не менувај го <code>retroarch.cfg</code> за слика и емулација. EmuELEC го препишува од <code>emuelec.conf</code> секој пат кога пушташ игра, па твоите измени исчезнуваат.</p>
+    <p data-lang="en">One trap: don't edit <code>retroarch.cfg</code> for picture and emulation settings. EmuELEC rewrites it from <code>emuelec.conf</code> every time you start a game, so your changes vanish.</p>
 
     <figure class="code">
-      <figcaption id="c-conf-cap"><span data-lang="mk">Мои измени во emuelec.conf</span><span data-lang="en">My changes to emuelec.conf</span></figcaption>
+      <figcaption id="c-conf-cap"><span data-lang="mk">Мои измени во emuelec.conf (− е старото, + е новото)</span><span data-lang="en">My changes to emuelec.conf (− is old, + is new)</span></figcaption>
       <pre tabindex="0" role="region" aria-labelledby="c-conf-cap"><code>-system.timezone=America/Mexico_City
 +system.timezone=Europe/Skopje
 -updates.enabled=1
@@ -756,26 +774,26 @@ Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g
     </figure>
 
     <ul data-lang="mk">
-      <li>Шејдер <code>sharp-bilinear-simple</code>: остри пиксели на секоја големина, без нерамномерни пиксели како кај обичното скалирање и без црни рабови како кај integer скалирањето. Затоа integer scale и smoothing се исклучени.</li>
-      <li>Rewind исклучен: троши процесор и меморија што овој чип ги нема во вишок.</li>
-      <li>Auto-save вклучен: при излез се зачувува состојбата, а при старт играта продолжува.</li>
-      <li>Run-ahead од една рамка само за NES, за помало доцнење на влезот таму каде што има простор.</li>
+      <li>Шејдер е филтер за сликата. <code>sharp-bilinear-simple</code> ги прави пикселите остри на секој телевизор, без криви пиксели и без црни рабови. Затоа integer scale и smoothing (други начини за истото) се исклучени.</li>
+      <li>Rewind (враќање назад во играта) исклучен: троши процесор што овој чип го нема во вишок.</li>
+      <li>Auto-save вклучен: кога излегуваш, играта се зачувува, а следниот пат продолжува од таму.</li>
+      <li>Run-ahead само за NES: копчињата реагираат малку побрзо.</li>
       <li>Ажурирања исклучени: подобро да ажурирам намерно, откако ќе направам копија од картичката.</li>
       <li>Логирање исклучено: помалку запишување на SD картичката.</li>
     </ul>
     <ul data-lang="en">
-      <li>The <code>sharp-bilinear-simple</code> shader: crisp pixels at any scale, without the uneven pixel widths of plain scaling or the black borders of integer scaling. So integer scale and smoothing are off.</li>
-      <li>Rewind off: it costs CPU and memory this chip doesn't have to spare.</li>
-      <li>Auto-save on: quitting saves a state and starting the game resumes it.</li>
-      <li>Run-ahead of one frame on NES only, to cut input lag where there's headroom.</li>
+      <li>A shader is a filter for the picture. <code>sharp-bilinear-simple</code> keeps pixels crisp on any TV, without wonky pixels or black borders. That's why integer scale and smoothing (other ways of doing the same) are off.</li>
+      <li>Rewind (going back in time in a game) off: it costs CPU this chip doesn't have to spare.</li>
+      <li>Auto-save on: when you quit, the game is saved, and next time it picks up right there.</li>
+      <li>Run-ahead on NES only: buttons respond a bit faster.</li>
       <li>Updates off: I'd rather update on purpose, after backing up the card.</li>
       <li>Logging off: fewer writes to the SD card.</li>
     </ul>
-    <p data-lang="mk">Веќе точно по стандард: <code>ee_videomode=1080p60hz</code> (чипот не може убаво 4K, а 50 Hz сецка), <code>global.maxperf=1</code> (performance governor) и исклучени bezels.</p>
-    <p data-lang="en">Already right by default: <code>ee_videomode=1080p60hz</code> (the chip can't do 4K well, and 50 Hz judders), <code>global.maxperf=1</code> (performance governor) and bezels off.</p>
+    <p data-lang="mk">Веќе точно по стандард: <code>ee_videomode=1080p60hz</code> (чипот не може убаво 4K, а 50 Hz сецка), <code>global.maxperf=1</code> (процесорот секогаш на полна брзина) и исклучени bezels (рамки околу сликата).</p>
+    <p data-lang="en">Already right by default: <code>ee_videomode=1080p60hz</code> (the chip can't do 4K well, and 50 Hz judders), <code>global.maxperf=1</code> (CPU always at full speed) and bezels (frames around the picture) off.</p>
 
     <table>
-      <caption><span data-lang="mk">Кои cores би ги користел</span><span data-lang="en">Cores I'd use</span></caption>
+      <caption><span data-lang="mk">Кои емулатори (cores) би ги користел</span><span data-lang="en">Emulators (cores) I'd use</span></caption>
       <thead>
         <tr><th scope="col"><span data-lang="mk">Систем</span><span data-lang="en">System</span></th><th scope="col">Core</th><th scope="col"><span data-lang="mk">Забелешка</span><span data-lang="en">Note</span></th></tr>
       </thead>
@@ -792,17 +810,17 @@ Skyscraper -p psx -f emulationstation -a ~/.skyscraper/artwork-ee.xml -i "$R" -g
     <ul data-lang="mk">
       <li>Телевизор: режим на слика Game, motion smoothing исклучено, големина на слика Just Scan или Screen Fit за ништо да не се сече.</li>
       <li>Џојстици: 2,4 GHz џојстици со USB донгл се посигурни од Bluetooth-от на боксот, кој го исклучив. Има само две USB порти, па користи hub ако тастатурата останува приклучена.</li>
-      <li>Подеси го секој џојстик од Controller Settings во главното мени и стави Hotkey Enable на Select. Тогаш работат вообичаените комбинации: Select+Start излегува, Select+R зачувува состојба, Select+L ја вчитува.</li>
+      <li>Подеси го секој џојстик од Controller Settings во главното мени и стави Hotkey Enable на Select. Hotkey е копче што го држиш за комбинации: Select+Start излегува од играта, Select+R зачувува, Select+L вчитува.</li>
     </ul>
     <ul data-lang="en">
       <li>TV: Game picture mode, motion smoothing off, picture size Just Scan or Screen Fit so nothing is cropped.</li>
       <li>Pads: 2.4 GHz pads with a USB dongle are more reliable than the box's Bluetooth, which I turned off. There are only two USB ports, so use a hub if the keyboard stays plugged in.</li>
-      <li>Map each pad from Controller Settings in the main menu and set Hotkey Enable to Select. Then the usual combos work: Select+Start quits, Select+R saves a state, Select+L loads it.</li>
+      <li>Map each pad from Controller Settings in the main menu and set Hotkey Enable to Select. The hotkey is the button you hold for combos: Select+Start quits the game, Select+R saves, Select+L loads.</li>
     </ul>
 
     <h2 id="lockdown"><span data-lang="mk">Заклучи го</span><span data-lang="en">Lock it down</span></h2>
-    <p data-lang="mk">Ова е опционално. Стандардно EmuELEC пушта Samba (споделување фајлови на мрежа, стандардна најава <code>root</code> / <code>emuelec</code>), а SSH е едно подесување подалеку. Сакам боксот да стигнува до интернет (scraping, синхронизација на време), но ништо од мојата мрежа да не стигнува до боксот. Сервисите проверуваат фајлови-знаменца во <code>STORAGE/.cache/services</code> кога боксот се пали:</p>
-    <p data-lang="en">This part is optional. Out of the box EmuELEC runs Samba (network file sharing, default login <code>root</code> / <code>emuelec</code>), and SSH is one setting away. I want the box to reach the internet (scraping, time sync) but nothing on my network to reach the box. The services check flag files in <code>STORAGE/.cache/services</code> when the box boots:</p>
+    <p data-lang="mk">Ова е опционално, за параноични како мене. Стандардно EmuELEC има вклучено Samba (споделување фајлови преку мрежа) со лозинка што ја знае цел интернет (<code>root</code> / <code>emuelec</code>), а SSH (далечински пристап со терминал) е едно подесување подалеку. Сакам боксот да може да излезе на интернет (за слики, точно време), ама ништо од мрежата да не може да влезе во него. EmuELEC при палење гледа во <code>STORAGE/.cache/services</code> кои сервиси да ги пушти:</p>
+    <p data-lang="en">This part is optional, for paranoid people like me. Out of the box EmuELEC runs Samba (file sharing over the network) with a password the whole internet knows (<code>root</code> / <code>emuelec</code>), and SSH (remote terminal access) is one setting away. I want the box to reach the internet (for box art, correct time), but nothing on the network to get into it. On startup EmuELEC checks <code>STORAGE/.cache/services</code> to decide which services to run:</p>
 
     <figure class="code">
       <figcaption id="c-lock-cap"><span data-lang="mk">Исклучи ги SSH, Samba и Avahi, вклучи firewall</span><span data-lang="en">Turn off SSH, Samba and Avahi, turn on the firewall</span></figcaption>
@@ -812,14 +830,14 @@ sudo touch samba.disabled
 printf 'RULES=public\n' | sudo tee iptables.conf</code></pre>
     </figure>
 
-    <p data-lang="mk"><code>RULES=public</code> ги вчитува јавните firewall правила на EmuELEC: дојдовниот и проследениот сообраќај се фрлаат, а одлезниот и одговорите се дозволени. Со <code>ee_ssh.enabled=0</code> и исклучени Wi-Fi и Bluetooth во <code>emuelec.conf</code>, SSH, Samba и Avahi се исклучени, а firewall-от вклучен.</p>
-    <p data-lang="en"><code>RULES=public</code> loads EmuELEC's public firewall rules: incoming and forwarded traffic is dropped, outgoing traffic and replies are allowed. With <code>ee_ssh.enabled=0</code> and Wi-Fi and Bluetooth off in <code>emuelec.conf</code>, that leaves SSH, Samba and Avahi off and the firewall on.</p>
+    <p data-lang="mk"><code>RULES=public</code> го пали firewall-от (ѕидот) на EmuELEC: ништо однадвор не влегува, а боксот сам може да излегува. Плус во <code>emuelec.conf</code> ставив <code>ee_ssh.enabled=0</code> и ги исклучив Wi-Fi и Bluetooth.</p>
+    <p data-lang="en"><code>RULES=public</code> turns on EmuELEC's firewall: nothing gets in from outside, while the box can still go out. On top of that I set <code>ee_ssh.enabled=0</code> and turned off Wi-Fi and Bluetooth in <code>emuelec.conf</code>.</p>
     <p data-lang="mk">Ако повеќе сакаш да копираш игри преку мрежа, остави ја Samba, отвори <code>smb://IP-НА-БОКСОТ/</code> во фајл менаџерот и резервирај ја IP адресата на боксот во рутерот. Никогаш не ја отворај кон интернет. Очекувај околу 10 MB/s; мрежната порта е 100 Mbit.</p>
     <p data-lang="en">If you'd rather copy games over the network, keep Samba on, open <code>smb://BOX-IP/</code> in your file manager and reserve the box's IP in your router. Never expose it to the internet. Expect about 10 MB/s; the Ethernet port is 100 Mbit.</p>
 
     <h2 id="theme"><span data-lang="mk">Тема и музика</span><span data-lang="en">Theme and music</span></h2>
-    <p data-lang="mk">Стандардната тема Crystal е во ред (сликата подолу). Јас сакав нешто аркадно. EmuELEC чува список од 82 теми во <code>themes.json</code> во репозиториумот <a href="https://github.com/EmuELEC/emuelec.github.io">emuelec.github.io</a>. Прво пробав Arcadeplanet, но има 173 MB и во README-то препорачува Raspberry Pi 4 или побрз. Neon Overdrive (gradient) има 28 MB, без видеа, и изгледа токму како што треба:</p>
-    <p data-lang="en">The default Crystal theme is fine (photo below). I wanted something arcade. EmuELEC keeps a list of 82 themes in <code>themes.json</code> in the <a href="https://github.com/EmuELEC/emuelec.github.io">emuelec.github.io</a> repository. I tried Arcadeplanet first, but it's 173 MB and its README recommends a Raspberry Pi 4 or faster. Neon Overdrive (gradient) is 28 MB with no videos and looks the part:</p>
+    <p data-lang="mk">Стандардната тема Crystal е во ред (сликата подолу). Јас сакав нешто аркадно. EmuELEC има <a href="https://github.com/EmuELEC/emuelec.github.io">список од 82 теми</a>. Прво пробав Arcadeplanet, ама има 173 MB и самите автори препорачуваат Raspberry Pi 4 или побрзо. Neon Overdrive (gradient) има 28 MB, без видеа, и изгледа токму како што треба. Без терминал: на GitHub страницата на темата Code → Download ZIP, отпакувај и копирај ја папката во <code>STORAGE/.config/emuelec/themes/</code>. Со терминал:</p>
+    <p data-lang="en">The default Crystal theme is fine (photo below). I wanted something arcade. EmuELEC has a <a href="https://github.com/EmuELEC/emuelec.github.io">list of 82 themes</a>. I tried Arcadeplanet first, but it's 173 MB and its own authors recommend a Raspberry Pi 4 or faster. Neon Overdrive (gradient) is 28 MB with no videos and looks the part. Without a terminal: on the theme's GitHub page hit Code → Download ZIP, unzip it and copy the folder to <code>STORAGE/.config/emuelec/themes/</code>. With a terminal:</p>
 
     <figure class="code">
       <figcaption id="c-theme-cap"><span data-lang="mk">Инсталирање на темата</span><span data-lang="en">Installing the theme</span></figcaption>
@@ -854,25 +872,25 @@ sudo cp -r es-theme-neon-overdrive-gradient /run/media/$USER/STORAGE/.config/emu
     <p data-lang="en">Background music is any MP3 in <code>EEROMS/BGM</code>. I used Eric Skiff's <a href="https://ericskiff.com/music/">Resistor Anthems</a>: chiptune licensed CC BY 4.0, so it's free with credit. 17 tracks, 62 MB. <code>audio.display_titles=1</code> in <code>emuelec.conf</code> shows the song title when a track starts.</p>
 
     <h2 id="saves"><span data-lang="mk">Дали save states ќе ја наполнат картичката?</span><span data-lang="en">Will save states fill the card?</span></h2>
-    <p data-lang="mk">Не. Auto-save чува по една компресирана состојба по игра и ја препишува секој пат. Приближни големини по состојба: NES 30–80 KB, SNES 150–300 KB, PS1 1–2 MB. Дури и да ја играм секоја игра на картичката по еднаш, тоа е околу 400 MB. Рачните зачувувања во многу слотови се собираат: десет слотови за секоја PS1 игра се околу 1 GB. Состојбите се во <code>EEROMS/savestates</code>; копирај ги на друго место одвреме-навреме.</p>
-    <p data-lang="en">No. Auto-save keeps one compressed state per game and overwrites it each time. Rough sizes per state: NES 30–80 KB, SNES 150–300 KB, PS1 1–2 MB. Even if I played every game on my card once, that's about 400 MB. Manual saves in many slots do add up: ten slots for every PS1 game is around 1 GB. States live in <code>EEROMS/savestates</code>; copy them somewhere else now and then.</p>
+    <p data-lang="mk">Не. Save state е „фотографија“ од играта во тој момент, па продолжуваш точно од таму. Auto-save чува по една по игра и ја препишува секој пат. Приближно: NES 30–80 KB, SNES 150–300 KB, PS1 1–2 MB. Дури и да ја играм секоја игра на картичката по еднаш, тоа е околу 400 MB. Рачните зачувувања во многу слотови се собираат: десет слотови за секоја PS1 игра се околу 1 GB. Сите се во <code>EEROMS/savestates</code>; копирај ги на друго место одвреме-навреме.</p>
+    <p data-lang="en">No. A save state is a “snapshot” of the game at that moment, so you continue exactly from there. Auto-save keeps one per game and overwrites it each time. Roughly: NES 30–80 KB, SNES 150–300 KB, PS1 1–2 MB. Even if I played every game on my card once, that's about 400 MB. Manual saves in many slots do add up: ten slots for every PS1 game is around 1 GB. They all live in <code>EEROMS/savestates</code>; copy them somewhere else now and then.</p>
 
     <h2 id="lessons"><span data-lang="mk">Што научив</span><span data-lang="en">What I learned</span></h2>
     <ul data-lang="mk">
       <li>Остави го првото бутирање да заврши. Ако падне, флеширај пак.</li>
-      <li>Празнењето на <code>es_input.cfg</code> не го враќа волшебникот. Напиши го блокот за тастатура сам.</li>
+      <li>Ако тастатурата не работи, празнењето на <code>es_input.cfg</code> не помага. Земи џојстик или допиши ги копчињата сам.</li>
       <li>Нека копчињата во менијата одговараат на стандардните во RetroArch, за едно копче секаде да значи исто.</li>
       <li>Подесувањата одат во <code>emuelec.conf</code>; <code>retroarch.cfg</code> се препишува при секое стартување.</li>
-      <li>Провери ги серијските броеви на PS1 дисковите; имињата знаат да лажат.</li>
+      <li>Имињата на PS1 фајловите знаат да лажат; провери ги кога ќе ги пуштиш.</li>
       <li>На мала картичка, исклучи ги видеата во scraper-от.</li>
       <li>Гаси од менито (Quit → Shutdown). Прекин на струја додека се запишува е начинот на кој фајловите остануваат празни.</li>
     </ul>
     <ul data-lang="en">
       <li>Let the first boot finish. If it crashes, flash again.</li>
-      <li>Emptying <code>es_input.cfg</code> doesn't bring the wizard back. Write the keyboard block yourself.</li>
+      <li>If the keyboard is dead, emptying <code>es_input.cfg</code> won't help. Use a gamepad or add the keys yourself.</li>
       <li>Make the menu keys match RetroArch's defaults, so a key means the same thing everywhere.</li>
       <li>Settings go in <code>emuelec.conf</code>; <code>retroarch.cfg</code> gets rewritten on every launch.</li>
-      <li>Check PS1 boot serials; file names can lie.</li>
+      <li>PS1 file names can lie; check them when you launch them.</li>
       <li>On a small card, turn off scraper videos.</li>
       <li>Shut down from the menu (Quit → Shutdown). A power cut during writes is how files end up empty.</li>
     </ul>
