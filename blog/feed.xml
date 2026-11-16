@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="mk">
-  <title>Блог — Живко Коцев</title>
-  <subtitle>Белешки од чепкање: хардвер, Линукс и софтвер.</subtitle>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Blog — Zhivko Kocev</title>
+  <subtitle>Notes from tinkering: hardware, Linux and software.</subtitle>
   <link href="https://kocev.mk/blog/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kocev.mk/blog/" rel="alternate" type="text/html"/>
   <id>https://kocev.mk/blog/</id>
   <updated>2026-11-16T12:00:00+01:00</updated>
   <author>
-    <name>Живко Коцев</name>
+    <name>Zhivko Kocev</name>
     <uri>https://kocev.mk/</uri>
   </author>
 
   <entry>
-    <title>Од заборавен ТВ бокс до ретро конзола</title>
+    <title>From a forgotten TV box to a retro console</title>
     <link href="https://kocev.mk/blog/tv-box-to-retro-console/" rel="alternate" type="text/html"/>
     <id>https://kocev.mk/blog/tv-box-to-retro-console/</id>
     <published>2026-11-16T12:00:00+01:00</published>
     <updated>2026-11-16T12:00:00+01:00</updated>
-    <summary>Стар Nexbox A95X-B7N, 32 GB microSD и EmuELEC 4.8: од флеширање и чачкалка во AV приклучокот до 758 оштетени фајлови, CHD, BIOS, слики од игрите, подесувања и аркадна тема. (Also in English: https://kocev.mk/blog/tv-box-to-retro-console/?lang=en)</summary>
+    <summary>An old Nexbox A95X-B7N, a 32 GB microSD and EmuELEC 4.8: from flashing and a toothpick in the AV jack to 758 damaged files, CHD, BIOS, box art, settings and an arcade theme. (Also in Macedonian: https://kocev.mk/blog/tv-box-to-retro-console/?lang=mk)</summary>
   </entry>
 </feed>
