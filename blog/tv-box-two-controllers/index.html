@@ -326,7 +326,6 @@ connect 98:B6:88:8C:10:60</code></pre>
       <figcaption id="c-btmon-cap"><span data-lang="mk">btmon: прашање за врска 6, одговор за врска 4 (скратено)</span><span data-lang="en">btmon: a question about connection 6, an answer about connection 4 (shortened)</span></figcaption>
       <pre tabindex="0" role="region" aria-labelledby="c-btmon-cap"><code>&lt; HCI Command: Read Encryption Key Size (0x05|0x0008) plen 2
         Handle: 6 Address: 98:B6:EB:D1:16:BD
-&gt; HCI Event: Command Complete (0x0e) plen 7
       Read Encryption Key Size (0x05|0x0008) ncmd 2
         Status: Success (0x00)
         Handle: 4
@@ -352,8 +351,10 @@ connect 98:B6:88:8C:10:60</code></pre>
       <figcaption><span data-lang="mk">Во 4:15 наутро, со правописот што оди со тоа.</span><span data-lang="en">At 4:15 in the morning, with the spelling to match.</span></figcaption>
     </figure>
 
-    <p data-lang="mk">Закрпата прави едно: кернелот веќе знае за која врска прашал, па нека веруваме на тоа. Ако одговорот на чипот спомнува друга врска, кернелот го запишува тоа во логот и претпоставува стандардни 16 бајти, исто како што старата верзија прави кога чипот враќа грешка, и исто како новите кернели за чипови означени како скршени.</p>
-    <p data-lang="en">The patch does one thing: the kernel already knows which connection it asked about, so trust that. If the chip's answer names a different connection, the kernel logs it and assumes the standard 16 bytes, the same as the old code does when the chip returns an error, and the same as newer kernels do for chips flagged as broken.</p>
+    <p data-lang="mk">Закрпата прави едно: кернелот веќе знае за која врска прашал, па нека веруваме на тоа. Ако одговорот на чипот спомнува друга врска, кернелот го запишува тоа во логот и ја користи врската од своето прашање. Големината на клучот од одговорот останува, па прекраток клуч и понатаму се одбива.</p>
+    <p data-lang="en">The patch does one thing: the kernel already knows which connection it asked about, so trust that. If the chip's answer names a different connection, the kernel logs it and uses the connection from its own question. The key size from the answer is kept, so a key that's too short is still rejected.</p>
+    <p data-lang="mk">Закрпата ја пратив на EmuELEC (<a href="https://github.com/EmuELEC/EmuELEC/pull/1701">PR #1701</a>), по уште еден преглед. Модулот на мојот бокс е од претходната верзија, која претпоставуваше 16 бајти секогаш кога одговорот спомнува погрешна врска. Чипот и онака јавува 16, па на овој бокс двете работат исто.</p>
+    <p data-lang="en">I've sent the patch to EmuELEC (<a href="https://github.com/EmuELEC/EmuELEC/pull/1701">PR #1701</a>), after one more review. The module on my box is from the earlier version, which assumed 16 bytes whenever the answer named the wrong connection. The chip reports 16 anyway, so on this box both behave the same.</p>
 
     <details>
       <summary><span data-lang="mk">За љубопитните: како го изградивме и ставивме модулот (Линукс, Docker)</span><span data-lang="en">For the curious: how we built and installed the module (Linux, Docker)</span></summary>
@@ -375,49 +376,37 @@ connect 98:B6:88:8C:10:60</code></pre>
     </ol>
 
     <figure class="code">
-      <figcaption id="c-patch-cap"><span data-lang="mk">bluetooth-read-enc-key-size-handle.patch</span><span data-lang="en">bluetooth-read-enc-key-size-handle.patch</span></figcaption>
+      <figcaption id="c-patch-cap"><span data-lang="mk">linux-05-bluetooth-read-enc-key-size-handle.patch, верзијата пратена на EmuELEC</span><span data-lang="en">linux-05-bluetooth-read-enc-key-size-handle.patch, the version sent to EmuELEC</span></figcaption>
       <pre tabindex="0" role="region" aria-labelledby="c-patch-cap"><code>--- a/net/bluetooth/hci_event.c
 +++ b/net/bluetooth/hci_event.c
-@@ -2547,7 +2547,9 @@
+@@ -2547,6 +2547,7 @@
  				       u16 opcode, struct sk_buff *skb)
  {
  	const struct hci_rp_read_enc_key_size *rp;
 +	const struct hci_cp_read_enc_key_size *cp;
  	struct hci_conn *conn;
-+	bool mismatch = false;
  	u16 handle;
  
- 	BT_DBG("%s status 0x%02x", hdev-&gt;name, status);
-@@ -2561,6 +2563,20 @@
+@@ -2561,6 +2562,19 @@
  	rp = (void *)skb-&gt;data;
  	handle = le16_to_cpu(rp-&gt;handle);
  
-+	/* Some controllers (e.g. the Realtek UART chips on Amlogic TV boxes)
-+	 * answer with the handle of a different connection once more than one
-+	 * ACL link exists. The link we asked about would then never leave
-+	 * BT_CONFIG, so trust the handle from our own command and fall back to
-+	 * the default key size, as when the command fails.
++	/* Some controllers (seen on a Realtek UART chip) answer with the
++	 * handle of a different connection once more than one ACL link
++	 * exists. The link we asked about would then never leave BT_CONFIG,
++	 * so use the handle from our own command. The reported key size is
++	 * kept, so a short key still fails the usual check.
 +	 */
 +	cp = hci_sent_cmd_data(hdev, HCI_OP_READ_ENC_KEY_SIZE);
 +	if (cp &amp;&amp; le16_to_cpu(cp-&gt;handle) != handle) {
 +		BT_ERR("%s key size reply for handle %u, requested %u",
 +		       hdev-&gt;name, handle, le16_to_cpu(cp-&gt;handle));
 +		handle = le16_to_cpu(cp-&gt;handle);
-+		mismatch = true;
 +	}
 +
  	hci_dev_lock(hdev);
  
- 	conn = hci_conn_hash_lookup_handle(hdev, handle);
-@@ -2571,7 +2587,7 @@
- 	 * (which is the same we do also when this HCI command isn't
- 	 * supported.
- 	 */
--	if (rp-&gt;status) {
-+	if (rp-&gt;status || mismatch) {
- 		BT_ERR("%s failed to read key size for handle %u", hdev-&gt;name,
- 		       handle);
- 		conn-&gt;enc_key_size = HCI_LINK_KEY_SIZE;</code></pre>
+ 	conn = hci_conn_hash_lookup_handle(hdev, handle);</code></pre>
     </figure>
 
     <p data-lang="mk">Системот на EmuELEC е слика само за читање, па модулот не се копира врз оригиналот. Наместо тоа, EmuELEC има механизам наречен kernel overlays: <code>.conf</code> фајл во <code>/storage/.cache/kernel-overlays/</code> покажува на папка со модули, а при палење модулите од таа папка се вчитуваат наместо оригиналните.</p>
@@ -509,12 +498,12 @@ $ cat /storage/.cache/kernel-overlays/50-bt-keysize-fix.conf
     <ul data-lang="mk">
       <li>Подолги игри во двајца, да видам дали врската држи со часови.</li>
       <li>Hotkey Enable на Select на двата џојстика.</li>
-      <li>Можеби да ја понудам закрпата на EmuELEC, за другите со ист бокс да не мора да градат модул.</li>
+      <li>Да видам што ќе каже EmuELEC за закрпата (<a href="https://github.com/EmuELEC/EmuELEC/pull/1701">PR #1701</a>), за другите со ист бокс да не мора сами да градат модул.</li>
     </ul>
     <ul data-lang="en">
       <li>Longer two-player sessions, to see whether the link holds for hours.</li>
       <li>Hotkey Enable on Select on both pads.</li>
-      <li>Maybe offer the patch to EmuELEC, so others with the same box don't have to build a module.</li>
+      <li>See what EmuELEC says about the patch (<a href="https://github.com/EmuELEC/EmuELEC/pull/1701">PR #1701</a>), so others with the same box don't have to build a module themselves.</li>
     </ul>
 
     <p class="meta" data-lang="mk">Направено со <a href="https://omp.sh/">omp</a> (<a href="https://github.com/can1357/oh-my-pi">oh-my-pi</a>). Протоколот на Switch џојстиците: <a href="https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering">dekuNukem/Nintendo_Switch_Reverse_Engineering</a>. Кернел: CoreELEC linux-amlogic и закрпите на <a href="https://github.com/EmuELEC/EmuELEC">EmuELEC</a>. Bluetooth алатки: BlueZ (bluetoothctl, btmon).</p>
