@@ -94,10 +94,10 @@
     <h1><span data-lang="mk">Два џојстика, еден скршен Bluetooth чип и закрпа за кернелот, со omp</span><span data-lang="en">Two controllers, one broken Bluetooth chip and a kernel patch, with omp</span></h1>
     <p class="meta"><time datetime="2026-11-17"><span data-lang="mk">17 ноември 2026</span><span data-lang="en">17 November 2026</span></time> · <span data-lang="mk">10 мин. читање</span><span data-lang="en">10 min read</span></p>
 
-    <p data-lang="mk">Ова е продолжение на <a href="/blog/tv-box-to-retro-console/">„Од заборавен ТВ бокс до ретро конзола“</a>. Таму напишав дека џојстиците од 2,4 GHz со USB донгл се посигурни од Bluetooth-от на боксот. Потоа купив два Bluetooth џојстика. 😃</p>
-    <p data-lang="en">This is a follow-up to <a href="/blog/tv-box-to-retro-console/">“From a forgotten TV box to a retro console”</a>. There I wrote that 2.4 GHz pads with a USB dongle are more reliable than the box's Bluetooth. Then I bought two Bluetooth pads. 😃</p>
-    <p data-lang="mk">Ова е приказната како ги натерав да работат, двата одеднаш, на истиот стар Nexbox A95X-B7N со EmuELEC 4.8. Траеше една ноќ, од 2 до 4:30 наутро, и на крајот вклучуваше поправка на баг во Линукс кернелот. Не сум кернел програмер. Цело време работев со <a href="https://omp.sh/">omp</a>, AI агент за програмирање што работи во терминал: тој читаше логови, пишуваше код и се поврзуваше на боксот, а јас притискав копчиња и одлучував кога да не се откажеме.</p>
-    <p data-lang="en">This is the story of getting them both working at once on the same old Nexbox A95X-B7N running EmuELEC 4.8. It took one night, from 2 to 4:30 in the morning, and ended with a bug fix in the Linux kernel. I'm not a kernel developer. I worked with <a href="https://omp.sh/">omp</a> the whole time, an AI coding agent that runs in the terminal: it read logs, wrote code and logged into the box, while I pressed buttons and decided when not to give up.</p>
+    <p data-lang="mk">Ова е продолжение на <a href="/blog/tv-box-to-retro-console/">„Од заборавен ТВ бокс до ретро конзола“</a>. Таму напишав дека џојстиците од 2,4 GHz со USB донгл се посигурни од Bluetooth-от на боксот. Потоа како за инат купив два Bluetooth џојстика хахаха. 😃</p>
+    <p data-lang="en">This is a follow-up to <a href="/blog/tv-box-to-retro-console/">“From a forgotten TV box to a retro console”</a>. There I wrote that 2.4 GHz pads with a USB dongle are more reliable than the box's Bluetooth. Then, as if out of spite, I bought two Bluetooth pads, hahaha. 😃</p>
+    <p data-lang="mk">Ова е приказната како ги натерав да работат, двата одеднаш, на истиот стар Nexbox A95X-B7N со EmuELEC 4.8. Траеше една ноќ и на крајот заврши со поправка на баг во Линукс кернелот. Јас и не сум некој си кернел програмер. Цело време работев со помош на <a href="https://omp.sh/">omp</a>, AI агент за програмирање што работи во терминал: тој читаше логови, пишуваше код и се поврзуваше на боксот, а јас притискав копчиња, читав имплементација, предлагав решенија и одлучував кога да не се откажеме.</p>
+    <p data-lang="en">This is the story of getting them both working at once on the same old Nexbox A95X-B7N running EmuELEC 4.8. It took one night and ended with a bug fix in the Linux kernel. And I'm not exactly a kernel developer. I worked with <a href="https://omp.sh/">omp</a> the whole time, an AI coding agent that runs in the terminal: it read logs, wrote code and logged into the box, while I pressed buttons, read the implementation, suggested fixes and decided when not to give up.</p>
 
     <figure>
       <video controls playsinline preload="none" width="576" height="1024" poster="media/demo-poster.jpg">
@@ -131,7 +131,7 @@
     <p data-lang="en">I tried the PC first, to check they work at all. No luck: the USB-C cable only charges them (the PC sees no device), and the PC has no Bluetooth. So all testing happened right on the box. I'd turned the box's Bluetooth off in the first post, so step one was turning it back on.</p>
 
     <figure>
-      <video controls playsinline preload="none" width="576" height="1024" poster="media/lights-poster.jpg">
+      <video controls playsinline preload="none" loading="lazy" width="576" height="1024" poster="media/lights-poster.jpg">
         <source src="media/lights.mp4" type="video/mp4">
       </video>
       <figcaption><span data-lang="mk">Едниот џојстик во темно, со светлата што ги менуваат боите. 19 секунди, без звук.</span><span data-lang="en">One of the pads in the dark, its lights cycling through colours. 19 seconds, no sound.</span></figcaption>
@@ -188,8 +188,8 @@ trust 98:B6:88:8C:10:60
 connect 98:B6:88:8C:10:60</code></pre>
     </figure>
 
-    <p data-lang="mk">Моја работа беше физичкиот дел. omp пишуваше упатства на мониторот, јас ги правев на телевизорот: исклучи го џојстикот, стави го во режим за спарување (светлата брзо трепкаат), почекај. Набрзо omp напиша и мала Python скрипта за спарување што самата одговара кога џојстикот бара PIN.</p>
-    <p data-lang="en">My job was the physical part. omp wrote instructions on the monitor and I did them on the TV: turn the pad off, put it in pairing mode (lights blinking fast), wait. Soon omp also wrote a small Python pairing script that answers the pad's PIN request by itself.</p>
+    <p data-lang="mk">Моја работа беше физичкиот дел. omp пишуваше упатства на мониторот, јас ги правев на телевизорот: исклучи го џојстикот, стави го во режим за спарување (светлата брзо трепкаат), почекај. Набрзо јас со помош на omp напишав и мала Python скрипта за спарување што самата одговара кога џојстикот бара PIN.</p>
+    <p data-lang="en">My job was the physical part. omp wrote instructions on the monitor and I did them on the TV: turn the pad off, put it in pairing mode (lights blinking fast), wait. Soon, with omp's help, I also wrote a small Python pairing script that answers the pad's PIN request by itself.</p>
 
     <figure class="gallery">
       <picture>
@@ -218,8 +218,8 @@ connect 98:B6:88:8C:10:60</code></pre>
     </figure>
 
     <h2 id="handshake"><span data-lang="mk">Да зборуваме како Switch</span><span data-lang="en">Speaking Switch</span></h2>
-    <p data-lang="mk">И со <code>connect</code> џојстиците одржуваа врска само додека трае спарувањето. Еднаш исклучени, не се враќаа. Тука omp прв пат се откажа: напиша дека EmuELEC (Linux 4.9, без драјвер за Nintendo џојстици) не може да ги задржи и дека со подесувања не се поправа.</p>
-    <p data-lang="en">Even with <code>connect</code>, the pads only stayed connected during the pairing session. Once off, they never came back. This is where omp gave up for the first time: it wrote that EmuELEC (Linux 4.9, with no Nintendo pad driver) can't keep them and that no setting fixes it.</p>
+    <p data-lang="mk">И со <code>connect</code> џојстиците одржуваа врска само додека трае спарувањето. Еднаш исклучени, не се враќаа. Тука omp прв пат крена раце: напиша дека EmuELEC (Linux 4.9, без драјвер за Nintendo џојстици) не може да ги задржи и дека со подесувања не се поправа.</p>
+    <p data-lang="en">Even with <code>connect</code>, the pads only stayed connected during the pairing session. Once off, they never came back. This is where omp threw in the towel for the first time: it wrote that EmuELEC (Linux 4.9, with no Nintendo pad driver) can't keep them and that no setting fixes it.</p>
     <p data-lang="mk">Прашав: „А што ако го напишеме драјверот?“ omp понуди два пата. А: да се пренесе Линукс драјверот за Nintendo (<code>hid-nintendo</code>, од Linux 5.16 нагоре) на стариот кернел 4.9. Часови работа, а клоновите често паѓаат на неговите проверки. Б: мал помошник на боксот што го прави она што го прави Switch по поврзувањето. Го избрав Б.</p>
     <p data-lang="en">I asked: “How about we write the driver?” omp offered two routes. A: port Linux's Nintendo driver (<code>hid-nintendo</code>, Linux 5.16 and newer) to the old 4.9 kernel. Hours of work, and clones often fail its checks. B: a small helper on the box that does what a Switch does after connecting. I picked B.</p>
     <p data-lang="mk">Switch по поврзувањето му праќа на џојстикот низа кратки команди (subcommands). Протоколот е јавно документиран благодарение на <a href="https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering">dekuNukem</a>, па помошникот ги праќа истите, директно на уредот (hidraw). Клонот ги прифати сите:</p>
@@ -278,8 +278,8 @@ connect 98:B6:88:8C:10:60</code></pre>
     </figure>
 
     <h2 id="helper"><span data-lang="mk">Помошникот</span><span data-lang="en">The helper</span></h2>
-    <p data-lang="mk">Сето ова omp го спакува во една Python скрипта, <code>switchpad.py</code>, што се пушта при секое палење на боксот (од <code>/storage/.config/custom_start.sh</code>, делот „after“). Таа:</p>
-    <p data-lang="en">omp packed all of this into one Python script, <code>switchpad.py</code>, that starts every time the box boots (from <code>/storage/.config/custom_start.sh</code>, the “after” section). It:</p>
+    <p data-lang="mk">Сето ова го спакувавме во една Python скрипта, <code>switchpad.py</code>: omp ја пишуваше, јас ја читав и предлагав поправки. Се пушта при секое палење на боксот (од <code>/storage/.config/custom_start.sh</code>, делот „after“). Таа:</p>
+    <p data-lang="en">We packed all of this into one Python script, <code>switchpad.py</code>: omp wrote it, I read it and suggested fixes. It starts every time the box boots (from <code>/storage/.config/custom_start.sh</code>, the “after” section). It:</p>
     <ul data-lang="mk">
       <li>бара џојстици во режим за спарување, но само додека се поврзани помалку од два и не трае игра;</li>
       <li>ги спарува и веднаш го отвора каналот за копчиња;</li>
@@ -331,8 +331,8 @@ connect 98:B6:88:8C:10:60</code></pre>
 
     <p data-lang="mk">Кернелот прашува за врската 6 (џојстик 2). Чипот одговара за врската 4 (џојстик 1). Кернелот го зема одговорот, ја наоѓа врската 4, која е веќе готова, и не прави ништо. Врската 6 засекогаш чека одговор што никогаш нема да дојде.</p>
     <p data-lang="en">The kernel asks about connection 6 (pad 2). The chip answers about connection 4 (pad 1). The kernel takes the answer, finds connection 4, which is already done, and does nothing. Connection 6 waits forever for an answer that never comes.</p>
-    <p data-lang="mk">Тоа е баг во фирмверот на Bluetooth чипот во боксот, Realtek прикачен преку UART. Со еден уред никогаш не се гледа, бидејќи тогаш има само една врска за која може да се одговори. Тука omp се откажа по втор пат: напиша дека со вградениот Bluetooth не може два џојстика, ги ограничи помошникот на еден, и предложи USB Bluetooth стик.</p>
-    <p data-lang="en">That's a bug in the firmware of the box's Bluetooth chip, a Realtek attached over UART. With one device you never see it, because then there's only one connection to answer about. This is where omp gave up for the second time: it wrote that the built-in Bluetooth can't do two pads, limited the helper to one, and suggested a USB Bluetooth stick.</p>
+    <p data-lang="mk">Тоа е баг во фирмверот на Bluetooth чипот во боксот, Realtek прикачен преку UART. Со еден уред никогаш не се гледа, бидејќи тогаш има само една врска за која може да се одговори. Тука omp крена раце по втор пат: напиша дека со вградениот Bluetooth не може два џојстика, ги ограничи помошникот на еден, и предложи USB Bluetooth стик.</p>
+    <p data-lang="en">That's a bug in the firmware of the box's Bluetooth chip, a Realtek attached over UART. With one device you never see it, because then there's only one connection to answer about. This is where omp threw in the towel a second time: it wrote that the built-in Bluetooth can't do two pads, limited the helper to one, and suggested a USB Bluetooth stick.</p>
 
     <h2 id="patch"><span data-lang="mk">Закрпа за кернелот</span><span data-lang="en">Patching the kernel</span></h2>
     <p data-lang="mk">Напишав: „може ли и тој баг да го поправиме“. Одговорот: „Веројатно да, во кернелот на боксот, а не во чипот.“ Новите Линукс кернели имаат знаменце за вакви чипови: кај чип означен како скршен, го прескокнуваат прашањето и претпоставуваат стандарден клуч од 16 бајти. Кернелот 4.9 на боксот тоа го нема. Но Bluetooth делот од кернелот на EmuELEC е модул (<code>bluetooth.ko</code>), посебен фајл што се вчитува при палење, па треба да се смени само тој, не целиот систем.</p>
@@ -348,8 +348,8 @@ connect 98:B6:88:8C:10:60</code></pre>
       <figcaption><span data-lang="mk">Во 4:15 наутро, со правописот што оди со тоа.</span><span data-lang="en">At 4:15 in the morning, with the spelling to match.</span></figcaption>
     </figure>
 
-    <p data-lang="mk">Тешкиот дел не е самата закрпа, туку модулот да одговара <em>точно</em> на кернелот што веќе работи на боксот. Погрешен модул значи Bluetooth не се вчитува, или полошо, кернелот паѓа. Чекорите:</p>
-    <p data-lang="en">The hard part isn't the patch itself, it's making the module match the kernel already running on the box <em>exactly</em>. A wrong module means Bluetooth won't load, or worse, the kernel crashes. The steps:</p>
+    <p data-lang="mk">Тешкиот дел не е самата закрпа, туку модулот да одговара <em>точно</em> на кернелот што веќе работи на боксот. Погрешен модул значи Bluetooth не се вчитува, или полошо, кернелот паѓа. Затоа сакав сè да се провери пред боксот да види било што. Чекорите:</p>
+    <p data-lang="en">The hard part isn't the patch itself, it's making the module match the kernel already running on the box <em>exactly</em>. A wrong module means Bluetooth won't load, or worse, the kernel crashes. So I wanted everything checked before the box saw any of it. The steps:</p>
     <ol data-lang="mk">
       <li><strong>Истиот изворен код.</strong> EmuELEC 4.8 го гради кернелот од CoreELEC <code>linux-amlogic</code>, на точно одреден commit (<code>ab03043</code>); хашот на симнатата архива одговараше на тој во EmuELEC. Плус 32-те закрпи на EmuELEC и неговата конфигурација за кернелот.</li>
       <li><strong>Градење.</strong> Во Docker контејнер (Debian bookworm, gcc 12 за ARM64), <code>make vmlinux modules</code>. Помалку од три минути.</li>
@@ -469,10 +469,10 @@ $ cat /storage/.cache/kernel-overlays/50-bt-keysize-fix.conf
     </figure>
 
     <h2 id="omp"><span data-lang="mk">Како изгледа работата со omp</span><span data-lang="en">What working with omp looks like</span></h2>
-    <p data-lang="mk">omp работеше на компјутерот и преку SSH на боксот. Тој читаше логови, ги снимаше и читаше Bluetooth пакетите, пишуваше скрипти, го најде и го изгради кернелот, ги провери модулите. Јас бев рацете: ги палев и гасев џојстиците, куцав на тастатурата на боксот кога SSH беше исклучен, ги вадев и ставав картичката.</p>
-    <p data-lang="en">omp ran on the PC and reached the box over SSH. It read logs, recorded and read Bluetooth packets, wrote scripts, found and built the kernel, and checked the modules. I was the hands: turning pads on and off, typing on the box's keyboard when SSH was off, pulling and inserting the card.</p>
-    <p data-lang="mk">Најважното: omp двапати ми кажа дека не може. И двапати решението беше едно прашање од мене: „а ако го напишеме драјверот?“ и „може ли и тој баг да го поправиме?“. Агентот е добар во барање и поправање, ама кога да не се откажеме, тоа сепак го одлучував јас.</p>
-    <p data-lang="en">The key part: omp told me twice that it couldn't be done. Both times the way forward was one question from me: “how about we write the driver?” and “can we fix that bug also?”. The agent is good at digging and fixing, but deciding when not to give up was still my call.</p>
+    <p data-lang="mk">omp работеше на компјутерот и преку SSH на боксот: читаше логови, снимаше и читаше Bluetooth пакети, пишуваше скрипти, го најде и го изгради кернелот, ги провери модулите. Јас бев рацете: ги палев и гасев џојстиците, куцав на тастатурата на боксот кога SSH беше исклучен, ги вадев и ставав картичката. Ама не само рацете: ги читав неговите објаснувања и кодот, прашував кога нешто не ми седеше, предлагав што да пробаме и одлучував што оди на боксот, а што не.</p>
+    <p data-lang="en">omp ran on the PC and reached the box over SSH: it read logs, recorded and read Bluetooth packets, wrote scripts, found and built the kernel, and checked the modules. I was the hands: turning pads on and off, typing on the box's keyboard when SSH was off, pulling and inserting the card. But not just the hands: I read its explanations and its code, asked when something didn't add up, suggested what to try next and decided what went on the box and what didn't.</p>
+    <p data-lang="mk">Најважното: omp двапати ми кажа дека не може. И двапати решението беше едно прашање од мене: „а ако го напишеме драјверот?“ и „може ли и тој баг да го поправиме?“. Агентот е одличен во копање и поправање, ама насоката и одлуката кога да не се откажеме беа мои.</p>
+    <p data-lang="en">The key part: omp told me twice that it couldn't be done. Both times the way forward was one question from me: “how about we write the driver?” and “can we fix that bug also?”. The agent is great at digging and fixing, but the direction, and the call on when not to give up, were mine.</p>
     <p data-lang="mk">Сликите од разговорот се од извоз на сесијата (<code>omp --export</code> прави HTML од целиот разговор).</p>
     <p data-lang="en">The chat screenshots come from an export of the session (<code>omp --export</code> turns the whole conversation into HTML).</p>
 
@@ -483,6 +483,7 @@ $ cat /storage/.cache/kernel-overlays/50-bt-keysize-fix.conf
       <li>Два уреда со исто име: залепи налепници и работи со MAC адресите.</li>
       <li>Кога нешто „само не работи“, сними го сообраќајот (<code>btmon</code>). Таму се гледа кој престанал да зборува.</li>
       <li>Баг во стар кернел некогаш се поправа со еден модул, ако го изградиш од истиот код и истата конфигурација и провериш vermagic и CRC пред да го вчиташ.</li>
+      <li>Агентот копа брзо, ама одлуките се твои: читај што предлага и прашај кога нешто не ти е јасно, пред да оди на боксот.</li>
       <li>Отвори го боксот само колку треба, па заклучи го пак.</li>
     </ul>
     <ul data-lang="en">
@@ -491,6 +492,7 @@ $ cat /storage/.cache/kernel-overlays/50-bt-keysize-fix.conf
       <li>Two devices with the same name: add stickers and work with MAC addresses.</li>
       <li>When something “just doesn't work”, record the traffic (<code>btmon</code>). That shows who stopped talking.</li>
       <li>A bug in an old kernel can sometimes be fixed with one module, if you build it from the same source and config and check vermagic and CRCs before loading it.</li>
+      <li>The agent digs fast, but the calls are yours: read what it proposes, and ask when something doesn't add up, before it goes on the box.</li>
       <li>Open the box only as much as you need, then lock it again.</li>
     </ul>
 
