@@ -5,11 +5,20 @@
   <link href="https://kocev.mk/blog/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://kocev.mk/blog/" rel="alternate" type="text/html"/>
   <id>https://kocev.mk/blog/</id>
-  <updated>2026-11-16T12:00:00+01:00</updated>
+  <updated>2026-11-17T12:00:00+01:00</updated>
   <author>
     <name>Zhivko Kocev</name>
     <uri>https://kocev.mk/</uri>
   </author>
+
+  <entry>
+    <title>Two controllers, one broken Bluetooth chip and a kernel patch, with omp</title>
+    <link href="https://kocev.mk/blog/tv-box-two-controllers/" rel="alternate" type="text/html"/>
+    <id>https://kocev.mk/blog/tv-box-two-controllers/</id>
+    <published>2026-11-17T12:00:00+01:00</published>
+    <updated>2026-11-17T12:00:00+01:00</updated>
+    <summary>Two DOYO Pro 3 Bluetooth pads on the same EmuELEC box: paired but not connected, a Switch clone that never reconnects, a Realtek chip that answers for the wrong connection, and a patched kernel module, in one night with omp. (Also in Macedonian: https://kocev.mk/blog/tv-box-two-controllers/?lang=mk)</summary>
+  </entry>
 
   <entry>
     <title>From a forgotten TV box to a retro console</title>

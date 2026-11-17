@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'inline-speculation-rules'; object-src 'none'; base-uri 'none'">
+
+  <title data-en="Two controllers, one broken Bluetooth chip and a kernel patch, with omp | kocev.mk" data-mk="Два џојстика, еден скршен Bluetooth чип и закрпа за кернелот, со omp | kocev.mk">Two controllers, one broken Bluetooth chip and a kernel patch, with omp | kocev.mk</title>
+  <script src="/script.js"></script>
+  <meta name="description" content="Getting two DOYO Pro 3 Bluetooth pads working on an EmuELEC TV box with the omp coding agent: paired but not connected, a Switch clone that never reconnects, a Realtek chip that answers for the wrong connection, and a one-module kernel patch.">
+  <meta name="author" content="Zhivko Kocev">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#f5f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d10" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="canonical" href="https://kocev.mk/blog/tv-box-two-controllers/">
+  <link rel="alternate" type="application/atom+xml" href="/blog/feed.xml" title="Blog — Zhivko Kocev">
+  <link rel="icon" type="image/jpeg" href="/spidey-96.jpg">
+  <link rel="apple-touch-icon" href="/spidey-192.jpg">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://kocev.mk/blog/tv-box-two-controllers/">
+  <meta property="og:site_name" content="kocev.mk">
+  <meta property="og:title" content="Two controllers, one broken Bluetooth chip and a kernel patch, with omp">
+  <meta property="og:description" content="Two Bluetooth pads on an EmuELEC TV box: a Switch clone that only half speaks Switch, a chip that answers for the wrong connection, and a kernel patch, all in one night with omp.">
+  <meta property="og:image" content="https://kocev.mk/blog/tv-box-two-controllers/media/og.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Two black controllers in front of a TV showing EmuELEC's neon menu">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="mk_MK">
+  <meta property="article:published_time" content="2026-11-17">
+  <meta property="article:author" content="https://kocev.mk/">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Two controllers, one broken Bluetooth chip and a kernel patch, with omp">
+  <meta name="twitter:description" content="Two Bluetooth pads, a TV box, one night with omp and a patched Linux kernel module.">
+  <meta name="twitter:image" content="https://kocev.mk/blog/tv-box-two-controllers/media/og.jpg">
+  <meta name="twitter:image:alt" content="Two black controllers in front of a TV showing EmuELEC's neon menu">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Two controllers, one broken Bluetooth chip and a kernel patch, with omp",
+    "alternativeHeadline": "Два џојстика, еден скршен Bluetooth чип и закрпа за кернелот, со omp",
+    "description": "Two DOYO Pro 3 Bluetooth pads on a Nexbox A95X-B7N with EmuELEC 4.8: pairing versus connecting, the Switch handshake, a Realtek chip bug and a patched bluetooth.ko, built with the omp coding agent.",
+    "inLanguage": ["en", "mk"],
+    "datePublished": "2026-11-17",
+    "dateModified": "2026-11-17",
+    "url": "https://kocev.mk/blog/tv-box-two-controllers/",
+    "mainEntityOfPage": "https://kocev.mk/blog/tv-box-two-controllers/",
+    "image": "https://kocev.mk/blog/tv-box-two-controllers/media/og.jpg",
+    "isBasedOn": "https://kocev.mk/blog/tv-box-to-retro-console/",
+    "author": {
+      "@type": "Person",
+      "name": "Zhivko Kocev",
+      "alternateName": "Живко Коцев",
+      "url": "https://kocev.mk/"
+    }
+  }
+  </script>
+
+  <script type="speculationrules">
+  {"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[data-set-lang]"}}]}, "eagerness": "moderate"}]}
+  </script>
+
+  <link rel="preload" href="media/demo-poster.jpg" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="breadcrumb" aria-label="Breadcrumbs" data-label-mk="Патека">
+      <ol>
+        <li><a href="/">kocev.mk</a></li>
+        <li><a href="/blog/"><span data-lang="mk">блог</span><span data-lang="en">blog</span></a></li>
+        <li><a href="/blog/tv-box-two-controllers/" aria-current="page"><span data-lang="mk">Два џојстика</span><span data-lang="en">Two pads</span></a></li>
+      </ol>
+    </nav>
+    <p class="lang-switch">
+      <a href="?lang=en" hreflang="en" lang="en" data-set-lang="en" data-lang="mk">English</a>
+      <a href="?lang=mk" hreflang="mk" lang="mk" data-set-lang="mk" data-lang="en">Македонски</a>
+    </p>
+  </header>
+
+  <main>
+  <article>
+
+    <h1><span data-lang="mk">Два џојстика, еден скршен Bluetooth чип и закрпа за кернелот, со omp</span><span data-lang="en">Two controllers, one broken Bluetooth chip and a kernel patch, with omp</span></h1>
+    <p class="meta"><time datetime="2026-11-17"><span data-lang="mk">17 ноември 2026</span><span data-lang="en">17 November 2026</span></time> · <span data-lang="mk">12 мин. читање</span><span data-lang="en">12 min read</span></p>
+
+    <p data-lang="mk">Ова е продолжение на <a href="/blog/tv-box-to-retro-console/">„Од заборавен ТВ бокс до ретро конзола“</a>. Таму напишав дека џојстиците од 2,4 GHz со USB донгл се посигурни од Bluetooth-от на боксот. Потоа купив два Bluetooth џојстика. 😃</p>
+    <p data-lang="en">This is a follow-up to <a href="/blog/tv-box-to-retro-console/">“From a forgotten TV box to a retro console”</a>. There I wrote that 2.4 GHz pads with a USB dongle are more reliable than the box's Bluetooth. Then I bought two Bluetooth pads. 😃</p>
+    <p data-lang="mk">Ова е приказната како ги натерав да работат, двата одеднаш, на истиот стар Nexbox A95X-B7N со EmuELEC 4.8. Траеше една ноќ, од 2 до 4:30 наутро, и на крајот вклучуваше поправка на баг во Линукс кернелот. Не сум кернел програмер. Цело време работев со <a href="https://omp.sh/">omp</a>, AI агент за програмирање што работи во терминал: тој читаше логови, пишуваше код и се поврзуваше на боксот, а јас притискав копчиња и одлучував кога да не се откажеме.</p>
+    <p data-lang="en">This is the story of getting them both working at once on the same old Nexbox A95X-B7N running EmuELEC 4.8. It took one night, from 2 to 4:30 in the morning, and ended with a bug fix in the Linux kernel. I'm not a kernel developer. I worked with <a href="https://omp.sh/">omp</a> the whole time, an AI coding agent that runs in the terminal: it read logs, wrote code and logged into the box, while I pressed buttons and decided when not to give up.</p>
+
+    <figure>
+      <video controls playsinline preload="none" width="576" height="1024" poster="media/demo-poster.jpg">
+        <source src="media/demo.mp4" type="video/mp4">
+      </video>
+      <figcaption><span data-lang="mk">Резултатот: џојстикот го вози менито на EmuELEC, од Super Nintendo до листата PlayStation игри. 35 секунди, без звук.</span><span data-lang="en">The result: the pad driving EmuELEC's menu, from Super Nintendo to the PlayStation game list. 35 seconds, no sound.</span></figcaption>
+    </figure>
+
+    <nav class="toc" aria-labelledby="contents">
+      <h2 id="contents"><span data-lang="mk">Содржина</span><span data-lang="en">Contents</span></h2>
+      <ol>
+        <li><a href="#pads"><span data-lang="mk">Џојстиците</span><span data-lang="en">The pads</span></a></li>
+        <li><a href="#forget"><span data-lang="mk">Кој од двата го заборавив?</span><span data-lang="en">Which one did I just forget?</span></a></li>
+        <li><a href="#connect"><span data-lang="mk">Спарен, ама не поврзан</span><span data-lang="en">Paired, but not connected</span></a></li>
+        <li><a href="#handshake"><span data-lang="mk">Да зборуваме како Switch</span><span data-lang="en">Speaking Switch</span></a></li>
+        <li><a href="#home"><span data-lang="mk">Зошто Home не го враќа</span><span data-lang="en">Why Home never reconnects</span></a></li>
+        <li><a href="#helper"><span data-lang="mk">Помошникот</span><span data-lang="en">The helper</span></a></li>
+        <li><a href="#chip"><span data-lang="mk">Вториот џојстик и чипот што лаже</span><span data-lang="en">The second pad and a chip that lies</span></a></li>
+        <li><a href="#patch"><span data-lang="mk">Закрпа за кернелот</span><span data-lang="en">Patching the kernel</span></a></li>
+        <li><a href="#lockdown"><span data-lang="mk">Заклучи го пак</span><span data-lang="en">Lock it again</span></a></li>
+        <li><a href="#omp"><span data-lang="mk">Како изгледа работата со omp</span><span data-lang="en">What working with omp looks like</span></a></li>
+        <li><a href="#lessons"><span data-lang="mk">Што научив</span><span data-lang="en">What I learned</span></a></li>
+        <li><a href="#next"><span data-lang="mk">Што следува</span><span data-lang="en">What's next</span></a></li>
+      </ol>
+    </nav>
+
+    <h2 id="pads"><span data-lang="mk">Џојстиците</span><span data-lang="en">The pads</span></h2>
+    <p data-lang="mk">Купив два DOYO „Pro 3 cross-platform wireless“: евтини, со RGB светла и распоред како на Switch Pro Controller. Кога ќе се поврзат, се претставуваат токму така: „Pro Controller“, со ознаките на Nintendo (<code>057E:2009</code>). Значи се клонови на џојстикот за Switch, и тоа ќе биде битно.</p>
+    <p data-lang="en">I bought two DOYO “Pro 3 cross-platform wireless” pads: cheap, with RGB lights and a Switch Pro Controller layout. When they connect, they introduce themselves exactly like that: “Pro Controller”, with Nintendo's IDs (<code>057E:2009</code>). So they're Switch pad clones, and that will matter.</p>
+    <p data-lang="mk">Прво пробав на компјутерот, за да видам дали воопшто работат. Не оди: USB-C кабелот само ги полни (компјутерот не гледа никаков уред), а компјутерот нема Bluetooth. Значи сè се тестираше директно на боксот. Во првиот пост го исклучив Bluetooth-от на боксот, па прво го вклучив пак.</p>
+    <p data-lang="en">I tried the PC first, to check they work at all. No luck: the USB-C cable only charges them (the PC sees no device), and the PC has no Bluetooth. So all testing happened right on the box. I'd turned the box's Bluetooth off in the first post, so step one was turning it back on.</p>
+
+    <figure>
+      <video controls playsinline preload="none" width="576" height="1024" poster="media/lights-poster.jpg">
+        <source src="media/lights.mp4" type="video/mp4">
+      </video>
+      <figcaption><span data-lang="mk">Едниот џојстик во темно, со светлата што ги менуваат боите. 19 секунди, без звук.</span><span data-lang="en">One of the pads in the dark, its lights cycling through colours. 19 seconds, no sound.</span></figcaption>
+    </figure>
+
+    <h2 id="forget"><span data-lang="mk">Кој од двата го заборавив?</span><span data-lang="en">Which one did I just forget?</span></h2>
+    <p data-lang="mk">Првиот џојстик се спари од менито на EmuELEC без проблем. Вториот не сакаше. Отидов да го „заборавам“ и да пробам пак, ама во листата и двата се викаат „Pro Controller“. Ја погодив погрешната ставка: го избришав <em>првиот</em>.</p>
+    <p data-lang="en">The first pad paired from EmuELEC's menu just fine. The second wouldn't. I went to “forget” it and try again, but in the list both are called “Pro Controller”. I picked the wrong entry: I deleted the <em>first</em> one.</p>
+    <p data-lang="mk">Од тука настана хаос. Повторното спарување враќаше <code>org.bluez.Error.AlreadyExists</code> и <code>Authentication Failed</code>: боксот сè уште чуваше стар клуч за џојстикот во кернелот, иако самиот уред беше избришан. Помогна рестарт: по рестартот Bluetooth меморијата беше чиста, и ги спаривме еден по еден, од терминал, каде што се гледа секој чекор.</p>
+    <p data-lang="en">Chaos followed. Re-pairing returned <code>org.bluez.Error.AlreadyExists</code> and <code>Authentication Failed</code>: the box still held an old key for the pad in the kernel, even though the device itself was deleted. A reboot fixed it: after it, the Bluetooth memory was clean, and we paired them one by one from a terminal, where you see every step.</p>
+
+    <figure class="gallery">
+      <picture>
+        <source type="image/avif" srcset="media/bt-already-exists-360.avif 360w, media/bt-already-exists-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
+        <img src="media/bt-already-exists-360.jpg" srcset="media/bt-already-exists-360.jpg 360w, media/bt-already-exists-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+             alt="The TV showing bluetoothctl in the box's terminal: Failed to pair: org.bluez.Error.AlreadyExists, then trust succeeded and a mistyped connect command."
+             data-alt-mk="Телевизорот со bluetoothctl во терминалот на боксот: Failed to pair: org.bluez.Error.AlreadyExists, потоа trust succeeded и погрешно напишана connect команда.">
+      </picture>
+      <picture>
+        <source type="image/avif" srcset="media/bt-auth-failed-360.avif 360w, media/bt-auth-failed-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
+        <img src="media/bt-auth-failed-360.jpg" srcset="media/bt-auth-failed-360.jpg 360w, media/bt-auth-failed-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+             alt="More bluetoothctl output on the TV: connect failed with br-connection-create-socket, Connected: yes, then auth failed with status 0x05 (Authentication Failure) and Connected: no."
+             data-alt-mk="Уште bluetoothctl на телевизорот: connect failed со br-connection-create-socket, Connected: yes, потоа auth failed со статус 0x05 (Authentication Failure) и Connected: no.">
+      </picture>
+      <figcaption><span data-lang="mk">Терминалот на боксот на телевизорот, со тастатура: AlreadyExists, Authentication Failed и „поврзан: да … поврзан: не“. Адресите на соседните уреди се заматени.</span><span data-lang="en">The box's terminal on the TV, with a keyboard: AlreadyExists, Authentication Failed and “connected: yes … connected: no”. Nearby devices' addresses are blurred.</span></figcaption>
+    </figure>
+
+    <p data-lang="mk">Најкорисниот совет таа ноќ беше и најпростиот. Кога првиот џојстик проработи, omp напиша: „Стави му налепница „1“.“ Двата уреди се викаат исто, па единствената сигурна разлика е MAC адресата (на пример, <code>98:B6:88:8C:10:60</code>); налепницата е за луѓето.</p>
+    <p data-lang="en">The most useful advice that night was also the simplest. Once the first pad worked, omp wrote: “Put a “1” sticker on it.” Both devices have the same name, so the only reliable difference is the MAC address (e.g. <code>98:B6:88:8C:10:60</code>); the sticker is for humans.</p>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/sticker-640.avif 640w, media/sticker-1171.avif 1171w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/sticker-640.jpg" srcset="media/sticker-640.jpg 640w, media/sticker-1171.jpg 1171w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1171" height="947" loading="lazy" decoding="async"
+             alt="omp in the terminal: the box rebooted with a clean Bluetooth memory, the first controller is paired, saved and connected, the box sees it as a Pro Controller, then: Put a 1 sticker on it, and steps for pairing the second controller."
+             data-alt-mk="omp во терминалот: боксот се рестартирал со чиста Bluetooth меморија, првиот џојстик е спарен, зачуван и поврзан, боксот го гледа како Pro Controller, потоа: Put a 1 sticker on it, и чекори за спарување на вториот.">
+      </picture>
+      <figcaption><span data-lang="mk">omp по рестартот: првиот џојстик е спарен и зачуван. Адресата на боксот е заматена.</span><span data-lang="en">omp after the reboot: the first pad is paired and saved. The box's address is blurred.</span></figcaption>
+    </figure>
+
+    <h2 id="connect"><span data-lang="mk">Спарен, ама не поврзан</span><span data-lang="en">Paired, but not connected</span></h2>
+    <p data-lang="mk">Следен проблем: џојстикот се спарува, боксот го зачувува, а сепак не работи. Во менито пишува „Paired“, не „Connected“. Ова е најчестиот проблем со вакви клонови, па вреди да се објасни.</p>
+    <p data-lang="en">Next problem: the pad pairs, the box saves it, and it still doesn't work. The menu says “Paired”, not “Connected”. This is the most common problem with clones like these, so it's worth explaining.</p>
+    <p data-lang="mk">Спарување значи двата уреди да си разменат клуч. Поврзување значи да се отворат канали низ кои патуваат копчињата. Кај џојстиците тоа се два канали (control и interrupt). Обичните џојстици сами ги отвораат. Овие чекаат <em>боксот</em> да ги отвори, како што прави Switch, а Bluetooth сервисот на Линукс (bluetoothd) тоа не го прави сам. Џојстикот чека околу 20 секунди и ја прекинува врската.</p>
+    <p data-lang="en">Pairing means the two devices exchange a key. Connecting means opening the channels the button presses travel through. For gamepads that's two channels (control and interrupt). Ordinary pads open them themselves. These wait for the <em>box</em> to open them, as a Switch does, and Linux's Bluetooth service (bluetoothd) doesn't do that on its own. The pad waits about 20 seconds and drops the link.</p>
+    <p data-lang="mk">Како го видовме? Со <code>btmon</code>, алатка што го снима целиот Bluetooth сообраќај на боксот. Во снимката: џојстикот се поврзува, се отвора само каналот за опис на сервисите, па тишина, па „Connection Timeout“. Никој не го отвори каналот за копчиња. Решението е едноставно: веднаш по спарувањето, кажи му на боксот да се поврзе:</p>
+    <p data-lang="en">How did we see that? With <code>btmon</code>, a tool that records all of the box's Bluetooth traffic. In the recording: the pad connects, only the service-description channel opens, then silence, then “Connection Timeout”. Nobody opened the button channels. The fix is simple: right after pairing, tell the box to connect:</p>
+
+    <figure class="code">
+      <figcaption id="c-connect-cap"><span data-lang="mk">Во bluetoothctl: спари, верувај и поврзи веднаш (стави ја адресата на твојот џојстик)</span><span data-lang="en">In bluetoothctl: pair, trust and connect right away (use your pad's address)</span></figcaption>
+      <pre tabindex="0" role="region" aria-labelledby="c-connect-cap"><code>scan on
+pair 98:B6:88:8C:10:60
+trust 98:B6:88:8C:10:60
+connect 98:B6:88:8C:10:60</code></pre>
+    </figure>
+
+    <p data-lang="mk">Моја работа беше физичкиот дел. omp пишуваше упатства на мониторот, јас ги правев на телевизорот: исклучи го џојстикот, стави го во режим за спарување (светлата брзо трепкаат), почекај. Набрзо omp напиша и мала Python скрипта за спарување што самата одговара кога џојстикот бара PIN.</p>
+    <p data-lang="en">My job was the physical part. omp wrote instructions on the monitor and I did them on the TV: turn the pad off, put it in pairing mode (lights blinking fast), wait. Soon omp also wrote a small Python pairing script that answers the pad's PIN request by itself.</p>
+
+    <figure class="gallery">
+      <picture>
+        <source type="image/avif" srcset="media/omp-steps-360.avif 360w, media/omp-steps-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
+        <img src="media/omp-steps-360.jpg" srcset="media/omp-steps-360.jpg 360w, media/omp-steps-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+             alt="A monitor with omp's numbered steps: open the Bluetooth tool, find the controller that isn't connected, trust and connect it, then press Home on the controller."
+             data-alt-mk="Монитор со нумерираните чекори од omp: отвори ја Bluetooth алатката, најди го џојстикот што не е поврзан, trust и connect, па притисни Home на џојстикот.">
+      </picture>
+      <picture>
+        <source type="image/avif" srcset="media/omp-script-360.avif 360w, media/omp-script-720.avif 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)">
+        <img src="media/omp-script-360.jpg" srcset="media/omp-script-360.jpg 360w, media/omp-script-720.jpg 720w" sizes="(min-width: 45rem) 320px, calc(50vw - 1.5rem)" width="720" height="960" loading="lazy" decoding="async"
+             alt="The monitor with omp writing btpair.py, a Python pairing script whose agent answers PIN and confirm prompts, behind a desk speaker and a Spider-Man plush."
+             data-alt-mk="Мониторот со omp што пишува btpair.py, Python скрипта за спарување што одговара на PIN и потврди, зад звучник и плишан Спајдермен.">
+      </picture>
+      <figcaption><span data-lang="mk">omp на мониторот: чекори за мене и скрипта за спарување за боксот.</span><span data-lang="en">omp on the monitor: steps for me, and a pairing script for the box.</span></figcaption>
+    </figure>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/pin-request-640.avif 640w, media/pin-request-1006.avif 1006w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/pin-request-640.jpg" srcset="media/pin-request-640.jpg 640w, media/pin-request-1006.jpg 1006w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1006" height="251" loading="lazy" decoding="async"
+             alt="omp: I've started a new pairing attempt. This time the box can answer the controller's PIN request. Then four steps: turn the controller off, keep the other one off, put it in pairing mode, wait about a minute."
+             data-alt-mk="omp: започнав нов обид за спарување. Овој пат боксот може да одговори на барањето за PIN. Потоа четири чекори: исклучи го џојстикот, другиот нека остане исклучен, стави го во режим за спарување, почекај околу минута.">
+      </picture>
+      <figcaption><span data-lang="mk">Типична порака од таа ноќ: omp чека, јас притискам копчиња.</span><span data-lang="en">A typical message from that night: omp waits, I press buttons.</span></figcaption>
+    </figure>
+
+    <h2 id="handshake"><span data-lang="mk">Да зборуваме како Switch</span><span data-lang="en">Speaking Switch</span></h2>
+    <p data-lang="mk">И со <code>connect</code> џојстиците одржуваа врска само додека трае спарувањето. Еднаш исклучени, не се враќаа. Тука omp прв пат се откажа: напиша дека EmuELEC (Linux 4.9, без драјвер за Nintendo џојстици) не може да ги задржи и дека со подесувања не се поправа.</p>
+    <p data-lang="en">Even with <code>connect</code>, the pads only stayed connected during the pairing session. Once off, they never came back. This is where omp gave up for the first time: it wrote that EmuELEC (Linux 4.9, with no Nintendo pad driver) can't keep them and that no setting fixes it.</p>
+    <p data-lang="mk">Прашав: „А што ако го напишеме драјверот?“ omp понуди два пата. А: да се пренесе Линукс драјверот за Nintendo (<code>hid-nintendo</code>, од Linux 5.16 нагоре) на стариот кернел 4.9. Часови работа, а клоновите често паѓаат на неговите проверки. Б: мал помошник на боксот што го прави она што го прави Switch по поврзувањето. Го избрав Б.</p>
+    <p data-lang="en">I asked: “How about we write the driver?” omp offered two routes. A: port Linux's Nintendo driver (<code>hid-nintendo</code>, Linux 5.16 and newer) to the old 4.9 kernel. Hours of work, and clones often fail its checks. B: a small helper on the box that does what a Switch does after connecting. I picked B.</p>
+    <p data-lang="mk">Switch по поврзувањето му праќа на џојстикот низа кратки команди (subcommands). Протоколот е јавно документиран благодарение на <a href="https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering">dekuNukem</a>, па помошникот ги праќа истите, директно на уредот (hidraw). Клонот ги прифати сите:</p>
+    <p data-lang="en">After connecting, a Switch sends the pad a series of short commands (subcommands). The protocol is publicly documented thanks to <a href="https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering">dekuNukem</a>, so the helper sends the same ones, straight to the device (hidraw). The clone accepted all of them:</p>
+
+    <table>
+      <caption><span data-lang="mk">Командите што ги праќа помошникот</span><span data-lang="en">The commands the helper sends</span></caption>
+      <thead>
+        <tr><th scope="col"><span data-lang="mk">Команда</span><span data-lang="en">Command</span></th><th scope="col"><span data-lang="mk">Што прави</span><span data-lang="en">What it does</span></th><th scope="col"><span data-lang="mk">Одговор</span><span data-lang="en">Reply</span></th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>0x02</code></td><td><span data-lang="mk">Информации за уредот</span><span data-lang="en">Device info</span></td><td><span data-lang="mk">фирмвер 3.72, тип 3 (Pro Controller)</span><span data-lang="en">firmware 3.72, type 3 (Pro Controller)</span></td></tr>
+        <tr><td><code>0x08 00</code></td><td><span data-lang="mk">Излези од „shipment mode“</span><span data-lang="en">Leave shipment mode</span></td><td>OK</td></tr>
+        <tr><td><code>0x03 3F</code></td><td><span data-lang="mk">Едноставен режим: стандардни копчиња, мапирањето на EmuELEC останува</span><span data-lang="en">Simple mode: standard buttons, EmuELEC's mapping stays valid</span></td><td>OK</td></tr>
+        <tr><td><code>0x48 01</code></td><td><span data-lang="mk">Вклучи вибрации</span><span data-lang="en">Vibration on</span></td><td>OK</td></tr>
+        <tr><td><code>0x30</code></td><td><span data-lang="mk">Светло за играч 1 или 2</span><span data-lang="en">Player 1 or 2 light</span></td><td>OK</td></tr>
+      </tbody>
+    </table>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/chat-handshake-640.avif 640w, media/chat-handshake-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/chat-handshake-640.jpg" srcset="media/chat-handshake-640.jpg 640w, media/chat-handshake-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="579" loading="lazy" decoding="async"
+             alt="omp: It works. The controller paired, the gamepad channel opened (Bluetooth channels 17 and 19), and it accepted every console command, followed by a table of commands, all OK, and: Its player-1 light should be on now. Now the real test, reconnecting."
+             data-alt-mk="omp: It works. Џојстикот се спари, каналот за копчиња се отвори (Bluetooth канали 17 и 19) и ги прифати сите команди од конзолата, со табела каде сè е OK, и: светлото за играч 1 треба да свети. Сега вистинскиот тест, повторно поврзување.">
+      </picture>
+      <figcaption><span data-lang="mk">Од извезениот разговор со omp: ракувањето успеа. Светлото за играч 1 засвети.</span><span data-lang="en">From the exported omp chat: the handshake worked. The player-1 light came on.</span></figcaption>
+    </figure>
+
+    <h2 id="home"><span data-lang="mk">Зошто Home не го враќа</span><span data-lang="en">Why Home never reconnects</span></h2>
+    <p data-lang="mk">„Сега вистинскиот тест, повторно поврзување.“ Не помина. Исклучен џојстик, притиснат Home: снимката на btmon е празна. Џојстикот воопшто не се ни обидува да го најде боксот. Пробавме сè што документацијата нуди:</p>
+    <p data-lang="en">“Now the real test, reconnecting.” It failed. Pad off, Home pressed: the btmon recording is empty. The pad doesn't even try to reach the box. We tried everything the documentation offers:</p>
+    <ul data-lang="mk">
+      <li>Ја прочитавме меморијата за спарување на џојстикот (флеш, адреса <code>0x2000</code>, команда <code>0x10</code>). Таму вистинскиот Pro Controller ја запишува конзолата. Кај клонот е празна.</li>
+      <li>Рачно спарување (<code>0x01</code>): генерички одговор, а клучот е сите нули. Не е имплементирано.</li>
+      <li>„Рестартирај се и поврзи се“ (<code>0x06 01</code>): вели OK, не прави ништо.</li>
+      <li>Го преименувавме боксот во „Nintendo Switch“. Ништо.</li>
+    </ul>
+    <ul data-lang="en">
+      <li>Read the pad's pairing memory (flash, address <code>0x2000</code>, command <code>0x10</code>). That's where a real Pro Controller stores its console. On the clone it's empty.</li>
+      <li>Manual pairing (<code>0x01</code>): a generic reply, and the key is all zeros. Not implemented.</li>
+      <li>“Reboot and reconnect” (<code>0x06 01</code>): says OK, does nothing.</li>
+      <li>Renamed the box to “Nintendo Switch”. Nothing.</li>
+    </ul>
+    <p data-lang="mk">Заклучок: фирмверот на клонот се враќа само на вистински Switch. Не може да се поправи од страна на боксот, па го прифатив: комбинацијата за спарување е копчето за палење. Ја држиш, светлата брзо трепкаат, по 5–10 секунди светне светлото за играч. Кај Switch клоновите, подобро е да се навикнеш отколку да се бориш.</p>
+    <p data-lang="en">Conclusion: the clone's firmware only reconnects to a real Switch. The box can't fix that, so I accepted it: the pairing combination is the power button. Hold it, the lights blink fast, and 5–10 seconds later the player light comes on. With Switch clones, getting used to that beats fighting it.</p>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/pairing-combo-640.avif 640w, media/pairing-combo-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/pairing-combo-640.jpg" srcset="media/pairing-combo-640.jpg 640w, media/pairing-combo-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="960" loading="lazy" decoding="async"
+             alt="A hand pressing buttons on a black controller on a wooden cabinet under the TV, with the second controller next to the TV stand."
+             data-alt-mk="Рака што притиска копчиња на црн џојстик на дрвен комод под телевизорот, со вториот џојстик до ногарката на телевизорот.">
+      </picture>
+      <figcaption><span data-lang="mk">„Вклучување“ на џојстикот: комбинацијата за спарување, секој пат.</span><span data-lang="en">“Turning on” a pad: the pairing combination, every time.</span></figcaption>
+    </figure>
+
+    <h2 id="helper"><span data-lang="mk">Помошникот</span><span data-lang="en">The helper</span></h2>
+    <p data-lang="mk">Сето ова omp го спакува во една Python скрипта, <code>switchpad.py</code>, што се пушта при секое палење на боксот (од <code>/storage/.config/custom_start.sh</code>, делот „after“). Таа:</p>
+    <p data-lang="en">omp packed all of this into one Python script, <code>switchpad.py</code>, that starts every time the box boots (from <code>/storage/.config/custom_start.sh</code>, the “after” section). It:</p>
+    <ul data-lang="mk">
+      <li>бара џојстици во режим за спарување, но само додека се поврзани помалку од два и не трае игра;</li>
+      <li>ги спарува и веднаш го отвора каналот за копчиња;</li>
+      <li>ги праќа командите од табелата погоре и му го пали светлото за играч 1 или 2;</li>
+      <li>го гаси Bluetooth пребарувањето на самиот EmuELEC, бидејќи двете се тепаат за радиото;</li>
+      <li>запишува сè во <code>/storage/.config/emuelec/logs/switchpad.log</code>.</li>
+    </ul>
+    <ul data-lang="en">
+      <li>looks for pads in pairing mode, but only while fewer than two are connected and no game is running;</li>
+      <li>pairs them and opens the button channel right away;</li>
+      <li>sends the commands from the table above and sets the player 1 or 2 light;</li>
+      <li>stops EmuELEC's own Bluetooth scan, because the two fight over the radio;</li>
+      <li>logs everything to <code>/storage/.config/emuelec/logs/switchpad.log</code>.</li>
+    </ul>
+    <p data-lang="mk">Прашав дали Python е доволно брз за ваков слаб бокс. Одговорот: помошникот троши околу 9 MB RAM и занемарливо процесор, а не стои меѓу џојстикот и играта. Копчињата одат од кернелот директно до емулаторот, па нема никакво доцнење; помошникот само ги подесува работите и гледа.</p>
+    <p data-lang="en">I asked whether Python is fast enough for a weak box like this. The answer: the helper uses about 9 MB of RAM and a negligible bit of CPU, and it doesn't sit between the pad and the game. Button presses go from the kernel straight to the emulator, so there's no added lag; the helper only sets things up and watches.</p>
+    <p data-lang="mk">Еден џојстик сега работеше. Вториот, не.</p>
+    <p data-lang="en">One pad now worked. The second one didn't.</p>
+
+    <h2 id="chip"><span data-lang="mk">Вториот џојстик и чипот што лаже</span><span data-lang="en">The second pad and a chip that lies</span></h2>
+    <p data-lang="mk">Со вклучен џојстик 1, џојстикот 2 се спаруваше, а потоа ништо. Секој сам работеше; заедно, никогаш. omp го вклучи debug логот на bluetoothd, а таму: <code>search_cb() … error updating services: Connection timed out (110)</code>. Боксот пробал да го праша вториот џојстик кои сервиси ги има, и не добил одговор.</p>
+    <p data-lang="en">With pad 1 on, pad 2 would pair, and then nothing. Each worked alone; together, never. omp turned on bluetoothd's debug log, and there it was: <code>search_cb() … error updating services: Connection timed out (110)</code>. The box tried to ask the second pad which services it has, and got no answer.</p>
+    <p data-lang="mk">Списокот на врски кажа повеќе. Кернелот ја означува секоја врска со број (handle) и состојба. Џојстикот 1 е на врска 4, состојба 1 („поврзан“). Џојстикот 2 е на врска 6, состојба 7 („сè уште се подесува“). Во таа состојба кернелот не пушта никакви податоци, затоа и пребарувањето истекува.</p>
+    <p data-lang="en">The connection list said more. The kernel labels each connection with a number (a handle) and a state. Pad 1 is on connection 4, state 1 (“connected”). Pad 2 is on connection 6, state 7 (“still configuring”). In that state the kernel lets no data through, which is why the service search times out.</p>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/chat-state7-640.avif 640w, media/chat-state7-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/chat-state7-640.jpg" srcset="media/chat-state7-640.jpg 640w, media/chat-state7-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="1200" loading="lazy" decoding="async"
+             alt="omp shows the connection list: controller 2 on handle 6 state 7, controller 1 on handle 4 state 1, explains that state 7 means still configuring, and runs btmon on the recording to inspect the encryption key size replies."
+             data-alt-mk="omp го покажува списокот на врски: џојстик 2 на handle 6 состојба 7, џојстик 1 на handle 4 состојба 1, објаснува дека состојба 7 значи сè уште се подесува, и пушта btmon врз снимката за да ги види одговорите за големината на клучот.">
+      </picture>
+      <figcaption><span data-lang="mk">Моментот кога се најде проблемот: „state 7“ кај вториот џојстик.</span><span data-lang="en">The moment the problem showed up: “state 7” on the second pad.</span></figcaption>
+    </figure>
+
+    <p data-lang="mk">Еден од последните чекори при подесување на врската е кернелот да го праша Bluetooth чипот колку е долг клучот за шифрирање. Тоа е безбедносна проверка: кернелот не сака врски со прекраток клуч. Во снимката на btmon:</p>
+    <p data-lang="en">One of the last steps in setting up a connection is the kernel asking the Bluetooth chip how long the encryption key is. It's a security check: the kernel refuses connections with a key that's too short. In the btmon recording:</p>
+
+    <figure class="code">
+      <figcaption id="c-btmon-cap"><span data-lang="mk">btmon: прашање за врска 6, одговор за врска 4 (скратено)</span><span data-lang="en">btmon: a question about connection 6, an answer about connection 4 (shortened)</span></figcaption>
+      <pre tabindex="0" role="region" aria-labelledby="c-btmon-cap"><code>&lt; HCI Command: Read Encryption Key Size (0x05|0x0008) plen 2
+        Handle: 6 Address: 98:B6:EB:D1:16:BD
+&gt; HCI Event: Command Complete (0x0e) plen 7
+      Read Encryption Key Size (0x05|0x0008) ncmd 2
+        Status: Success (0x00)
+        Handle: 4
+        Key size: 16</code></pre>
+    </figure>
+
+    <p data-lang="mk">Кернелот прашува за врската 6 (џојстик 2). Чипот одговара за врската 4 (џојстик 1). Кернелот го зема одговорот, ја наоѓа врската 4, која е веќе готова, и не прави ништо. Врската 6 засекогаш чека одговор што никогаш нема да дојде.</p>
+    <p data-lang="en">The kernel asks about connection 6 (pad 2). The chip answers about connection 4 (pad 1). The kernel takes the answer, finds connection 4, which is already done, and does nothing. Connection 6 waits forever for an answer that never comes.</p>
+    <p data-lang="mk">Тоа е баг во фирмверот на Bluetooth чипот во боксот, Realtek прикачен преку UART. Со еден уред никогаш не се гледа, бидејќи тогаш има само една врска за која може да се одговори. Тука omp се откажа по втор пат: напиша дека со вградениот Bluetooth не може два џојстика, ги ограничи помошникот на еден, и предложи USB Bluetooth стик.</p>
+    <p data-lang="en">That's a bug in the firmware of the box's Bluetooth chip, a Realtek attached over UART. With one device you never see it, because then there's only one connection to answer about. This is where omp gave up for the second time: it wrote that the built-in Bluetooth can't do two pads, limited the helper to one, and suggested a USB Bluetooth stick.</p>
+
+    <h2 id="patch"><span data-lang="mk">Закрпа за кернелот</span><span data-lang="en">Patching the kernel</span></h2>
+    <p data-lang="mk">Напишав: „може ли и тој баг да го поправиме“. Одговорот: „Веројатно да, во кернелот на боксот, а не во чипот.“ Новите Линукс кернели веќе знаат за вакви чипови: ги означуваат како скршени, го прескокнуваат прашањето и претпоставуваат стандарден клуч од 16 бајти. Кернелот 4.9 на боксот тоа го нема. Но Bluetooth делот од кернелот на EmuELEC е модул (<code>bluetooth.ko</code>), посебен фајл што се вчитува при палење, па треба да се смени само тој, не целиот систем.</p>
+    <p data-lang="en">I typed: “can we fix that bug also”. The answer: “Probably yes, in the box's kernel rather than in the chip.” Newer Linux kernels already know about chips like this: they flag them as broken, skip the question and assume the standard 16-byte key. The box's 4.9 kernel doesn't have that. But EmuELEC's Bluetooth core is a module (<code>bluetooth.ko</code>), a separate file loaded at boot, so only that file has to change, not the whole system.</p>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/chat-fix-question-640.avif 640w, media/chat-fix-question-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/chat-fix-question-640.jpg" srcset="media/chat-fix-question-640.jpg 640w, media/chat-fix-question-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="489" loading="lazy" decoding="async"
+             alt="Me at 04:15: can qwe dfix that bug also. omp: Probably yes, in the box's kernel rather than in the chip, explaining the HCI_QUIRK_BROKEN_READ_ENC_KEY_SIZE flag, that bluetooth.ko is a loadable module, and that it is checking the exact kernel source, configuration and MODVERSIONS."
+             data-alt-mk="Јас во 04:15: can qwe dfix that bug also. omp: Probably yes, во кернелот на боксот, а не во чипот, со објаснување за знамето HCI_QUIRK_BROKEN_READ_ENC_KEY_SIZE, дека bluetooth.ko е модул што се вчитува, и дека ги проверува точниот изворен код, конфигурацијата и MODVERSIONS.">
+      </picture>
+      <figcaption><span data-lang="mk">Во 4:15 наутро, со правописот што оди со тоа.</span><span data-lang="en">At 4:15 in the morning, with the spelling to match.</span></figcaption>
+    </figure>
+
+    <p data-lang="mk">Тешкиот дел не е самата закрпа, туку модулот да одговара <em>точно</em> на кернелот што веќе работи на боксот. Погрешен модул значи Bluetooth не се вчитува, или полошо, кернелот паѓа. Чекорите:</p>
+    <p data-lang="en">The hard part isn't the patch itself, it's making the module match the kernel already running on the box <em>exactly</em>. A wrong module means Bluetooth won't load, or worse, the kernel crashes. The steps:</p>
+    <ol data-lang="mk">
+      <li><strong>Истиот изворен код.</strong> EmuELEC 4.8 го гради кернелот од CoreELEC <code>linux-amlogic</code>, на точно одреден commit (<code>ab03043</code>); хашот на симнатата архива одговараше на тој во EmuELEC. Плус 32-те закрпи на EmuELEC и неговата конфигурација за кернелот.</li>
+      <li><strong>Градење.</strong> Во Docker контејнер (Debian bookworm, gcc 12 за ARM64), <code>make vmlinux modules</code>. Помалку од три минути.</li>
+      <li><strong>Закрпата.</strong> Петнаесетина линии во <code>net/bluetooth/hci_event.c</code> (подолу).</li>
+      <li><strong>Проверка пред да се допре боксот.</strong> Ознаката на модулот (vermagic) е иста како на оригиналот, а иста е и проверката (CRC) на сите 197 функции од кернелот што модулот ги користи и на сите 43 што ги користат другите Bluetooth модули. Значи се разликува само поправката.</li>
+      <li><strong>Инсталација без менување на системот.</strong> Преку kernel overlays на EmuELEC (подолу).</li>
+    </ol>
+    <ol data-lang="en">
+      <li><strong>The same source.</strong> EmuELEC 4.8 builds its kernel from CoreELEC's <code>linux-amlogic</code> at one exact commit (<code>ab03043</code>); the downloaded archive's hash matched the one in EmuELEC. Plus EmuELEC's 32 patches and its kernel config.</li>
+      <li><strong>Build.</strong> In a Docker container (Debian bookworm, gcc 12 for ARM64), <code>make vmlinux modules</code>. Under three minutes.</li>
+      <li><strong>The patch.</strong> About fifteen lines in <code>net/bluetooth/hci_event.c</code> (below).</li>
+      <li><strong>Check before touching the box.</strong> The module's label (vermagic) matches the original, and so does the checksum (CRC) of all 197 kernel functions the module uses and all 43 that the other Bluetooth modules use. So the only difference is the fix.</li>
+      <li><strong>Install without modifying the system.</strong> Through EmuELEC's kernel overlays (below).</li>
+    </ol>
+
+    <p data-lang="mk">Закрпата прави едно: кернелот веќе знае за која врска прашал, па нека веруваме на тоа. Ако одговорот на чипот спомнува друга врска, кернелот го запишува тоа во логот и претпоставува стандардни 16 бајти, исто како што старата верзија прави кога чипот враќа грешка, и исто како новите кернели за чипови означени како скршени.</p>
+    <p data-lang="en">The patch does one thing: the kernel already knows which connection it asked about, so trust that. If the chip's answer names a different connection, the kernel logs it and assumes the standard 16 bytes, the same as the old code does when the chip returns an error, and the same as newer kernels do for chips flagged as broken.</p>
+
+    <figure class="code">
+      <figcaption id="c-patch-cap"><span data-lang="mk">bluetooth-read-enc-key-size-handle.patch</span><span data-lang="en">bluetooth-read-enc-key-size-handle.patch</span></figcaption>
+      <pre tabindex="0" role="region" aria-labelledby="c-patch-cap"><code>--- a/net/bluetooth/hci_event.c
++++ b/net/bluetooth/hci_event.c
+@@ -2547,7 +2547,9 @@
+ 				       u16 opcode, struct sk_buff *skb)
+ {
+ 	const struct hci_rp_read_enc_key_size *rp;
++	const struct hci_cp_read_enc_key_size *cp;
+ 	struct hci_conn *conn;
++	bool mismatch = false;
+ 	u16 handle;
+ 
+ 	BT_DBG("%s status 0x%02x", hdev-&gt;name, status);
+@@ -2561,6 +2563,20 @@
+ 	rp = (void *)skb-&gt;data;
+ 	handle = le16_to_cpu(rp-&gt;handle);
+ 
++	/* Some controllers (e.g. the Realtek UART chips on Amlogic TV boxes)
++	 * answer with the handle of a different connection once more than one
++	 * ACL link exists. The link we asked about would then never leave
++	 * BT_CONFIG, so trust the handle from our own command and fall back to
++	 * the default key size, as when the command fails.
++	 */
++	cp = hci_sent_cmd_data(hdev, HCI_OP_READ_ENC_KEY_SIZE);
++	if (cp &amp;&amp; le16_to_cpu(cp-&gt;handle) != handle) {
++		BT_ERR("%s key size reply for handle %u, requested %u",
++		       hdev-&gt;name, handle, le16_to_cpu(cp-&gt;handle));
++		handle = le16_to_cpu(cp-&gt;handle);
++		mismatch = true;
++	}
++
+ 	hci_dev_lock(hdev);
+ 
+ 	conn = hci_conn_hash_lookup_handle(hdev, handle);
+@@ -2571,7 +2587,7 @@
+ 	 * (which is the same we do also when this HCI command isn't
+ 	 * supported.
+ 	 */
+-	if (rp-&gt;status) {
++	if (rp-&gt;status || mismatch) {
+ 		BT_ERR("%s failed to read key size for handle %u", hdev-&gt;name,
+ 		       handle);
+ 		conn-&gt;enc_key_size = HCI_LINK_KEY_SIZE;</code></pre>
+    </figure>
+
+    <p data-lang="mk">Системот на EmuELEC е слика само за читање, па модулот не се копира врз оригиналот. Наместо тоа, EmuELEC има механизам наречен kernel overlays: <code>.conf</code> фајл во <code>/storage/.cache/kernel-overlays/</code> покажува на папка со модули, а при палење модулите од таа папка се вчитуваат наместо оригиналните. За враќање назад, бришеш еден фајл и рестартираш.</p>
+    <p data-lang="en">EmuELEC's system is a read-only image, so the module isn't copied over the original. Instead, EmuELEC has a mechanism called kernel overlays: a <code>.conf</code> file in <code>/storage/.cache/kernel-overlays/</code> points to a folder of modules, and at boot the modules from that folder load instead of the originals. To undo it, delete one file and reboot.</p>
+
+    <figure class="code">
+      <figcaption id="c-overlay-cap"><span data-lang="mk">Проверка на модулот и инсталација преку kernel overlay</span><span data-lang="en">Checking the module and installing it as a kernel overlay</span></figcaption>
+      <pre tabindex="0" role="region" aria-labelledby="c-overlay-cap"><code>$ modinfo -F vermagic bluetooth.ko
+4.9.269 SMP preempt mod_unload modversions aarch64
+
+$ cat /storage/.cache/kernel-overlays/50-bt-keysize-fix.conf
+/storage/switchpad/kernel-overlay
+
+# the patched module
+/storage/switchpad/kernel-overlay/lib/modules/4.9.269/kernel/net/bluetooth/bluetooth.ko</code></pre>
+    </figure>
+
+    <p data-lang="mk">Ако некој ден EmuELEC се ажурира на друг кернел, модулот едноставно се игнорира (друга 4.9.x папка), па нема ризик да остане несоодветен модул. Ја вратив границата на помошникот на два џојстика, ја извадив картичката, ја ставив во боксот, ги вклучив двата.</p>
+    <p data-lang="en">If EmuELEC ever updates to a different kernel, the module is simply ignored (a different 4.9.x folder), so there's no risk of a mismatched module sticking around. I set the helper's limit back to two pads, pulled the card, put it in the box and turned both pads on.</p>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/chat-it-worked-640.avif 640w, media/chat-it-worked-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/chat-it-worked-640.jpg" srcset="media/chat-it-worked-640.jpg 640w, media/chat-it-worked-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="573" loading="lazy" decoding="async"
+             alt="Me at 04:27: it worked. omp: Both controllers now work at the same time on the box's built-in Bluetooth, then how to play: turn each controller on with its pairing combination, wait for the player light, quit with Shutdown, and that Home alone won't reconnect these clones."
+             data-alt-mk="Јас во 04:27: it worked. omp: двата џојстика сега работат истовремено на вградениот Bluetooth на боксот, па како се игра: вклучи го секој со комбинацијата за спарување, почекај го светлото за играч, гаси со Shutdown, и дека само Home не ги враќа овие клонови.">
+      </picture>
+      <figcaption><span data-lang="mk">04:27. Двата џојстика, истовремено, на вградениот Bluetooth.</span><span data-lang="en">04:27. Both pads, at the same time, on the built-in Bluetooth.</span></figcaption>
+    </figure>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/two-pads-640.avif 640w, media/two-pads-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/two-pads-640.jpg" srcset="media/two-pads-640.jpg 640w, media/two-pads-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="960" loading="lazy" decoding="async"
+             alt="A TV showing EmuELEC's Neon Overdrive theme with PlayStation selected and 53 games, with two black controllers on the cabinet in front of it."
+             data-alt-mk="Телевизор со темата Neon Overdrive на EmuELEC, избран PlayStation и 53 игри, со два црни џојстика на комодот пред него.">
+      </picture>
+      <figcaption><span data-lang="mk">Играч 1 и играч 2.</span><span data-lang="en">Player 1 and player 2.</span></figcaption>
+    </figure>
+
+    <h2 id="lockdown"><span data-lang="mk">Заклучи го пак</span><span data-lang="en">Lock it again</span></h2>
+    <p data-lang="mk">Во првиот пост го заклучив боксот: firewall вклучен, SSH исклучен. За omp да може да работи на боксот, двете ги отворав привремено (SSH во менито, <code>systemctl stop iptables</code> во терминалот на боксот). На крајот omp ги врати: <code>RULES=public</code> и <code>ee_ssh.enabled=0</code>, па проба да се поврзе и доби „Connection refused“. Тоа е точно она што сакаш да го видиш.</p>
+    <p data-lang="en">In the first post I locked the box down: firewall on, SSH off. For omp to work on the box I opened both temporarily (SSH from the menu, <code>systemctl stop iptables</code> in the box's terminal). At the end omp put them back: <code>RULES=public</code> and <code>ee_ssh.enabled=0</code>, then tried to connect and got “Connection refused”. That's exactly what you want to see.</p>
+    <p data-lang="mk">Една мала паника успат: терминалот на боксот замрзна и бев сигурен дека го „брикнав“. Само рестарт.</p>
+    <p data-lang="en">One small panic along the way: the box's terminal froze and I was sure I'd bricked it. Just a reboot.</p>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="media/ssh-refused-640.avif 640w, media/ssh-refused-1280.avif 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)">
+        <img src="media/ssh-refused-640.jpg" srcset="media/ssh-refused-640.jpg 640w, media/ssh-refused-1280.jpg 1280w" sizes="(min-width: 45rem) 648px, calc(100vw - 2.5rem)" width="1280" height="960" loading="lazy" decoding="async"
+             alt="The monitor with omp: ssh: connect to host 192.168.0.43 port 22: Connection refused, and omp explaining that the firewall is off but the SSH service isn't running."
+             data-alt-mk="Мониторот со omp: ssh: connect to host 192.168.0.43 port 22: Connection refused, и omp што објаснува дека firewall-от е исклучен, но SSH сервисот не работи.">
+      </picture>
+      <figcaption><span data-lang="mk">„Connection refused“: досадно додека бараш баг, токму тоа што сакаш потоа.</span><span data-lang="en">“Connection refused”: annoying while debugging, exactly what you want afterwards.</span></figcaption>
+    </figure>
+
+    <h2 id="omp"><span data-lang="mk">Како изгледа работата со omp</span><span data-lang="en">What working with omp looks like</span></h2>
+    <p data-lang="mk">omp работеше на компјутерот и преку SSH на боксот. Тој читаше логови, ги снимаше и читаше Bluetooth пакетите, пишуваше скрипти, го најде и го изгради кернелот, ги провери модулите. Јас бев рацете: ги палев и гасев џојстиците, куцав на тастатурата на боксот кога SSH беше исклучен, ги вадев и ставав картичката.</p>
+    <p data-lang="en">omp ran on the PC and reached the box over SSH. It read logs, recorded and read Bluetooth packets, wrote scripts, found and built the kernel, and checked the modules. I was the hands: turning pads on and off, typing on the box's keyboard when SSH was off, pulling and inserting the card.</p>
+    <p data-lang="mk">Најважното: omp двапати ми кажа дека не може. И двапати решението беше едно прашање од мене: „а ако го напишеме драјверот?“ и „може ли и тој баг да го поправиме?“. Агентот е добар во барање и поправање, ама кога да не се откажеме, тоа сепак го одлучував јас.</p>
+    <p data-lang="en">The key part: omp told me twice that it couldn't be done. Both times the way forward was one question from me: “how about we write the driver?” and “can we fix that bug also?”. The agent is good at digging and fixing, but deciding when not to give up was still my call.</p>
+    <p data-lang="mk">Сликите од разговорот се од извоз на сесијата (<code>omp --export</code> прави HTML од целиот разговор).</p>
+    <p data-lang="en">The chat screenshots come from an export of the session (<code>omp --export</code> turns the whole conversation into HTML).</p>
+
+    <h2 id="lessons"><span data-lang="mk">Што научив</span><span data-lang="en">What I learned</span></h2>
+    <ul data-lang="mk">
+      <li>„Спарен“ не значи „поврзан“. Ако џојстикот е спарен, а не работи, поврзи го рачно веднаш по спарувањето.</li>
+      <li>Евтините клонови на Switch џојстик зборуваат Switch само до половина. Нека не те изненади ако Home не ги враќа.</li>
+      <li>Два уреди со исто име: залепи налепници и работи со MAC адресите.</li>
+      <li>Кога нешто „само не работи“, сними го сообраќајот (<code>btmon</code>). Таму се гледа кој престанал да зборува.</li>
+      <li>Баг во стар кернел некогаш се поправа со еден модул, ако го изградиш од истиот код и истата конфигурација и провериш vermagic и CRC пред да го вчиташ.</li>
+      <li>Отвори го боксот само колку треба, па заклучи го пак.</li>
+    </ul>
+    <ul data-lang="en">
+      <li>“Paired” doesn't mean “connected”. If a pad is paired but dead, connect it by hand right after pairing.</li>
+      <li>Cheap Switch pad clones only speak half of Switch. Don't be surprised if Home doesn't bring them back.</li>
+      <li>Two devices with the same name: add stickers and work with MAC addresses.</li>
+      <li>When something “just doesn't work”, record the traffic (<code>btmon</code>). That shows who stopped talking.</li>
+      <li>A bug in an old kernel can sometimes be fixed with one module, if you build it from the same source and config and check vermagic and CRCs before loading it.</li>
+      <li>Open the box only as much as you need, then lock it again.</li>
+    </ul>
+
+    <h2 id="next"><span data-lang="mk">Што следува</span><span data-lang="en">What's next</span></h2>
+    <ul data-lang="mk">
+      <li>Подолги игри во двајца, да видам дали врската држи со часови.</li>
+      <li>Hotkey Enable на Select на двата џојстика.</li>
+      <li>Можеби да ја понудам закрпата на EmuELEC, за другите со ист бокс да не мора да градат модул.</li>
+    </ul>
+    <ul data-lang="en">
+      <li>Longer two-player sessions, to see whether the link holds for hours.</li>
+      <li>Hotkey Enable on Select on both pads.</li>
+      <li>Maybe offer the patch to EmuELEC, so others with the same box don't have to build a module.</li>
+    </ul>
+
+    <p class="meta" data-lang="mk">Направено со <a href="https://omp.sh/">omp</a> (<a href="https://github.com/can1357/oh-my-pi">oh-my-pi</a>). Протоколот на Switch џојстиците: <a href="https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering">dekuNukem/Nintendo_Switch_Reverse_Engineering</a>. Кернел: CoreELEC linux-amlogic и закрпите на <a href="https://github.com/EmuELEC/EmuELEC">EmuELEC</a>. Bluetooth алатки: BlueZ (bluetoothctl, btmon).</p>
+    <p class="meta" data-lang="en">Built with <a href="https://omp.sh/">omp</a> (<a href="https://github.com/can1357/oh-my-pi">oh-my-pi</a>). Switch pad protocol: <a href="https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering">dekuNukem/Nintendo_Switch_Reverse_Engineering</a>. Kernel: CoreELEC linux-amlogic and the <a href="https://github.com/EmuELEC/EmuELEC">EmuELEC</a> patches. Bluetooth tools: BlueZ (bluetoothctl, btmon).</p>
+
+  </article>
+  </main>
+
+  <footer>
+    <hr>
+    <ul class="row" role="list">
+      <li><a rel="me" href="https://github.com/zhivko-kocev">.github</a></li>
+      <li><a rel="me" href="https://www.linkedin.com/in/zhivko-kocev/">.linkedin</a></li>
+      <li><a href="/blog/">.blog</a></li>
+      <li><a rel="me author" href="mailto:zikekocev57@gmail.com">.email</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
